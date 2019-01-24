@@ -10,7 +10,14 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 
 @NgModule({
-  declarations: [UserComponent, UserCreateEventComponent, UserHomeComponent, UserNavbarComponent, UserProfileComponent, UserAdminComponent],
+  declarations: [
+    UserComponent,
+    UserCreateEventComponent,
+    UserHomeComponent,
+    UserNavbarComponent,
+    UserProfileComponent,
+    UserAdminComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule
