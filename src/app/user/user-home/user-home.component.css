@@ -26,7 +26,7 @@ table tr {
 .eventList {
     display: flex;
     justify-content: center;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 15px;
     padding: 5px; 
     background: none;
