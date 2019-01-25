@@ -1,3 +1,15 @@
-<p>
-  user-async works!
+<p *ngIf = "systemError">
+  {{systemErrorMessage}}
 </p>
+<div *ngIf = "isLoggedIn && !systemError">
+  <p>
+    {{userDetail.name}}
+  </p>
+  <p>Note: above user details returned by async call</p>
+</div>
+
+<div *ngIf = "!isLoggedIn ** !systemError">
+  <p>
+    You need to log in!
+  </p>
+</div>
