@@ -1,0 +1,120 @@
+#profile-image {
+    border: 2px dashed orange;
+    height: 230px;
+}
+
+#user-section {
+    position: relative;
+}
+
+span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.box-shadow {
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+}
+
+.eventFromList {
+    display: inline;
+    margin: 10px 20px 10px 20px;
+}
+
+#default {
+    text-align: center;
+    padding: 20px;
+}
+
+.card {
+    margin: 25px;
+    width: 17rem;
+}
+
+.card-padding {
+    padding: 20px;
+}
+
+p {
+   margin: 0px 20px auto;
+}
+
+/* equal card height */
+.row-equal > div[class*='col-'] {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.row-equal .card {
+   width: 100%;
+}
+
+/* ensure equal card height inside carousel */
+.carousel-inner>.row-equal.active, 
+.carousel-inner>.row-equal.next, 
+.carousel-inner>.row-equal.prev {
+    display: flex;
+}
+
+/* prevent flicker during transition */
+.carousel-inner>.row-equal.active.left, 
+.carousel-inner>.row-equal.active.right {
+    opacity: 0.5;
+    display: flex;
+}
+
+
+/* control image height */
+.card-img-top-250 {
+    max-height: 250px;
+    overflow:hidden;
+}
+
+.btn {
+ float: right;
+}
+
+.carousel {
+    border: 2px solid gray;
+    overflow: scroll;
+}
+
+table {
+    border-radius: 15px;
+}
+
+table tr {
+    border-radius: 15px;
+}
+
+.box-shadow {
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+}
+
+#comments {
+    padding: 20px;
+}
+
+#default {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
+
+    
