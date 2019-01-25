@@ -65,3 +65,7 @@ tbody {
 #flagged-events td {
     width: 20%;
 }
+
+.buttons {
+    padding: 2%;
+}
