@@ -12,4 +12,8 @@ export class UserHomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  showModal() {
+    console.log("modal works");
+  }
+
 }
