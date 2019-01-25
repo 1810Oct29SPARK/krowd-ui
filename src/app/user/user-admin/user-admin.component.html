@@ -1,3 +1,54 @@
-<p>
-  user-admin works!
-</p>
+<div class="container">
+    <div class="row align-items-center">
+      <div class="jumbotron text-center">
+        <h1> Hello, (User)!</h1>
+        <p> Welcome to the Admin Homepage! </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class=" col-md-12 justify-content-between">
+        <h4> Flagged Events </h4>
+        <br>
+        <!-- *NgFor="let cevents of cevents"-->
+        <div id="flagged-events">
+          <table class="col-md-12 ">
+            <tr class="eventList justify-content-between z-depth-2" (click)="showModal()">
+              <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+              <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+              <td class="event-date"> <span class="align-middle"> Date </span> </td>
+              <td class="event-time"> <span class="align-middle"> Time </span> </td>
+              <td class="event-location"> <span class="align-middle"> Location </span> </td>
+            </tr>
+            <tr class="eventList justify-content-between z-depth-2">
+              <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+              <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+              <td class="event-date"> <span class="align-middle"> Date </span> </td>
+              <td class="event-time"> <span class="align-middle"> Time </span> </td>
+              <td class="event-location"> <span class="align-middle"> Location </span> </td>
+            </tr>
+            <tr class="eventList justify-content-between z-depth-2">
+              <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+              <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+              <td class="event-date"> <span class="align-middle"> Date </span> </td>
+              <td class="event-time"> <span class="align-middle"> Time </span> </td>
+              <td class="event-location"> <span class="align-middle"> Location </span> </td>
+            </tr>
+            <tr class="eventList justify-content-between z-depth-2">
+              <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+              <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+              <td class="event-date"> <span class="align-middle"> Date </span> </td>
+              <td class="event-time"> <span class="align-middle"> Time </span> </td>
+              <td class="event-location"> <span class="align-middle"> Location </span> </td>
+            </tr>
+            <tr class="eventList justify-content-between z-depth-2">
+              <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+              <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+              <td class="event-date"> <span class="align-middle"> Date </span> </td>
+              <td class="event-time"> <span class="align-middle"> Time </span> </td>
+              <td class="event-location"> <span class="align-middle"> Location </span> </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
