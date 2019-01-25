@@ -1,36 +1,30 @@
-import { async, ComponentFixture, tick, fakeAsync, TestBed } from '@angular/core/testing';
+import { tick, fakeAsync, TestBed } from '@angular/core/testing';
 
 import { UserAsyncComponent } from './user-async.component';
 import { UserAsyncService }  from './user-async.service';
-import { Observable, Observer, observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 describe('UserAsyncComponent', () => {
-  let component: UserAsyncComponent;
-  let fixture: ComponentFixture<UserAsyncComponent>;
+  // let component: UserAsyncComponent;
+  // let fixture: ComponentFixture<UserAsyncComponent>;
+  // let 
 
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ UserAsyncComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UserAsyncComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    });
+    // .compileComponents();
   });
 
   describe(':', () => {
   function setup() {
     const fixture = TestBed.createComponent(UserAsyncComponent);
     const app = fixture.debugElement.componentInstance;
-    const UserAsyncService = fixture.debugElement.injector.get(
-
+    const userAsyncService = fixture.debugElement.injector.get(
       UserAsyncService
     );
 
-    return { fixture, app, UserAsyncService };
+    return { fixture, app, userAsyncService };
   };
 
 
@@ -40,9 +34,9 @@ describe('UserAsyncComponent', () => {
   });
 
   it('should display username', fakeAsync(() => {
-    const { fixture, app, UserAsyncService } = setup();
+    const { fixture, app, userAsyncService } = setup();
     const mockUser = { name:'Emily'};
-    spyOn(UserAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
+    spyOn(userAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
       observer.next(mockUser);
       return observer;
     })
@@ -57,8 +51,8 @@ describe('UserAsyncComponent', () => {
   }));
 
   it('should display a system error', fakeAsync(() => {
-    const { app, fixture, UserAsyncService } = setup();
-    spyOn(UserAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
+    const { fixture, app, userAsyncService } = setup();
+    spyOn(userAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
       return observer.error('Something went wrong.');
     }));
 
