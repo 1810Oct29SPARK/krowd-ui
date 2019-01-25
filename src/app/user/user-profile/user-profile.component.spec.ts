@@ -22,4 +22,16 @@ describe('UserProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should get user info by userId', () => {
+
+  })
+  it('should allow user to get comments by userId', () => {
+
+  })
+  it('should allow user to update information', () => {
+
+  })
+  it('should allow user to update profile picture', () => {
+
+  })
 });
