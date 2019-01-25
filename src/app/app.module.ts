@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
 import { UserAsyncComponent } from './user-async/user-async.component';
+import { MaterialModule } from './material.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +16,9 @@ import { UserAsyncComponent } from './user-async/user-async.component';
   ],
   imports: [
     BrowserModule,
-    CoreModule
+    CoreModule,
+    MaterialModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

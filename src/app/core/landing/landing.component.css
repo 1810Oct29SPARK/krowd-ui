@@ -1,0 +1,10 @@
+.cards {
+    width: 40%;
+    position: relative;
+    top: 12vh;
+    left: 30vw;
+}
+
+.buttons {
+    padding: 1%;
+}

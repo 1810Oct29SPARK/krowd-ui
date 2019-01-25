@@ -13,13 +13,20 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { FileUploadModule } from 'ng2-file-upload';
+import 'rxjs/rx';
+import { EventsComponent } from './events/events.component';
+import { ServicesComponent } from './services/services.component';
 
 @NgModule({
   declarations: [
     LandingComponent,
     LoginComponent,
     RegisterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EventsComponent,
+    ServicesComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +37,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     NgbModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    Ng2CloudinaryModule,
+    FileUploadModule,
   ],
   exports: [
     RouterModule
