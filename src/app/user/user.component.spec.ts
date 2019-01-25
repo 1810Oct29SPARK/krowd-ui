@@ -57,6 +57,12 @@ describe('UserComponent', () => {
     const loggedInUser = compile.querySelector('p');
     expect(loggedInUser.textContent).toBe('user is NOT logged in');
   });
+  xit('should add a new user', () => {
+
+  })
+  xit('should add a new admin', () => {
+
+  })
 });
   
 });
