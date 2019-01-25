@@ -8,6 +8,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
+import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserAdminComponent } from './user-admin/user-admin.component';
     UserHomeComponent,
     UserNavbarComponent,
     UserProfileComponent,
-    UserAdminComponent
+    UserAdminComponent,
+    UserAllEventsComponent
   ],
   imports: [
     CommonModule,
