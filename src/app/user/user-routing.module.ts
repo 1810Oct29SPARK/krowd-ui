@@ -6,6 +6,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserCreateEventComponent } from './user-create-event/user-create-event.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
+import { UserAllEventsComponent } from './user-all-events/user-all-events.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
           { path: 'home', component: UserHomeComponent },
           { path: 'profile', component: UserProfileComponent },
           { path: 'create', component: UserCreateEventComponent },
+          { path: 'all', component: UserAllEventsComponent},
           {
             path: 'admin',
             // canActivate: [],
