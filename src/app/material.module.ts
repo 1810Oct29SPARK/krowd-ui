@@ -32,7 +32,7 @@ import {
   MatGridList,
   MatGridTile,
   MatPaginator,
-  MatSpinner
+  MatSpinner,
 } from '@angular/material';
 
 @NgModule({
