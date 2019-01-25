@@ -1,13 +1,17 @@
 <div class="text-center">
+  <br>
   <div>
     <h2>Welcome to Krowd!</h2>
     <h5>Login or create an account </h5>
   </div>
-  <button mat-raised-button class="btn btn-outline-warning my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleLogin()">
-    Login</button>
-  <button mat-raised-button class="btn btn-outline-warning my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleRegister()">
-    Create an Account</button>
-</div>
+  <span class="buttons">
+    <button mat-raised-button class="btn btn-outline-warning my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleLogin()">
+      Login</button>
+  </span>
+  <span class="buttons">
+    <button mat-raised-button class="btn btn-outline-warning my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleRegister()">
+      Create an Account</button>
+  </span>
   <div *ngIf="showLogin" id="login">
     <div class="cards">
       <mat-card>
@@ -15,10 +19,9 @@
       </mat-card>
     </div>
   </div>
-  <div *ngIf="showRegister" id="login">
-    <div class="cards">
-      <mat-card>
-        <app-register></app-register>
-      </mat-card>
-    </div>
+  <div *ngIf="showRegister" id="login" class="cards">
+    <mat-card>
+      <app-register></app-register>
+    </mat-card>
   </div>
+</div>
