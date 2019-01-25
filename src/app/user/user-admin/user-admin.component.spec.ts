@@ -19,7 +19,31 @@ describe('UserAdminComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  xit('should create admin home', () => {
     expect(component).toBeTruthy();
   });
+  xit('should all admin to get all events', () => {
+
+  })
+  xit('should allow admin to get all users', () => {
+
+  })
+  xit('should allow admin to get all admins', () => {
+
+  })
+  xit('should allow admin to view all flagged events', () => {
+    
+  })
+  xit('should allow admin to view all flagged comments', () => {
+
+  })
+  xit('should allow admin to deactivate user', () => {
+
+  })
+  xit('should allow admin to delete comment', () => {
+
+  })
+  xit('should allow admin to delete event', () => {
+
+  })
 });
