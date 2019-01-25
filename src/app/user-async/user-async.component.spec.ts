@@ -33,7 +33,7 @@ describe('UserAsyncComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should display username', fakeAsync(() => {
+  xit('should display username', fakeAsync(() => {
     const { fixture, app, userAsyncService } = setup();
     const mockUser = { name:'Emily'};
     spyOn(userAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
@@ -50,7 +50,7 @@ describe('UserAsyncComponent', () => {
     expect (loggedInUserName.textContent).toBe('Emily');
   }));
 
-  it('should display a system error', fakeAsync(() => {
+  xit('should display a system error', fakeAsync(() => {
     const { fixture, app, userAsyncService } = setup();
     spyOn(userAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
       return observer.error('Something went wrong.');
