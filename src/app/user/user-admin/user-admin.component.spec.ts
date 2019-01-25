@@ -26,8 +26,30 @@ describe('UserAdminComponent', () => {
 
   })
   xit('should allow admin to get all users', () => {
+    const users : User[]=[
+      {
+        id: 1,
+        username: 'EHiggins',
+        firstname: 'Emily',
+        lastname: 'Higgins',
+        email: 'ehiggins@revature.com',
+        reputation: '4.5',
+        flagScore: 0,
+        accountStatus: 'active',
+        photoUrl: 'https://revature.com/wp-content/uploads/2017/12/revature-logo-600x219.png'
 
-  })
+      }
+    ];
+
+    spyOn(service,'getUsers').and.callFake(() => {
+      return Observable.from([users]);
+    });
+
+    component.ngOnInit();
+
+    expect(component.users).toEqual(users);
+
+  });
   xit('should allow admin to get all admins', () => {
 
   })
