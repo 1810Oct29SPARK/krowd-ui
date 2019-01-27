@@ -2,6 +2,7 @@ export class Event {
     id: number;
     name: string;
     category: string;
+
     date: Date;
     time: TimeRanges; // Optional
     address: string;

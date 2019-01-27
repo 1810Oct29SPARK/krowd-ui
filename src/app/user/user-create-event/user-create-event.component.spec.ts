@@ -19,7 +19,7 @@ describe('UserCreateEventComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create a new event', () => {
+  xit('should create an event page', () => {
 
     expect(component).toBeTruthy();
   });

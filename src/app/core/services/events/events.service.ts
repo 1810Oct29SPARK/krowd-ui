@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EventsService {
+  private events: Event[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
@@ -57,6 +58,7 @@ export class EventsService {
       );
   }
   getEventsByCategory(categoryID: number) {
+
     return this.httpClient.get<Event[]>(`http://localhost:8080/${categoryID}`)
       .map(
         (event: any[]) => {

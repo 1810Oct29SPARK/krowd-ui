@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Event } from '../../shared/models/event';
+import { Comment } from '../../shared/models/comment';
+
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
+  events: Event[] = [];
+  comments: Comment[] = [];
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  addComment(comment: Comment) {
+    
+  }
+
+  
 
 }
