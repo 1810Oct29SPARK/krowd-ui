@@ -8,6 +8,8 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import { UserAdminComponent } from './user-admin/user-admin.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgbModule
   ]
 })
 export class UserModule { }
