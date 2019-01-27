@@ -9,7 +9,7 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
-import { NgForm, FormsModule } from '@angular/forms';
+import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageUploadComponent } from '../core/image-upload/image-upload.component';
 
@@ -27,9 +27,9 @@ import { ImageUploadComponent } from '../core/image-upload/image-upload.componen
   imports: [
     CommonModule,
     UserRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
 

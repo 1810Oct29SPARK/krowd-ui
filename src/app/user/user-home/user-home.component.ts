@@ -15,7 +15,7 @@ export class UserHomeComponent implements OnInit {
 
   eventList = [];
 
-  constructor(private httpClient: HttpClient, event: Event) { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
     // this.getAllEvents();
