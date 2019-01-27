@@ -22,8 +22,6 @@ export class EventsComponent implements OnInit {
     
   }
 
-  addEvent(event: Event) {
-    
-  }
+  
 
 }

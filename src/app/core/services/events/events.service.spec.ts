@@ -3,10 +3,12 @@ import { TestBed } from '@angular/core/testing';
 import { Event } from '../../../shared/models/event';
 import { EventsComponent } from '../../events/events.component';
 import { EventsService } from './events.service';
+import { UserCreateEventComponent } from '../../../user/user-create-event/user-create-event.component';
 import { Observable } from 'rxjs';
 
 describe('EventsService', () => {
   let component: EventsComponent;
+  let newEventComponent: UserCreateEventComponent;
   let service: EventsService;
   
   beforeEach(() => TestBed.configureTestingModule({}));
@@ -87,7 +89,7 @@ describe('EventsService', () => {
       zip: 37921,
       hostId: 17
     };
-    component.addEvent(newEvent);
+    newEventComponent.addEvent(newEvent);
     expect(component.events).toContain(newEvent);
   });
 });

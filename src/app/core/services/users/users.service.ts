@@ -17,9 +17,9 @@ export class UsersService {
     return this.httpClient.get<User[]>('http://localhost:8083/');
   }
 
-//   addUser(user: User) {
-//     return this.httpClient.post(`http://localhost:8083`, user);
-//   }
+  addUser(user: User) {
+    return this.httpClient.post(`http://localhost:8083`, user);
+  }
   // updateEvent(event: Event) {
   //   return this.httpClient.put(`http://localhost:8080`), {'id': id, 'Created': Date};
   // }
