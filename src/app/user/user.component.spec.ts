@@ -38,7 +38,7 @@ describe('UserComponent', () => {
     const { component } = setup();
     expect(component).toBeTruthy();
   });
-  xit('should display logged-in user name', () => {
+  it('should display logged-in user name', () => {
     const { fixture, component, userService } = setup();
     const mockUser = {name: 'Emily' };
     spyOn(userService, 'getUser').and.returnValue(mockUser);
@@ -48,7 +48,7 @@ describe('UserComponent', () => {
     const loggedInUser = compile.querySelector('p');
     expect(loggedInUser.textContent).toBe('Welcome Emily');
   })
-  xit('should display user is NOT logged in message', () => {
+  it('should display user is NOT logged in message', () => {
     const {fixture, component, userService } = setup();
     spyOn(userService, 'getUser').and.returnValue(undefined);
     fixture.detectChanges();

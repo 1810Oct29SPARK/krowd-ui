@@ -7,6 +7,6 @@ export class User {
     reputation: string;
     flagScore: number;
     accountStatus: string; //FK
-    photoUrl: ImageBitmap;
+    photoUrl: string;
     // cognitoStuff: ???
 }

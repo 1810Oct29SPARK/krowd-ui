@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../../../shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class UsersService {
   });
   constructor(private httpClient: HttpClient) { }
 
-//   getAllUsers() {
-//     return this.httpClient.get<User[]>('http://localhost:8083/');
-//   }
+  getAllUsers() {
+    return this.httpClient.get<User[]>('http://localhost:8083/');
+  }
 
 //   addUser(user: User) {
 //     return this.httpClient.post(`http://localhost:8083`, user);

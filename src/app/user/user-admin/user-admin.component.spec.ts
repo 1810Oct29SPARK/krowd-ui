@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserAdminComponent } from './user-admin.component';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 describe('UserAdminComponent', () => {
   let component: UserAdminComponent;
   let fixture: ComponentFixture<UserAdminComponent>;
+  let service: UsersService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,31 +27,31 @@ describe('UserAdminComponent', () => {
   xit('should all admin to get all events', () => {
 
   })
-  xit('should allow admin to get all users', () => {
-    const users : User[]=[
-      {
-        id: 1,
-        username: 'EHiggins',
-        firstname: 'Emily',
-        lastname: 'Higgins',
-        email: 'ehiggins@revature.com',
-        reputation: '4.5',
-        flagScore: 0,
-        accountStatus: 'active',
-        photoUrl: 'https://revature.com/wp-content/uploads/2017/12/revature-logo-600x219.png'
+  // xit('should allow admin to get all users', () => {
+  //   const users : User[]=[
+  //     {
+  //       id: 1,
+  //       username: 'EHiggins',
+  //       firstname: 'Emily',
+  //       lastname: 'Higgins',
+  //       email: 'ehiggins@revature.com',
+  //       reputation: '4.5',
+  //       flagScore: 0,
+  //       accountStatus: 'active',
+  //       photoUrl: 'https://revature.com/wp-content/uploads/2017/12/revature-logo-600x219.png'
 
-      }
-    ];
+  //     }
+  //   ];
 
-    spyOn(service,'getUsers').and.callFake(() => {
-      return Observable.from([users]);
-    });
+  //   spyOn(service,'getUsers').and.callFake(() => {
+  //     return Observable.from([users]);
+  //   });
 
-    component.ngOnInit();
+  //   component.ngOnInit();
 
-    expect(component.users).toEqual(users);
+  //   expect(component.users).toEqual(users);
 
-  });
+  // });
   xit('should allow admin to get all admins', () => {
 
   })

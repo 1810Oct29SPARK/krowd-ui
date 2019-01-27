@@ -33,7 +33,7 @@ describe('UserAsyncComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  xit('should display username', fakeAsync(() => {
+  it('should display username', fakeAsync(() => {
     const { fixture, app, userAsyncService } = setup();
     const mockUser = { name:'Emily'};
     spyOn(userAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
@@ -50,10 +50,10 @@ describe('UserAsyncComponent', () => {
     expect (loggedInUserName.textContent).toBe('Emily');
   }));
 
-  xit('should display a system error', fakeAsync(() => {
+  it('should display a system error', fakeAsync(() => {
     const { fixture, app, userAsyncService } = setup();
     spyOn(userAsyncService, 'getUserDetails').and.returnValue(Observable.create((observer: Observer<{name:string}>) => {
-      return observer.error('Something went wrong.');
+      return observer.error('...well that didn\'t work...');
     }));
 
     tick();
@@ -61,7 +61,7 @@ describe('UserAsyncComponent', () => {
     fixture.detectChanges();
     const userAsyncElement = fixture.debugElement.nativeElement;
     const systemError = userAsyncElement.querySelector('p');
-    expect (systemError.textContent).toBe('Something went wrong.');
+    expect (systemError.textContent).toBe('...well that didn\'t work...');
   }))
   });
 });
