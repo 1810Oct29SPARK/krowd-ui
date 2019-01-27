@@ -6,6 +6,7 @@ import 'rxjs';
   providedIn: 'root'
 })
 export class EventsService {
+  private events: Event[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
