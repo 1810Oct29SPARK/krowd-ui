@@ -28,10 +28,10 @@ export class UserCreateEventComponent implements OnInit {
     // this.authService.getCurrentUser();
 
 
-    const newEvent = new Event(null, value.name, value.category, value.date, value.time, value.address, null, null, null, null, value.zip, userId);
+    const newEvent = new Event(null, value.eventName, value.eventCategory, value.eventDate, value.eventTime, value.eventAddress, value.eventCity, value.eventState, value.eventZip, null, null, userId);
     console.log(newEvent)
     this.submitted=true;
-    this.eventservice.addEvent(newEvent);
+    // this.eventservice.addEvent(newEvent);
   }
 
 
