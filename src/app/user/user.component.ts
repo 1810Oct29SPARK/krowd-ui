@@ -32,4 +32,9 @@ export class UserComponent implements OnInit {
 
   }
 
+  getUserById(id: number) {
+  }
+  getUserByEventId(commentId: number) {
+  }
+
 }

@@ -31,7 +31,7 @@ describe('UsersService', () => {
       },
       {
         id: 2,
-        username: 'ItsaMe',
+        username: 'Its-a-Me',
         firstname: 'Mario',
         lastname: 'Mario',
         email: 'SuperMario@gmail.com',
@@ -63,7 +63,7 @@ describe('UsersService', () => {
       },
       {
         id: 2,
-        username: 'ItsaMe',
+        username: 'Its-a-Me',
         firstname: 'Mario',
         lastname: 'Mario',
         email: 'SuperMario@gmail.com',
@@ -88,5 +88,37 @@ describe('UsersService', () => {
     expect(component.user).toContain(newUser);
   });
 
-  
+  it('should get a user by their userId', () => {
+    const user1 = {
+      id: 1,
+      username: 'OoohBanana',
+      firstname: 'Donkey',
+      lastname: 'Kong',
+      email: 'DK@gmail.com',
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+    }
+    const user2 = {
+      id: 2,
+      username: 'Its-a-Me',
+      firstname: 'Mario',
+      lastname: 'Mario',
+      email: 'SuperMario@gmail.com',
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+    }
+    const users: User[] = [
+      user1,
+      user2
+    ];
+    spyOn(service, 'getUserById').and.callFake(() => {
+      return Observable.from([users]);
+    });
+    component.getUserById(2);
+    expect(component.user).toEqual(user2);
+  });
 });

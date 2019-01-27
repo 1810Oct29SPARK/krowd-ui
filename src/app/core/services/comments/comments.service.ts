@@ -33,7 +33,7 @@ export class CommentsService {
   getCommentById(id: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8083`);
   }
-  getCommentsByUderId(userId: number) {
+  getCommentsByUserId(userId: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8080/${userId}`);
   }
   getCommentByEventId(commentId: number) {
