@@ -1,3 +1,58 @@
-<p>
-  user-all-events works!
-</p>
+<div class="container align-items-center">
+  <div class="row">
+    <div class=" col-md-12 justify-content-between">
+      <h4> All Events </h4>
+      <br>
+      <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
+      <!-- *NgFor="let event of all-events"-->
+      <!-- <div id="all-events" *ngFor="event of events"> -->
+      <div id="all-events">
+        <table class="col-md-12">
+          <tr class="eventList justify-content-between z-depth-2" (click)="open(allEvent)">
+            <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
+            Then we populate the modal with the results. -->
+            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+            <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> Event Title </span> </td>
+            <td class="event-date"> <span class="align-middle"> Date </span> </td>
+            <td class="event-time"> <span class="align-middle"> Time </span> </td>
+            <td class="event-location"> <span class="align-middle"> Location </span> </td>
+          </tr>
+        </table>
+        <table class="col-md-12">
+          <tr class="eventList justify-content-between z-depth-2" (click)="open(allEvent)">
+            <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
+            Then we populate the modal with the results. -->
+            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+            <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> Event Title </span> </td>
+            <td class="event-date"> <span class="align-middle"> Date </span> </td>
+            <td class="event-time"> <span class="align-middle"> Time </span> </td>
+            <td class="event-location"> <span class="align-middle"> Location </span> </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+<ng-template #allEvent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Event Title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
+    <br>
+    <br>
+    <h4> Event Description </h4>
+    <p> This is the event's description. </p>
+    <br>
+    <h4>Date & Time </h4>
+    <p> Date and time will appear here. </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Dismiss</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
+  </div>
+</ng-template>
