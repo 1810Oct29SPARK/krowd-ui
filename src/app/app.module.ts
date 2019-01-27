@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     FormsModule
   ],
-  providers: [EventsService, CommentsService, UsersService, AdminService, Event],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

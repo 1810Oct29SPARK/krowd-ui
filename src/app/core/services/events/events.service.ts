@@ -16,7 +16,7 @@ export class EventsService {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, event: Event) {
+  constructor(private httpClient: HttpClient) {
   }
 
   getAllEvents() {
