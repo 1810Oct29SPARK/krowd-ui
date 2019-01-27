@@ -19,7 +19,16 @@ describe('UserHomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  xit('should create a user-homepage', () => {
     expect(component).toBeTruthy();
   });
+  xit('should allow user to get all events', () => {
+
+  })
+  xit('should allow user to get events by category', () => {
+
+  })
+  xit('should allow user to get events by ranking', () => {
+
+  })
 });

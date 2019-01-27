@@ -17,7 +17,12 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload';
 import 'rxjs/rx';
 import { EventsComponent } from './events/events.component';
-import { ServicesComponent } from './services/services.component';
+import { UserService } from '../user/user.service';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { EventsService } from './services/events/events.service';
+import { UsersService } from './services/users/users.service';
+import { CommentsService } from './services/comments/comments.service';
+import { AdminService } from './services/admin/admin.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,7 @@ import { ServicesComponent } from './services/services.component';
     RegisterComponent,
     PageNotFoundComponent,
     EventsComponent,
-    ServicesComponent,
+    ImageUploadComponent
   ],
   imports: [
     CommonModule,
@@ -42,8 +47,9 @@ import { ServicesComponent } from './services/services.component';
     FileUploadModule,
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    ImageUploadComponent
   ],
-  providers: []
+  providers: [ImageUploadComponent, EventsService, UsersService, CommentsService, AdminService]
 })
 export class CoreModule { }

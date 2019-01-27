@@ -8,8 +8,11 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
+import { NgForm, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ImageUploadComponent } from '../core/image-upload/image-upload.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserHomeComponent,
     UserNavbarComponent,
     UserProfileComponent,
-    UserAdminComponent
+    UserAdminComponent,
+    UserAllEventsComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     NgbModule
-  ]
+  ],
+  providers: [],
+
 })
 export class UserModule { }

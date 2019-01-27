@@ -10,10 +10,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    UserAsyncComponent
+    UserAsyncComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EventsService, CommentsService, UsersService, AdminService, Event],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

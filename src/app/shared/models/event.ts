@@ -2,12 +2,15 @@ export class Event {
     id: number;
     name: string;
     category: string;
+
     date: Date;
-    time: TimeRanges; //Optional
+    time: TimeRanges; // Optional
     address: string;
+    city: string;
+    state: string;
+    zip: number;
     ratingScore: number;
     flagScore: number;
-    zip: number;
     hostId: number;
 
     constructor(id: number, name: string, category: string, date: Date, time: TimeRanges, address: string, ratingScore: number, flagScore: number, zip: number, hostId: number){
@@ -22,4 +25,3 @@ export class Event {
         this.zip = zip;
         this.hostId = hostId;
     }
-}

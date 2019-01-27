@@ -1,12 +1,184 @@
 import { TestBed } from '@angular/core/testing';
 
+import { User } from '../../../shared/models/user';
+import { Event } from '../../../shared/models/event';
 import { UsersService } from './users.service';
+import { UserComponent } from 'src/app/user/user.component';
+import { Observable } from 'rxjs';
 
 describe('UsersService', () => {
+
+  let component: UserComponent;
+  let service: UsersService;
+
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  xit('should be created', () => {
     const service: UsersService = TestBed.get(UsersService);
     expect(service).toBeTruthy();
   });
+  it('should get a list of all users', () => {
+    const users: User[] = [
+      {
+        id: 1,
+        username: 'OoohBanana',
+        firstname: 'Donkey',
+        lastname: 'Kong',
+        email: 'DK@gmail.com',
+        reputation: 'good',
+        flagScore: 0,
+        accountStatus: 'Active',
+        photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+      },
+      {
+        id: 2,
+        username: 'Its-a-Me',
+        firstname: 'Mario',
+        lastname: 'Mario',
+        email: 'SuperMario@gmail.com',
+        reputation: 'good',
+        flagScore: 0,
+        accountStatus: 'Active',
+        photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+      }
+    ];
+    spyOn(service, 'getAllUsers').and.callFake(() => {
+      return Observable.from([users]);
+    });
+    component.ngOnInit();
+    expect(component.user).toEqual(users);
+  });
+
+  it('should add a new user', () => {
+    const users: User[] = [
+      {
+        id: 1,
+        username: 'OoohBanana',
+        firstname: 'Donkey',
+        lastname: 'Kong',
+        email: 'DK@gmail.com',
+        reputation: 'good',
+        flagScore: 0,
+        accountStatus: 'Active',
+        photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+      },
+      {
+        id: 2,
+        username: 'Its-a-Me',
+        firstname: 'Mario',
+        lastname: 'Mario',
+        email: 'SuperMario@gmail.com',
+        reputation: 'good',
+        flagScore: 0,
+        accountStatus: 'Active',
+        photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+      }
+    ];
+    const newUser: User = {
+      id: 3,
+      username: 'StarWarrior',
+      firstname: 'Kirby',
+      lastname: '',
+      email: "Zzz@gmail.com",
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj6iaX2hI3gAhUom-AKHaLeAqgQjRx6BAgBEAU&url=https%3A%2F%2Fkirby.nintendo.com%2F&psig=AOvVaw3SAF0KO77ChM_o70oIurpZ&ust=1548646764410141'
+    };
+    component.addUser(newUser);
+    expect(component.user).toContain(newUser);
+  });
+
+  it('should get a user by their userId', () => {
+    const user1 = {
+      id: 1,
+      username: 'OoohBanana',
+      firstname: 'Donkey',
+      lastname: 'Kong',
+      email: 'DK@gmail.com',
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+    }
+    const user2 = {
+      id: 2,
+      username: 'Its-a-Me',
+      firstname: 'Mario',
+      lastname: 'Mario',
+      email: 'SuperMario@gmail.com',
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+    }
+    const users: User[] = [
+      user1,
+      user2
+    ];
+    spyOn(service, 'getUserById').and.callFake(() => {
+      return Observable.from([users]);
+    });
+    component.getUserById(2);
+    expect(component.user).toEqual(user2);
+  });
+  
+  it('should get a user by an eventId', () => {
+    const user1 = {
+      id: 1,
+      username: 'OoohBanana',
+      firstname: 'Donkey',
+      lastname: 'Kong',
+      email: 'DK@gmail.com',
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+    }
+    const user2 = {
+      id: 2,
+      username: 'Its-a-Me',
+      firstname: 'Mario',
+      lastname: 'Mario',
+      email: 'SuperMario@gmail.com',
+      reputation: 'good',
+      flagScore: 0,
+      accountStatus: 'Active',
+      photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+    }
+    const users: User[] = [
+      user1,
+      user2
+    ];
+    const event1 = {
+      id: 25000,
+      name: 'Eat Bananas',
+      category: 'Eat Bananas',
+      address: 'DK\'s Place',
+      ratingScore: 100000000,
+      flagScore: 0,
+      zip: 15973,
+      hostId: 1
+    };
+    const event2 = {
+      id: 35000,
+      name: 'Save-a the Princess',
+      category: 'Adventure/Journey',
+      address: 'Bowser\'s Castle',
+      ratingScore: 100000000,
+      flagScore: 0,
+      zip: 75391,
+      hostId: 2
+    };
+    const events: Event[] = [
+      event1,
+      event2
+    ]
+  spyOn(service, 'getUserByEventId').and.callFake(() => {
+    return Observable.from([users])
+  })
+  component.getUserByEventId(1);
+  expect(component.user).toEqual(user1);
+  })
+
 });
