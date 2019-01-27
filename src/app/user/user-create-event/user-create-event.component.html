@@ -24,8 +24,45 @@
 
     <!-- div for putting Category & number of people & description in the same column-->
     <div class="form-row">
-      <div class="form-group col-6">
+      <div class="form-group col-3">
 
+        <!-- input for the Location of the Event-->
+        <div class="form-group">
+          <label for="eventName">Event Address*</label>
+          <input required type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Street"  [(ngModel)] = "eventLocation"
+          #street="ngModel"/>
+          <br>
+          <input required type="text" class="form-control" id="eventCity" name="eventCity" placeholder="City"  [(ngModel)] = "eventCity"
+          #city="ngModel"/>
+          <br>
+          <div class="form-row">
+            <div class="col">
+              <input required type="text" class="form-control" id="eventState" name="eventState" placeholder="State"  [(ngModel)] = "eventState"
+              #state="ngModel"/>
+            </div>
+            <div class="col">
+              <input required type="text" class="form-control" id="eventZip" name="eventZip" placeholder="Zipcode"  [(ngModel)] = "eventZip"
+              #zip="ngModel"/>
+            </div>
+          </div>
+          <br>
+        
+          <label for="eventTime">Event Time*</label>
+          <input required type="time" class="form-control" id="eventTime" name="eventTime">
+        </div>
+  
+        <!-- error message for event address-->
+        <div [hidden]="street.valid || street.pristine" class="alert alert-danger">
+          Event address is required
+        </div>
+      
+      </div>
+
+       <!-- div to provide spacing between Calendar and other Information -->
+       <div class="form-group col">
+        </div>
+
+      <div class="form-group col-4">
         <!-- input for event category dropdown-->
         <label for="eventCategory">Category*</label>
         <select required class="form-control" id="eventCategory" name="eventCategory" 
@@ -39,20 +76,9 @@
         </select>
         <br>
 
-        <!-- input for number of people-->
-        <label for="eventPeople">Max Number of People*</label>
-        <input required type="number" class="form-control" id="eventPeople" name="eventPeople" placeholder="1-100"
-          maxlength="3" min="1" max="100" pattern="^[1-9]+[0-9]*$" [(ngModel)] = "eventPeople" #people="ngModel"/>
-        <br>
-
-        <!-- error message for max number of people-->
-        <div [hidden]="people.valid || people.pristine" class="alert alert-danger">
-          Max number of people is required
-        </div>
-
         <!-- input for event description-->
         <label for="eventDescription">Description*</label>
-        <textarea required class="form-control" name="eventDescription" id="eventDescription" rows="4" maxlength="200"
+        <textarea required class="form-control" name="eventDescription" id="eventDescription" rows="6" maxlength="200"
           placeholder="Please provide a short description of the event (under 200 characters)." required [(ngModel)]="eventDescription"
           #description="ngModel">
         </textarea>
@@ -65,47 +91,35 @@
         </div>
       </div>
 
-
-
       <!-- div to provide spacing between Calendar and other Information -->
       <div class="form-group col">
       </div>
 
       <!-- Calendar for picking the event date-->
       <div class="form-group col">
-        <br>
         <label for="eventDate">Event Date*</label>
         <ngb-datepicker #d [(ngModel)]="eventDate" name="eventDate" required></ngb-datepicker>
       </div>
 
     </div>
 
-    <!-- input for the Location of the Event-->
-    <div class="form-group">
-      <label for="eventName">Event Address*</label>
-      <input required type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="example: 1600 Pennsylvania Ave NW, Washington, DC 20500"  [(ngModel)] = "eventLocation"
-      #location="ngModel"/>
-    </div>
+    
 
-    <!-- error message for event address-->
-    <div [hidden]="location.valid || location.pristine" class="alert alert-danger">
-      Event address is required
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col">
+    <div class="form-row picture-upload">
+      <div class="form-group col-4">
         <label for="eventImage">Upload an Image (Optional)</label>
         <br>
-
-        <!-- [uploader]="uploader"  -->
-        <input type="file" ng2FileSelect 
+        
+        <!-- need to add [uploader]="uploader"-->
+        
+        <input type="file" ng2FileSelect  
         accept="image/*;capture=camera" name="eventPhotoID"
           ngModel>
         <br>
         <br>
         <button [disabled]="loading" (click)="upload()">Upload</button>
       </div>
-      <div class="form-group col">
+      <div class="form-group col-4">
         <img src={{picture}}>
       </div>
     </div>

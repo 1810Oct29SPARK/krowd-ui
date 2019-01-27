@@ -11,7 +11,6 @@ import { UserAdminComponent } from './user-admin/user-admin.component';
 import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
 import { NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ImageUploadComponent } from '../core/image-upload/image-upload.component';
 
 
 @NgModule({
