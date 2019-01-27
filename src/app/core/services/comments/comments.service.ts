@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { Comment } from '../../../shared/models/comment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CommentsService {
+  private comments: Comment[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',

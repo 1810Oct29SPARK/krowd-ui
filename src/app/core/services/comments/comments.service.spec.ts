@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 
 import { Comment } from '../../../shared/models/comment';
 import { CommentsService } from './comments.service';
-import { UserHomeComponent } from '../../../user/user-home/user-home.component';
+import { EventsComponent } from '../../events/events.component';
 
 describe('CommentsService', () => {
-  let component: UserHomeComponent;
+  let component: EventsComponent;
   let service: CommentsService;
   
   beforeEach(() => TestBed.configureTestingModule({}));
@@ -40,5 +40,37 @@ describe('CommentsService', () => {
     });
     component.ngOnInit();
     expect(component.comments).toEqual(comments);
+  });
+
+  it('should add a new comment', () => {
+    const comments: Comment[] = [
+      {
+        id: 592,
+        description: 'Great game today!',
+        postedBy: 52, //FK
+        // time: Time; //Optional
+        flagScore: 0,
+        eventId: 72 //FK
+    },
+    {
+      id: 843,
+      description: 'Wow, it was pouring today!  Good call on the indoor event!',
+      postedBy: 71, //FK
+      // time: Time; //Optional
+      flagScore: 0,
+      eventId: 83 //FK
+  }
+    ];
+    const newComment: Comment =
+      {
+        id: 1024,
+        description: 'Bwahahahahahaha!',
+        postedBy: 87, //FK
+        // time: Time; //Optional
+        flagScore: 0,
+        eventId: 33 //FK
+    };
+    component.addComment(newComment);
+    expect(component.comments).toContain(newComment);
   });
 });
