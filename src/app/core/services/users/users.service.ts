@@ -25,10 +25,10 @@ export class UsersService {
   // }
 
 
-//   getUserById(id: number) {
-//     return this.httpClient.get<User[]>(`http://localhost:8083`);
-//   }
-//   getUserByEventId(commentId: number) {
-//     return this.httpClient.get<User[]>(`http://localhost:8080/${commentId}`);
-//   }
+  getUserById(id: number) {
+    return this.httpClient.get<User[]>(`http://localhost:8083`);
+  }
+  getUserByEventId(commentId: number) {
+    return this.httpClient.get<User[]>(`http://localhost:8080/${commentId}`);
+  }
 }

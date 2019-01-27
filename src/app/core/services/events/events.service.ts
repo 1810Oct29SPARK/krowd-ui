@@ -31,10 +31,10 @@ export class EventsService {
     return this.httpClient.get<Event[]>(`http://localhost:8083`);
   }
   getEventsByCategory(categoryID: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8080/${categoryID}`);
+    return this.httpClient.get<Event[]>(`http://localhost:8083/${categoryID}`);
   }
-  getEventsByUderId(userid: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8080/${userid}`);
+  getEventsByUserId(userid: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8083/${userid}`);
   }
 
   registerForEvent(eventId: number, userId: number) {

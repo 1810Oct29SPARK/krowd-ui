@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from './user.service';
 import { User } from '../shared/models/user';
+import { Event } from '../shared/models/event';
 
 @Component({
   selector: 'app-user',
@@ -13,6 +14,8 @@ export class UserComponent implements OnInit {
   user:{name:string};
   isUserLoggedIn = false;
   userDetail;
+  users: User[] = [];
+  events: Event[] = [];
 
 
   constructor(private userService:UserService) { }
