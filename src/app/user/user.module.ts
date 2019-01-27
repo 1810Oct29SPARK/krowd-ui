@@ -13,6 +13,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageUploadComponent } from '../core/image-upload/image-upload.component';
 
+
 @NgModule({
   declarations: [
     UserComponent,
@@ -26,9 +27,11 @@ import { ImageUploadComponent } from '../core/image-upload/image-upload.componen
   imports: [
     CommonModule,
     UserRoutingModule,
-    NgbModule,
+    ReactiveFormsModule,
     FormsModule,
+    NgbModule
   ],
   providers: [],
+
 })
 export class UserModule { }
