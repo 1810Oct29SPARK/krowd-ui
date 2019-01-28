@@ -2,7 +2,7 @@ export class Event {
 
     id: number;
     name: string;
-    category: string;
+    category: number;
     date: Date;
     time: any; // Optional
     address: string;
@@ -12,11 +12,13 @@ export class Event {
     ratingScore: number;
     flagScore: number;
     hostId: number;
+    description: string;
+    picture: string;
 
     constructor(
         id: number,
         name: string,
-        category: string,
+        category: number,
         date: Date,
         time: any,
         address: string,
@@ -25,7 +27,8 @@ export class Event {
         zip: number,
         ratingScore: number,
         flagScore: number,
-        hostId: number
+        hostId: number,
+        picture: string
     ) {
         this.id = id;
         this.name = name;
@@ -39,6 +42,7 @@ export class Event {
         this.ratingScore = ratingScore;
         this.flagScore = flagScore;
         this.hostId = hostId;
+        this.picture = picture;
     }
 
 }

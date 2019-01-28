@@ -71,3 +71,8 @@ tbody {
 .buttons {
   padding: 2%;
 }
+
+.card {
+    margin: 25px;
+    width: 15rem;
+}

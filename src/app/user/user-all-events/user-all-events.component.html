@@ -4,17 +4,17 @@
   <h4> All Events </h4>
   <br>
   <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
-  <!-- *NgFor="let event of all-events"-->
-  <!-- <div class="card-group" *ngFor="event of events"> -->
-  <div class="card-group">
+  <!-- *NgFor="let event of eventList2"-->
+  <div class="card-group" *ngFor="let event of eventList2">
+  <!-- <div class="card-group"> -->
     <div class="col-md-4">
       <div class="card" (click)="open(allEvent)">
         <div class="card-img-top card-img-top-250">
-          <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+          <img class="img-fluid" src={{event.picture}} alt="Carousel 1">
           <div class="card-body">
             <h6 class="small text-wide p-b-2">Insight</h6>
             <h2>
-              Host Event #1
+              {{event.name}}
             </h2>
             <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
           </div>
@@ -63,25 +63,58 @@
   <mat-tab-group>
     <mat-tab label="Event Description">
       <div class="modal-body">
-        <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
+        <img src={{event.picture}} style="height: 200px; width:100%;">
         <br>
         <h4>Event Description</h4>
         <p>This is the event's description.</p>
         <h4>Date & Time</h4>
-        <p>Date and time will appear here.</p>
+        <p>{{event.date}}</p>
         <h4>Location</h4>
-        <p>Location of event.</p>
+        <p>{{event.address.streetAddress}}</p>
+        <p>{{event.address.city}}, {{event.address.state}} {{event.address.zipcode}}</p>
       </div>
       <div class="modal-footer">
-        <!-- Buttons on the bottom of the modal for commenting and registering for event -->
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
         <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
       </div>
     </mat-tab>
-    <mat-tab label="View Comments">
-      <h4>Comments About The Event</h4>
-      <h6>User name</h6>
-      <p>User comment here.</p>
+    <mat-tab (click)="getComments" label="View Comments">
+      <div id="maincommentdiv">
+        <h4 class="centerize">Comments</h4>
+  
+        <!-- comment outline-->
+        <div *ngFor="let comment of commentsList" class="row commentdiv col-12">
+          <div id="UserInfo" class="col-2">
+             <img src={{comment.picture}} class="commentpic centerize"> 
+          </div>
+          <div id="comment-body" class="col-10">
+            <em>"{{comment.comment.data}}"</em>
+            <span id="comment-metadata">
+              <p>User: {{comment.username}} &nbsp; &nbsp; {{comment.created | date}}</p>
+            </span>
+          </div>
+        </div>
+        <div [hidden] = "!commentsList.length == 0">
+          <br>
+          <p class="centerize">No comments yet.  So why not post the first comment?</p>
+          <br>
+        </div>
+  
+        <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">Post a Comment</button>
+        
+        <form [hidden]="!toggle" (ngSubmit)="onCommentCreated(commentForm)" #commentForm="ngForm">
+          <div class="row comment-button">
+          <input type="text" name="data" class="col-9" [(ngModel)] = "data"> 
+          &nbsp;
+          <input type="submit" class="btn btn-outline-success col-2" value="Submit" click="ontoggle()">
+        </div>
+        </form>
+  
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </ng-template>
+</div>
+</div>

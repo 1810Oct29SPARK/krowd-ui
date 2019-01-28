@@ -106,4 +106,161 @@ describe('EventsService', () => {
     expect(component.events).toContain(newEvent);
   });
 
+  it('should get an event by its eventId', () => {
+    const event1 = {
+      id: 23000,
+      name: 'Community Kickball',
+      category: 'Sports',
+      address: '14665 Fowler Avenue',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 17,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const event2 = {
+      id: 24000,
+      name: 'Basketball',
+      category: 'Sports',
+      address: '14505 Prism Circle',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 17,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const events: Event[] = [
+      event1,
+      event2
+    ];
+    spyOn(service, 'getEventById').and.callFake(() => {
+      return Observable.from([events]);
+    });
+    service.getEventById(24000);
+  });
+
+  it('Should get an event by its category', () => {
+    const event1 = {
+      id: 22000,
+      name: 'Church Picnic',
+      category: 'Food & Drink',
+      address: '1652 Cranberry Lane',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 17,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const event2 = {
+      id: 24000,
+      name: 'Bird Watching',
+      category: 'Nature',
+      address: 'Lettuce Lake Park',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 17,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const events: Event[] = [
+      event1,
+      event2
+    ];
+    spyOn(service, 'getEventsByCategory').and.callFake(() => {
+      return Observable.from([events]);
+    });
+    service.getEventsByCategory(5);
+  });
+
+  it('Should get an event by the host ID', () => {
+    const event1 = {
+      id: 22000,
+      name: 'Fondue',
+      category: 'Food & Drink',
+      address: '3215 Silver Meadow Court',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 14,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const event2 = {
+      id: 24000,
+      name: 'Swamp Kayaking',
+      category: 'Nature',
+      address: 'Lettuce Lake Park',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 12,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const events: Event[] = [
+      event1,
+      event2
+    ];
+    spyOn(service, 'getEventsByUserId').and.callFake(() => {
+      return Observable.from([events]);
+    });
+    service.getEventsByUserId(17);
+  });
+
+  it('Should allow user to register for event', () => {
+    const event1 = {
+      id: 16000,
+      name: 'Astro Photography',
+      category: 'Outdoors',
+      address: '59000 County Line Road',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37921,
+      hostId: 14,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
+    };
+    const event2 = {
+      id: 24000,
+      name: 'Beach Volleyball',
+      category: 'Sports',
+      address: 'Clearwater Beach',
+      ratingScore: 10000,
+      flagScore: 0,
+      zip: 37331,
+      hostId: 12,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Clearwater',
+      state: 'Florida'
+    };
+    const events: Event[] = [
+      event1,
+      event2
+    ];
+    spyOn(service, 'registerForEvent').and.callFake(() => {
+      return Observable.from([events]);
+    });
+    service.registerForEvent(15, 24000);
+  });
+
+
 });
