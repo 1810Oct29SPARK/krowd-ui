@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAsyncService } from './user-async.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-async',
@@ -11,7 +10,7 @@ import { Observable } from 'rxjs';
 export class UserAsyncComponent implements OnInit {
   isLoggedIn = false;
   user: { name: string };
-  userDetail;
+  userDetail: any;
   systemError = false;
   systemErrorMessage = '';
 
@@ -27,7 +26,7 @@ export class UserAsyncComponent implements OnInit {
         this.systemError = true;
         this.systemErrorMessage = error;
       }
-    )
+    );
   }
 
 }

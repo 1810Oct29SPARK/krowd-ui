@@ -9,6 +9,11 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
+import { MatTabsModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -18,11 +23,17 @@ import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.
     UserNavbarComponent,
     UserProfileComponent,
     UserAdminComponent,
-    UserAllEventsComponent
+    UserAllEventsComponent,
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
-  ]
+    UserRoutingModule,
+    FormsModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FileUploadModule,
+    MatTabsModule
+  ],
+  providers: []
 })
 export class UserModule { }

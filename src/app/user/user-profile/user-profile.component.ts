@@ -5,9 +5,11 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
+
 export class UserProfileComponent implements OnInit {
+
 
   public show_info: Boolean = false;
   public info_button_text: any = "Show Profile Info";
@@ -70,4 +72,7 @@ export class UserProfileComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+  response: any = null;
+
 }

@@ -1,0 +1,56 @@
+language: node_js
+node_js:
+- '10'
+dist: trusty
+sudo: required
+branches:
+  only:
+  - master
+  - dev
+  - captain
+before_script:
+- npm install -g @angular/cli
+addons:
+  sonarcloud:
+    organization: 1810oct29spark
+    token:
+      secure: vg2lF5ltdwEMBXAe9X+AT5QurE6mIsvgcmsbYG81LxDTy0xcY11wER+UCUVw11ta6s7OrZ17MBjuwjVnkmnSe7cU3f84XNw4pqNw8Zk8iWUCgPItizmhU9afhNwzA0Onxz7iMQh2Bk7/yXItgaulKDYqSdT4IPVjY73sBhKcjidN3/tyVSZxsjJ5ADa/ol1KBk4fBCJ/b07q7JIcxD2I61+fIXSEYeC1cVuCISUtdP7ctg4cgJDB+W8UXPm8V5OCvZv8Ggfxpa6I1Wz67daU26FlOj4U9UD0xHOuIHiR3n64664/fPQGDiiqAb6U8/SWN1P8JceAwlwIDfYfn3n+GcFVDzP9wVQw3virRRYNu25dJCbyQYOI5j0bXIWU5luudNEsNhGYceYcu7WmDLqJlfUXrvlDIwdby//8woAf2MfaGnaPoXQBy1dC8mi/gcSsKHhCJoyQ2OXYHRlfnmPYVINHkdPnqZIsP1dpP8OOdv16LahLT8/iJtv3m9NnIGUm0eKCDgW8AqUiKAfITngH8llSazdGiDgqsP7bbgYQE0tKgAOYhrTx52121oAnt0P7bOpAhd6vh/1KgvMFv4pMHK2k56dguGarVD0NwoU6jYMWqDSPD/9VO9zsxiR7kQxyrjJC1iiuJI6bcH6IGRNLxNMb8nyFu+euVBeQUaIv/nU=
+script:
+- ng lint
+# - npm run test-headless
+- sonar-scanner
+- ng build --prod
+deploy:
+- provider: s3
+  access_key_id: AKIAJ3NJKPMGH4IOOYYA
+  secret_access_key:
+    secure: GKZbCzI9CxeIFHaRi9vuxbkiCHTpUqfWU4cBP1m5gcOTi/kCNOEnYWN9rbgV5svtupRaNE742cV8/8d6kIMlXm+0y0MKOXcWDN/nAdY98+6EnV7EdWsEi9RbKIganw+oP628crutMuY9jkBkVE3B3eiBiNcVMaXjt1dgmSzkXmN/NOQB0Bj50+8Ki3FhvlaupdGppJhjcSz0sIeomfZ8aLuFopm20Zb/77BNYnAO+F6F+m/C5b8cSEqazVJpi6J2TD3di10ZjhCnGWd9bcNTkL4VW6xAY/4VKu8EwWhFsD768mJcLmpbc4lyl20LKSw5HsFRyhBeYNRonYYtsBQRfZnQz4MTO4tiAIObeySBvm7PcaLRyGwgZJnmFEZeHEzAmGc05YEE0aZ3xP9WzjV4suIeH7J1sr/JsPWPmb//ZmbZ6L3YDs+IwlZ1Ir8A/3F9Neq+6AQINnee3QPYbWdkKQQn6vSDDOidzDlxZiPWn4bQF7T9E/GhA0tlrKpcFjxIDAOIrjdxpNQmXnv/G3oQ3lj6K6Pell/sGm34f3bmMSmLIgW7dRD8vGhPDotSXhNPD+1kw1MalJig6ngME9Sece8v95CNd3lR6spw8cGc9qLR9uMKHx4RX/ApBt8fXufbZvweEuOdZWy0EkHxDcQk16TDiduvlF+Fvgme47LCuio=
+  bucket: krowd-green
+  acl: public_read
+  skip_cleanup: true
+  local_dir: dist/krowd-ui
+  on:
+    branch: captain
+- provider: s3
+  access_key_id: AKIAJ3NJKPMGH4IOOYYA
+  secret_access_key:
+    secure: GKZbCzI9CxeIFHaRi9vuxbkiCHTpUqfWU4cBP1m5gcOTi/kCNOEnYWN9rbgV5svtupRaNE742cV8/8d6kIMlXm+0y0MKOXcWDN/nAdY98+6EnV7EdWsEi9RbKIganw+oP628crutMuY9jkBkVE3B3eiBiNcVMaXjt1dgmSzkXmN/NOQB0Bj50+8Ki3FhvlaupdGppJhjcSz0sIeomfZ8aLuFopm20Zb/77BNYnAO+F6F+m/C5b8cSEqazVJpi6J2TD3di10ZjhCnGWd9bcNTkL4VW6xAY/4VKu8EwWhFsD768mJcLmpbc4lyl20LKSw5HsFRyhBeYNRonYYtsBQRfZnQz4MTO4tiAIObeySBvm7PcaLRyGwgZJnmFEZeHEzAmGc05YEE0aZ3xP9WzjV4suIeH7J1sr/JsPWPmb//ZmbZ6L3YDs+IwlZ1Ir8A/3F9Neq+6AQINnee3QPYbWdkKQQn6vSDDOidzDlxZiPWn4bQF7T9E/GhA0tlrKpcFjxIDAOIrjdxpNQmXnv/G3oQ3lj6K6Pell/sGm34f3bmMSmLIgW7dRD8vGhPDotSXhNPD+1kw1MalJig6ngME9Sece8v95CNd3lR6spw8cGc9qLR9uMKHx4RX/ApBt8fXufbZvweEuOdZWy0EkHxDcQk16TDiduvlF+Fvgme47LCuio=
+  bucket: krowd-blue
+  acl: public_read
+  skip_cleanup: true
+  local_dir: dist/krowd-ui
+  on:
+    branch: dev
+- provider: s3
+  access_key_id: AKIAJ3NJKPMGH4IOOYYA
+  secret_access_key:
+    secure: GKZbCzI9CxeIFHaRi9vuxbkiCHTpUqfWU4cBP1m5gcOTi/kCNOEnYWN9rbgV5svtupRaNE742cV8/8d6kIMlXm+0y0MKOXcWDN/nAdY98+6EnV7EdWsEi9RbKIganw+oP628crutMuY9jkBkVE3B3eiBiNcVMaXjt1dgmSzkXmN/NOQB0Bj50+8Ki3FhvlaupdGppJhjcSz0sIeomfZ8aLuFopm20Zb/77BNYnAO+F6F+m/C5b8cSEqazVJpi6J2TD3di10ZjhCnGWd9bcNTkL4VW6xAY/4VKu8EwWhFsD768mJcLmpbc4lyl20LKSw5HsFRyhBeYNRonYYtsBQRfZnQz4MTO4tiAIObeySBvm7PcaLRyGwgZJnmFEZeHEzAmGc05YEE0aZ3xP9WzjV4suIeH7J1sr/JsPWPmb//ZmbZ6L3YDs+IwlZ1Ir8A/3F9Neq+6AQINnee3QPYbWdkKQQn6vSDDOidzDlxZiPWn4bQF7T9E/GhA0tlrKpcFjxIDAOIrjdxpNQmXnv/G3oQ3lj6K6Pell/sGm34f3bmMSmLIgW7dRD8vGhPDotSXhNPD+1kw1MalJig6ngME9Sece8v95CNd3lR6spw8cGc9qLR9uMKHx4RX/ApBt8fXufbZvweEuOdZWy0EkHxDcQk16TDiduvlF+Fvgme47LCuio=
+  bucket: krowded
+  acl: public_read
+  skip_cleanup: true
+  local_dir: dist/krowd-ui
+  on:
+    branch: master
+notifications:
+  slack:
+    secure: CWn03nnJ1QIhDamCEWVsJfXyPsx0LyCQEGrA1CgbFqD7tIBXcffJbO40XC8ft2NrITItw27THZWZUVxCykEsf7SbVI5sTS6u/7gkfNjiqSegPDdtQ1NzTve/yZCliNRhbN3jvxZF9DtxUFGmJghVwf2Q/bBILzTiWljYASxhpRba3M0ioZ+iZivfmtEefPgaGJ+7cOTBZDLnHG0jfd+3QY85QGUrzUl1NAiyBfpBLfLBQLwr+29PlQsb4zOLSiNi7V5FS1mBrxnK4Bzw5Qh6NR+WxESJX3MZ59GzAfOvCkGtCbKdae92tpWQG7DUtwVwfoAi00CThrnMksGprPwPhrU4UrWbs+v0k7PPSRw5dEEq/t98/nls814wUkmy7J/AhNEYt1N6RKGaPHOIMOcX/hPZSLVxxHuJeJCpvobK1psJzIqkREpJeeja/EGp191R4WZiQFYa7s1o7WKE1wrd7MPYWjyakf5ilALhHyZ/PAFLpCPyvZD/pawiu/3BXHwnd98IF2jIvXNBo5Y7EfCtLK9AAWDAfPZTTiBSOA5o2bmUt9iWpjrRLPzIWhz1F7G6/zY8MngAzPGatCigZVROu+wy0ttuSz6C5CkE6IMOs/Ei/PbWrI/0pH3I6WSCxHpYfuFu6/O8Pn9reylgKt6fmcKQsIJjTfiaIXWAFkAPDZ0=
