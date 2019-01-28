@@ -9,4 +9,5 @@ export class Event {
     flagScore: number;
     zip: number;
     hostId: number;
+    description: string;
 }
