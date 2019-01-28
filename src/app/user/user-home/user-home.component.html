@@ -5,53 +5,51 @@
       <p> Welcome to your Homepage! </p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 justify-content-between">
-      <h4> Current Events </h4>
-      <br>
-      <!-- *NgFor="let cevents of cevents"-->
-      <div id="current-events">
-        <!-- <div class="card-group" *ngFor="event of events"> -->
-        <div class="card-group">
-          <div class="col-md-4">
-            <div class="card" (click)="open(allEvent)">
-              <div class="card-img-top card-img-top-250">
-                <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-                <div class="card-body">
-                  <h6 class="small text-wide p-b-2">Insight</h6>
-                  <h2>
-                    Host Event #1
-                  </h2>
-                  <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-                </div>
+  <div class="col-md-12 justify-content-between">
+    <h4> Current Events </h4>
+    <br>
+    <!-- *NgFor="let cevents of cevents"-->
+    <div id="current-events">
+      <!-- <div class="card-group" *ngFor="event of events"> -->
+      <div class="card-group">
+        <div class="col-md-4">
+          <div class="card" (click)="open(allEvent)">
+            <div class="card-img-top card-img-top-250">
+              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">Insight</h6>
+                <h2>
+                  Host Event #1
+                </h2>
+                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card" (click)="open(allEvent)">
-              <div class="card-img-top card-img-top-250">
-                <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-                <div class="card-body">
-                  <h6 class="small text-wide p-b-2">Insight</h6>
-                  <h2>
-                    Host Event #1
-                  </h2>
-                  <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-                </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" (click)="open(allEvent)">
+            <div class="card-img-top card-img-top-250">
+              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">Insight</h6>
+                <h2>
+                  Host Event #1
+                </h2>
+                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card" (click)="open(allEvent)">
-              <div class="card-img-top card-img-top-250">
-                <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-                <div class="card-body">
-                  <h6 class="small text-wide p-b-2">Insight</h6>
-                  <h2>
-                    Host Event #1
-                  </h2>
-                  <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-                </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" (click)="open(allEvent)">
+            <div class="card-img-top card-img-top-250">
+              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">Insight</h6>
+                <h2>
+                  Host Event #1
+                </h2>
+                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
               </div>
             </div>
           </div>
@@ -120,23 +118,29 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
-    <br>
-    <br>
-    <h4>Event Description</h4>
-    <p>This is the event's description.</p>
-    <br>
-    <h4>Date & Time</h4>
-    <p>Date and time will appear here.</p>
-    <br>
-    <h4>Location</h4>
-    <p>Location of event.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
-    <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
-  </div>
+  <mat-tab-group>
+    <mat-tab label="Event Description">
+      <div class="modal-body">
+        <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
+        <br>
+        <h4>Event Description</h4>
+        <p>This is the event's description.</p>
+        <h4>Date & Time</h4>
+        <p>Date and time will appear here.</p>
+        <h4>Location</h4>
+        <p>Location of event.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
+        <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="View Comments">
+        <h4>Comments About The Event</h4>
+        <h6>User name</h6>
+        <p>User comment here.</p>
+    </mat-tab>
+  </mat-tab-group>
 </ng-template>
 <br>
 <br>
