@@ -12,6 +12,7 @@ import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
+import { MatTabsModule } from '@angular/material';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    MatTabsModule
   ],
   providers: []
 })

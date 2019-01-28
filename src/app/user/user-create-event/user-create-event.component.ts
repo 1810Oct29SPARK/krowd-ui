@@ -97,7 +97,7 @@ export class UserCreateEventComponent implements OnInit {
     this.loading = true;
     this.uploader.uploadAll();
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-      const res: any = JSON.parse(response);
+      let res: any = JSON.parse(response);
       console.log(res);
       this.imageURL = res.url;
       console.log(this.imageURL);
