@@ -6,10 +6,15 @@
       <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
       <!-- *NgFor="let flagged of flagged-events"-->
       <div id="flagged-events">
-        <table class="col-md-12 ">
-          <tr class="eventList justify-content-between z-depth-2" (click)="open(eventFlag)">
-            <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
-            Then we populate the modal with the results. -->
+        <table class="col-md-12">
+          <tr class="eventList justify-content-between z-depth-2" (click)="showModal()">
+            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+            <td class="event-date"> <span class="align-middle"> Date </span> </td>
+            <td class="event-time"> <span class="align-middle"> Time </span> </td>
+            <td class="event-location"> <span class="align-middle"> Location </span> </td>
+          </tr>
+          <tr class="eventList justify-content-between z-depth-2">
             <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
             <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> Event Title </span> </td>
             <td class="event-date"> <span class="align-middle"> Date </span> </td>
