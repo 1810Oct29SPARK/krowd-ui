@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { Comment } from '../../../shared/models/comment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CommentsService {
+  private comments: Comment[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
@@ -30,7 +33,7 @@ export class CommentsService {
   getCommentById(id: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8083`);
   }
-  getCommentsByUderId(userId: number) {
+  getCommentsByUserId(userId: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8080/${userId}`);
   }
   getCommentByEventId(commentId: number) {

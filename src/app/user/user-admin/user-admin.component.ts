@@ -13,6 +13,13 @@ export class UserAdminComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private modalService: NgbModal) { }
 
+  // (1) array with elements of type Event
+
+  // (2) send a request to get all events that are flagged
+
+  
+
+  
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

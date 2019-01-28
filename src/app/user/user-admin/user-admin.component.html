@@ -1,15 +1,10 @@
-<div class="container">
-  <div class="row align-items-center">
-    <div class="jumbotron text-center">
-      <h1> Hello, (User)!</h1>
-      <p> Welcome to the Admin Homepage! </p>
-    </div>
-  </div>
+<div class="container align-items-center">
   <div class="row">
     <div class=" col-md-12 justify-content-between">
       <h4> Flagged Events </h4>
       <br>
-      <!-- *NgFor="let cevents of cevents"-->
+      <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
+      <!-- *NgFor="let flagged of flagged-events"-->
       <div id="flagged-events">
         <table class="col-md-12">
           <tr class="eventList justify-content-between z-depth-2" (click)="showModal()">
@@ -21,28 +16,7 @@
           </tr>
           <tr class="eventList justify-content-between z-depth-2">
             <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+            <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> Event Title </span> </td>
             <td class="event-date"> <span class="align-middle"> Date </span> </td>
             <td class="event-time"> <span class="align-middle"> Time </span> </td>
             <td class="event-location"> <span class="align-middle"> Location </span> </td>
@@ -51,31 +25,66 @@
       </div>
     </div>
   </div>
+  <br>
+  <br>
+  <h4> Flagged Comments </h4>
+  <br>
+  <div id="comments">
+    <!-- table created if there is anything in the response (user has made comments)-->
+    <table *ngIf="response !== null" class="table">
+      <thead>
+        <th scope="col">Event</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Actions</th>
+      </thead>
+      <tbody>
+        <!-- creates a new row for each user comment, 
+                        using the name of the event, the comment, and the event date-->
+        <tr *ngFor="let comment of commentsList" id="commentsList">
+          <a routerLink="/events/{{eventID}}">
+            <td> {{comment.event_id}} </td>
+          </a>
+          <td> {{comment.data}} </td>
+          <td> {{comment.created | date }} </td>
+          <td>
+            <span class="buttons">
+              <button type="button" class="btn btn-outline-dark">Dismiss</button>
+            </span>
+            <span class="buttons">
+              <button type="button" class="btn btn-outline-dark">Delete</button>
+            </span>
+          </td>
+        </tr>
+        <tr id="default" [hidden]="commentsList">
+          <td></td>
+          <td> No flagged comments to see.</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input matInput placeholder="Test">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
-  </ng-template>
-  
-  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-  
+<ng-template #eventFlag let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Event Title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
+    <br>
+    <br>
+    <h4> Event Description </h4>
+    <p> This is the event's description. </p>
+    <br>
+    <h4>Date & Time </h4>
+    <p> Date and time will appear here. </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Dismiss</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
+  </div>
+</ng-template>
+
+
