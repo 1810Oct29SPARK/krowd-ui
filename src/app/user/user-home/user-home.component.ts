@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { EventsService } from 'src/app/core/services/events/events.service';
-import { Event } from 'src/app/shared/models/event';
+import { MatDialog } from '@angular/material';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from '../../shared/models/comment';
 
 @Component({
@@ -11,11 +10,31 @@ import { Comment } from '../../shared/models/comment';
 })
 export class UserHomeComponent implements OnInit {
 
+  closeResult: string;
+
+  constructor(public dialog: MatDialog, private modalService: NgbModal) { }
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   comments: Comment[] = [];
 
   eventList = [];
-
-  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
     // this.getAllEvents();
