@@ -5,12 +5,12 @@
       <p> Welcome to your Homepage! </p>
     </div>
   </div>
+  <!-- Div for 5 current events -->
   <div class="col-md-12 justify-content-between">
     <h4> Current Events </h4>
     <br>
-    <!-- *NgFor="let cevents of cevents"-->
     <div id="current-events">
-      <!-- <div class="card-group" *ngFor="event of events"> -->
+      <!-- <div class="card-group" *ngFor="Cevent of Current-events"> -->
       <div class="card-group">
         <div class="col-md-4">
           <div class="card" (click)="open(allEvent)">
@@ -57,12 +57,12 @@
       </div>
     </div>
   </div>
+  <!-- Div for 5 Recent events -->
   <div class="col-md-12 justify-content-between">
     <h4> Recent Events </h4>
     <br>
-    <!-- *NgFor="let cevents of cevents"-->
     <div id="current-events">
-      <!-- <div class="card-group" *ngFor="event of events"> -->
+      <!-- <div class="card-group" *ngFor="Revent of Recent-events"> -->
       <div class="card-group">
         <div class="col-md-4">
           <div class="card" (click)="open(allEvent)">
@@ -111,6 +111,7 @@
   </div>
 </div>
 <br>
+<!--  -->
 <ng-template #allEvent let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Event Title</h4>
@@ -142,5 +143,3 @@
     </mat-tab>
   </mat-tab-group>
 </ng-template>
-<br>
-<br>

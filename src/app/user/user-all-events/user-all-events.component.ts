@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { EventsService } from '../../core/services/events/events.service';
+import { EventsService } from 'src/app/core/services/events/events.service';
+import { Event } from 'src/app/shared/models/event';
 import { CommentsService } from '../../core/services/comments/comments.service'
 
 
@@ -13,8 +14,10 @@ import { CommentsService } from '../../core/services/comments/comments.service'
 export class UserAllEventsComponent implements OnInit {
   commentsList = [];
   closeResult: string;
+  events: Event[] = [];
 
   constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService, private commentService: CommentsService) { }
+
 
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -94,6 +97,12 @@ export class UserAllEventsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEvents();
+  }
+
+  getAllEvents() {
+    this.eventService.getAllEvents().subscribe( (e) => {
+      this.events = e;
+    });
   }
 
 }
