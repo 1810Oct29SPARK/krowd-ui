@@ -40,7 +40,7 @@ describe('UsersService', () => {
         reputation: 0,
         flagScore: 0,
         accountStatus: 1,
-        photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+        photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
       }
     ];
     spyOn(service, 'getAllUsers').and.callFake(() => {
