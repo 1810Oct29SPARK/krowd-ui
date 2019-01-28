@@ -1,11 +1,12 @@
 import { Time } from '@angular/common';
 
 export class Comment {
+
     id: number;
     description: string;
 
     postedBy: number; // FK
-    time: Time; // Optional
+    time: any; // Optional
 
     flagScore: number;
     eventId: number; // FK
@@ -14,7 +15,7 @@ export class Comment {
         id: number,
         description: string,
         postedBy: number,
-        time: Time,
+        time: any,
         flagScore: number,
         eventId: number
     ) {

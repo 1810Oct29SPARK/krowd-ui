@@ -2,15 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+
+  user: User = null;
+
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
     'Accept': 'application/json',
     'Access-Control-Allow-Headers': 'Content-Type'
   });
+
   constructor(private httpClient: HttpClient, user: User) { }
 
   getAllUsers() {
@@ -49,6 +54,7 @@ export class UsersService {
         }
       );
   }
+
   getUserByEventId(eventId: number) {
     return this.httpClient.get<User[]>(`http://localhost:8083/${eventId}`)
       .map(
@@ -63,4 +69,5 @@ export class UsersService {
         }
       );
   }
+
 }

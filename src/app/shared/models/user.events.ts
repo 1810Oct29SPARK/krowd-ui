@@ -1,4 +1,5 @@
 export class UserEvents {
+
     userId: number;
     eventId: number;
     eventRating: number; // possibly deprecated by #Server-side
@@ -12,4 +13,5 @@ export class UserEvents {
         this.eventId = eventId;
         this.eventRating = eventRating;
     }
+
 }

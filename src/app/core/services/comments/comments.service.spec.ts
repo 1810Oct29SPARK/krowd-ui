@@ -6,13 +6,14 @@ import { CommentsService } from './comments.service';
 import { EventsComponent } from '../../events/events.component';
 
 describe('CommentsService', () => {
+
   let component: EventsComponent;
   let service: CommentsService;
-  
+
   beforeEach(() => TestBed.configureTestingModule({}));
 
   xit('should be created', () => {
-    const service: CommentsService = TestBed.get(CommentsService);
+    service = TestBed.get(CommentsService);
     expect(service).toBeTruthy();
   });
 
@@ -21,19 +22,19 @@ describe('CommentsService', () => {
       {
         id: 592,
         description: 'Great game today!',
-        postedBy: 52, //FK
-        // time: Time; //Optional
+        postedBy: 52,
         flagScore: 0,
-        eventId: 72 //FK
-    },
-    {
-      id: 843,
-      description: 'Wow, it was pouring today!  Good call on the indoor event!',
-      postedBy: 71, //FK
-      // time: Time; //Optional
-      flagScore: 0,
-      eventId: 83 //FK
-  }
+        eventId: 72,
+        time: Date.now()
+      },
+      {
+        id: 843,
+        description: 'Wow, it was pouring today!  Good call on the indoor event!',
+        postedBy: 71,
+        flagScore: 0,
+        eventId: 83,
+        time: Date.now()
+      }
     ];
     spyOn(service, 'getAllComments').and.callFake(() => {
       return Observable.from([comments]);
@@ -47,30 +48,30 @@ describe('CommentsService', () => {
       {
         id: 592,
         description: 'Great game today!',
-        postedBy: 52, //FK
-        // time: Time; //Optional
+        postedBy: 52,
         flagScore: 0,
-        eventId: 72 //FK
-    },
-    {
-      id: 843,
-      description: 'Wow, it was pouring today!  Good call on the indoor event!',
-      postedBy: 71, //FK
-      // time: Time; //Optional
-      flagScore: 0,
-      eventId: 83 //FK
-  }
-    ];
-    const newComment: Comment =
+        eventId: 72,
+        time: Date.now()
+      },
       {
-        id: 1024,
-        description: 'Bwahahahahahaha!',
-        postedBy: 87, //FK
-        // time: Time; //Optional
+        id: 843,
+        description: 'Wow, it was pouring today!  Good call on the indoor event!',
+        postedBy: 71,
         flagScore: 0,
-        eventId: 33 //FK
+        eventId: 83,
+        time: Date.now()
+      }
+    ];
+    const newComment: Comment = {
+      id: 1024,
+      description: 'Bwahahahahahaha!',
+      postedBy: 87,
+      flagScore: 0,
+      eventId: 33,
+      time: Date.now()
     };
     component.addComment(newComment);
     expect(component.comments).toContain(newComment);
   });
+
 });

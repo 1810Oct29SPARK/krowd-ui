@@ -3,14 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserAllEventsComponent } from './user-all-events.component';
 
 describe('UserAllEventsComponent', () => {
+
   let component: UserAllEventsComponent;
   let fixture: ComponentFixture<UserAllEventsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserAllEventsComponent ]
+      declarations: [UserAllEventsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +23,5 @@ describe('UserAllEventsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

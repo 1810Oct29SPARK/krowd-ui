@@ -19,9 +19,7 @@ export class EventsComponent implements OnInit {
   }
 
   addComment(comment: Comment) {
-    
+    //
   }
-
-  
 
 }

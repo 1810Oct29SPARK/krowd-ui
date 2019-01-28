@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
+  users: any = null;
+
   constructor() { }
 
   ngOnInit() {

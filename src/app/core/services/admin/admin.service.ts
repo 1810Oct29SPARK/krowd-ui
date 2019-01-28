@@ -26,7 +26,7 @@ export class AdminService {
           return Observable.throw(error);
         }
       );
-   }
+  }
 
   getUsersByFlagScore(flagScore: number) {
     return this.httpClient.get<User[]>(`http://localhost:8083/${flagScore}`)
@@ -56,7 +56,7 @@ export class AdminService {
           return Observable.throw(error);
         }
       );
-   }
+  }
 
   getEventsByFlagScore(flagScore: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8083/${flagScore}`)

@@ -3,14 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserCreateEventComponent } from './user-create-event.component';
 
 describe('UserCreateEventComponent', () => {
+
   let component: UserCreateEventComponent;
   let fixture: ComponentFixture<UserCreateEventComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserCreateEventComponent ]
+      declarations: [UserCreateEventComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('UserCreateEventComponent', () => {
   });
 
   xit('should create an event page', () => {
-
     expect(component).toBeTruthy();
   });
+
 });

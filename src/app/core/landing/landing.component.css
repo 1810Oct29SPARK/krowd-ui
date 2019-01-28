@@ -1,19 +1,18 @@
 .cards {
-    width: 30%;
-    position: relative;
-    /* margin-left: 500px;
+  width: 30%;
+  position: relative;
+  /* margin-left: 500px;
     margin-top: -200px; */
-    margin: -150px auto;
+  margin: -150px auto;
 }
 
 .buttons {
-    padding: 1%;
+  padding: 1%;
 }
 
 .login {
-    width: 500px;
-    position: relative;
-    margin-left: 500px;
-    margin-top: 300px;
-
-  }
+  width: 500px;
+  position: relative;
+  margin-left: 500px;
+  margin-top: 300px;
+}

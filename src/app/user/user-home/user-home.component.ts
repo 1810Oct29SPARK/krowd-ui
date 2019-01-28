@@ -4,13 +4,13 @@ import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
 import { Comment } from '../../shared/models/comment';
 
-
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
+
   comments: Comment[] = [];
 
   eventList = [];
@@ -40,6 +40,5 @@ export class UserHomeComponent implements OnInit {
   //     );
   //   return this.eventList;
   // }
-
 
 }

@@ -14,9 +14,10 @@ describe('UsersService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   xit('should be created', () => {
-    const service: UsersService = TestBed.get(UsersService);
+    service = TestBed.get(UsersService);
     expect(service).toBeTruthy();
   });
+
   it('should get a list of all users', () => {
     const users: User[] = [
       {
@@ -25,9 +26,9 @@ describe('UsersService', () => {
         firstname: 'Jane',
         lastname: 'Doe',
         email: 'jdoe@gmail.com',
-        reputation: 'good',
+        reputation: 0,
         flagScore: 0,
-        accountStatus: 'Active',
+        accountStatus: 1,
         photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
       },
       {
@@ -36,9 +37,9 @@ describe('UsersService', () => {
         firstname: 'Barbara',
         lastname: 'Mullen',
         email: 'bmullen@gmail.com',
-        reputation: 'good',
+        reputation: 0,
         flagScore: 0,
-        accountStatus: 'Active',
+        accountStatus: 1,
         photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
       }
     ];
@@ -46,7 +47,7 @@ describe('UsersService', () => {
       return Observable.from([users]);
     });
     component.ngOnInit();
-    expect(component.user).toEqual(users);
+    expect(component.users).toEqual(users);
   });
 
   it('should add a new user', () => {
@@ -57,9 +58,9 @@ describe('UsersService', () => {
         firstname: 'Jane',
         lastname: 'Doe',
         email: 'jdoe@gmail.com',
-        reputation: 'good',
+        reputation: 0,
         flagScore: 0,
-        accountStatus: 'Active',
+        accountStatus: 1,
         photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
       },
       {
@@ -68,9 +69,9 @@ describe('UsersService', () => {
         firstname: 'Barbara',
         lastname: 'Mullen',
         email: 'bmullen@gmail.com',
-        reputation: 'good',
+        reputation: 0,
         flagScore: 0,
-        accountStatus: 'Active',
+        accountStatus: 1,
         photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
       }
     ];
@@ -79,14 +80,14 @@ describe('UsersService', () => {
       username: 'MPhilips',
       firstname: 'Mary',
       lastname: 'Philips',
-      email: "mphilips@gmail.com",
-      reputation: 'good',
+      email: 'mphilips@gmail.com',
+      reputation: 0,
       flagScore: 0,
-      accountStatus: 'Active',
+      accountStatus: 1,
       photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161024794260285.jpg'
     };
-    component.addUser(newUser);
-    expect(component.user).toContain(newUser);
+    service.addUser(newUser);
+    expect(component.users).toContain(newUser);
   });
 
   it('should get a user by their userId', () => {
@@ -96,22 +97,22 @@ describe('UsersService', () => {
       firstname: 'Jane',
       lastname: 'Doe',
       email: 'jdoe@gmail.com',
-      reputation: 'good',
+      reputation: 0,
       flagScore: 0,
-      accountStatus: 'Active',
+      accountStatus: 1,
       photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
-    }
+    };
     const user2 = {
       id: 2,
       username: 'Bmullen',
       firstname: 'Barbara',
       lastname: 'Mullen',
       email: 'bmullen@gmail.com',
-      reputation: 'good',
+      reputation: 0,
       flagScore: 0,
-      accountStatus: 'Active',
+      accountStatus: 1,
       photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
-    }
+    };
     const users: User[] = [
       user1,
       user2
@@ -119,10 +120,10 @@ describe('UsersService', () => {
     spyOn(service, 'getUserById').and.callFake(() => {
       return Observable.from([users]);
     });
-    component.getUserById(2);
-    expect(component.user).toEqual(user2);
+    service.getUserById(2);
+    expect(service.user).toEqual(user2);
   });
-  
+
   it('should get a user by an eventId', () => {
     const user1 = {
       id: 1,
@@ -130,22 +131,22 @@ describe('UsersService', () => {
       firstname: 'Jane',
       lastname: 'Doe',
       email: 'jdoe@gmail.com',
-      reputation: 'good',
+      reputation: 0,
       flagScore: 0,
-      accountStatus: 'Active',
+      accountStatus: 1,
       photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
-    }
+    };
     const user2 = {
       id: 2,
       username: 'Bmullen',
       firstname: 'Barbara',
       lastname: 'Mullen',
       email: 'bmullen@gmail.com',
-      reputation: 'good',
+      reputation: 0,
       flagScore: 0,
-      accountStatus: 'Active',
+      accountStatus: 1,
       photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
-    }
+    };
     const users: User[] = [
       user1,
       user2
@@ -158,7 +159,11 @@ describe('UsersService', () => {
       ratingScore: 100000000,
       flagScore: 0,
       zip: 15973,
-      hostId: 1
+      hostId: 1,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
     };
     const event2 = {
       id: 35000,
@@ -168,17 +173,21 @@ describe('UsersService', () => {
       ratingScore: 100000000,
       flagScore: 0,
       zip: 75391,
-      hostId: 2
+      hostId: 2,
+      date: new Date(),
+      time: Date.now(),
+      city: 'Tampa',
+      state: 'Florida'
     };
     const events: Event[] = [
       event1,
       event2
-    ]
-  spyOn(service, 'getUserByEventId').and.callFake(() => {
-    return Observable.from([users])
-  })
-  component.getUserByEventId(1);
-  expect(component.user).toEqual(user1);
-  })
+    ];
+    spyOn(service, 'getUserByEventId').and.callFake(() => {
+      return Observable.from([users]);
+    });
+    service.getUserByEventId(1);
+    expect(service.user).toEqual(user1);
+  });
 
 });

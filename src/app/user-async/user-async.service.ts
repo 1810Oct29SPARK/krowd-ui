@@ -2,7 +2,7 @@ import { Observable, Observer } from 'rxjs';
 
 export class UserAsyncService {
     user = { name: 'Emily' };
-    getUserDetails(){
+    getUserDetails() {
         const userObservables = Observable.create(
             (observer: Observer<{ name: string }>) => {
                 setTimeout(() => {

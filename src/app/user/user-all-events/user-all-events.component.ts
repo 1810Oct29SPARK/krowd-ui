@@ -13,7 +13,7 @@ export class UserAllEventsComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private modalService: NgbModal) { }
 
-  open(content) {
+  open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

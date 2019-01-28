@@ -1,11 +1,11 @@
 export class Admin {
+
     id: number;
     username: string;
     firstname: string;
     lastname: string;
     email: string;
     // cognitoStuff: ???
-
 
     constructor(
         id: number,
@@ -20,4 +20,5 @@ export class Admin {
         this.lastname = lastname;
         this.email = email;
     }
+
 }

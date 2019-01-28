@@ -17,6 +17,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterComponent implements OnInit {
 
+  matcher = new MyErrorStateMatcher();
+
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,

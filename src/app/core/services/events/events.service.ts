@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
-import 'rxjs';
 import { Event } from 'src/app/shared/models/event';
 import { Observable } from 'rxjs';
+
+import 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
+
   private events: Event[] = [];
 
   httpHeaders = new HttpHeaders({
@@ -34,8 +36,6 @@ export class EventsService {
       );
   }
 
-
-
   addEvent(event: Event) {
     return this.httpClient.post(`http://localhost:8083`, event);
   }
@@ -57,6 +57,7 @@ export class EventsService {
         }
       );
   }
+
   getEventsByCategory(categoryID: number) {
 
     return this.httpClient.get<Event[]>(`http://localhost:8080/${categoryID}`)
@@ -72,6 +73,7 @@ export class EventsService {
         }
       );
   }
+
   getEventsByUserId(userid: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8080/${userid}`)
       .map(
@@ -90,4 +92,5 @@ export class EventsService {
   registerForEvent(eventId: number, userId: number) {
     return this.httpClient.post('', eventId);
   }
+
 }

@@ -28,15 +28,16 @@ export class CommentsService {
   //   return this.httpClient.put(`http://localhost:8080`), {'id': id, 'Created': Date};
   // }
 
-
-
   getCommentById(id: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8083`);
   }
+
   getCommentsByUserId(userId: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8080/${userId}`);
   }
+
   getCommentByEventId(commentId: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8080/${commentId}`);
   }
+
 }

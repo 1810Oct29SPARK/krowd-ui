@@ -1,4 +1,5 @@
 export class User {
+
     id: number;
     username: string;
     firstname: string;
@@ -32,4 +33,5 @@ export class User {
         this.accountStatus = accountStatus;
         this.photoUrl = photoUrl;
     }
+
 }
