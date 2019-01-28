@@ -29,7 +29,7 @@ export class UserCreateEventComponent implements OnInit {
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
-    new CloudinaryOptions({ cloudName: 'NOLAWolfe', uploadPreset: 'e06zwizv' })
+    new CloudinaryOptions({ cloudName: 'nolawolfe', uploadPreset: 'e06zwizv' })
   );
 
   loading: any;
@@ -71,7 +71,7 @@ export class UserCreateEventComponent implements OnInit {
     this.loading = true;
     this.uploader.uploadAll();
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-      const res: any = JSON.parse(response);
+      let res: any = JSON.parse(response);
       console.log(res);
       this.imageURL = res.url;
       console.log(this.imageURL);
