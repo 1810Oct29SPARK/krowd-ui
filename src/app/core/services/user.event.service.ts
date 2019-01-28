@@ -4,6 +4,10 @@ import { User } from 'src/app/shared/models/user';
 import { Event } from 'src/app/shared/models/event';
 import { Observable } from 'rxjs';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/catch';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -57,4 +61,5 @@ export class UserEventService {
     deleteAttendee(userId: number, eventId: number) {
         return this.httpClient.post(`http:/localhost:8083/${userId}/${eventId}`, this.getAttendee);
     }
+
 }

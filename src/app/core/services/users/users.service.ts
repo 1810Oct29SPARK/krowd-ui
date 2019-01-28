@@ -3,6 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
 import { Observable } from 'rxjs';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/catch';
+
 @Injectable({
   providedIn: 'root'
 })
