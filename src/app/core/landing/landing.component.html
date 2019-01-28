@@ -1,23 +1,23 @@
-<div class="text-center">
+<div class="text-center login" [@slide]="[position]">
   <br>
   <div>
     <h2>Welcome to Krowd!</h2>
     <h5>Login or create an account </h5>
   </div>
   <span class="buttons">
-    <button mat-raised-button class="btn btn-outline-warning my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleLogin()">
+    <button mat-raised-button class="btn btn-outline-success my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleLogin()">
       Login</button>
   </span>
   <span class="buttons">
-    <button mat-raised-button class="btn btn-outline-warning my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleRegister()">
+    <button mat-raised-button class="btn btn-outline-success my-2 my-sm-2 text-dark mt-1" label="Click" (click)="toggleRegister()">
       Create an Account</button>
   </span>
-  <div *ngIf="showLogin" id="login">
-    <div class="cards">
+</div>
+<div *ngIf="showLogin || showRegister" [@fade]="'in'">
+  <div *ngIf="showLogin" id="login" class="cards">
       <mat-card>
         <app-login></app-login>
       </mat-card>
-    </div>
   </div>
   <div *ngIf="showRegister" id="login" class="cards">
     <mat-card>
