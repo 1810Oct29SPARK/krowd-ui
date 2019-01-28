@@ -18,7 +18,7 @@ const routes: Routes = [
           { path: 'home', component: UserHomeComponent },
           { path: 'profile', component: UserProfileComponent },
           { path: 'create', component: UserCreateEventComponent },
-          { path: 'all', component: UserAllEventsComponent},
+          { path: 'all', component: UserAllEventsComponent },
           {
             path: 'admin',
             // canActivate: [],

@@ -9,6 +9,9 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -19,11 +22,22 @@ import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.
     UserProfileComponent,
     UserAdminComponent,
     UserAllEventsComponent,
+<<<<<<< HEAD
    
+=======
+>>>>>>> 9d9e25a88f69b7a1409effadf97073d8b05bbe25
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
+<<<<<<< HEAD
   ]
+=======
+    FormsModule,
+    NgbModule,
+    ReactiveFormsModule
+  ],
+  providers: []
+>>>>>>> 9d9e25a88f69b7a1409effadf97073d8b05bbe25
 })
 export class UserModule { }

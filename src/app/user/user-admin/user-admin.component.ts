@@ -9,11 +9,16 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class UserAdminComponent implements OnInit {
 
+  response: any = null;
   closeResult: string;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal) { }
 
-  open(content) {
+  // (1) array with elements of type Event
+
+  // (2) send a request to get all events that are flagged
+
+  open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -37,4 +42,5 @@ export class UserAdminComponent implements OnInit {
   showModal() {
 
   }
+
 }

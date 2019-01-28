@@ -1,22 +1,22 @@
 <div class="wrapper">
-    <header>
-      <nav>
-        <div class="menu-icon">
-          <i class="fa fa-bars fa-2x"></i>
-        </div>
-        <div class="logo">
-          KROWD
-        </div>
-        <div class="menu">
-          <ul>
-            <li><a [routerLink]="[ 'home' ]"><strong>Home</strong></a></li>
-            <li><a [routerLink]="[ 'all' ]"><strong>All Events</strong></a></li>
-            <li><a [routerLink]="[ 'create' ]"><strong>Create Event</strong></a></li>
-            <li><a [routerLink]="[ 'profile' ]"><strong>Profile</strong></a></li>
-            <li><a [routerLink]="[ 'admin' ]"><strong>Admin</strong></a></li>
-            <li><a (click)="onLogout()"><strong>Logout</strong></a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-  </div>
+  <header>
+    <nav>
+      <div class="menu-icon">
+        <i class="fa fa-bars fa-2x"></i>
+      </div>
+      <div class="logo">
+        KROWD
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a [routerLink]="[ 'home' ]"><strong>Home</strong></a></li>
+          <li><a [routerLink]="[ 'all' ]"><strong>All Events</strong></a></li>
+          <li><a [routerLink]="[ 'create' ]"><strong>Create Event</strong></a></li>
+          <li><a [routerLink]="[ 'profile' ]"><strong>Profile</strong></a></li>
+          <li><a [routerLink]="[ 'admin' ]"><strong>Admin</strong></a></li>
+          <li><a style="cursor: pointer;" (click)="onLogout()"><strong>Logout</strong></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</div>
