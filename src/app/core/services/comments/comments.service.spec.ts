@@ -101,7 +101,7 @@ describe('CommentsService', () => {
       eventId: 16,
       time: Date.now()
     };
-    component.getCommentById(id: number);
+    component.getCommentById(3);
     expect(component.comments).toContain(newComment);
   })
 
