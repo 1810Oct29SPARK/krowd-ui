@@ -21,21 +21,21 @@ describe('UsersService', () => {
     const users: User[] = [
       {
         id: 1,
-        username: 'OoohBanana',
-        firstname: 'Donkey',
-        lastname: 'Kong',
-        email: 'DK@gmail.com',
+        username: 'JDoe',
+        firstname: 'Jane',
+        lastname: 'Doe',
+        email: 'jdoe@gmail.com',
         reputation: 'good',
         flagScore: 0,
         accountStatus: 'Active',
-        photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+        photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
       },
       {
         id: 2,
-        username: 'Its-a-Me',
-        firstname: 'Mario',
-        lastname: 'Mario',
-        email: 'SuperMario@gmail.com',
+        username: 'BMullen',
+        firstname: 'Barbara',
+        lastname: 'Mullen',
+        email: 'bmullen@gmail.com',
         reputation: 'good',
         flagScore: 0,
         accountStatus: 'Active',
@@ -53,37 +53,37 @@ describe('UsersService', () => {
     const users: User[] = [
       {
         id: 1,
-        username: 'OoohBanana',
-        firstname: 'Donkey',
-        lastname: 'Kong',
-        email: 'DK@gmail.com',
+        username: 'JDoe',
+        firstname: 'Jane',
+        lastname: 'Doe',
+        email: 'jdoe@gmail.com',
         reputation: 'good',
         flagScore: 0,
         accountStatus: 'Active',
-        photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+        photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
       },
       {
         id: 2,
-        username: 'Its-a-Me',
-        firstname: 'Mario',
-        lastname: 'Mario',
-        email: 'SuperMario@gmail.com',
+        username: 'BMullen',
+        firstname: 'Barbara',
+        lastname: 'Mullen',
+        email: 'bmullen@gmail.com',
         reputation: 'good',
         flagScore: 0,
         accountStatus: 'Active',
-        photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+        photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
       }
     ];
     const newUser: User = {
       id: 3,
-      username: 'StarWarrior',
-      firstname: 'Kirby',
-      lastname: '',
-      email: "Zzz@gmail.com",
+      username: 'MPhilips',
+      firstname: 'Mary',
+      lastname: 'Philips',
+      email: "mphilips@gmail.com",
       reputation: 'good',
       flagScore: 0,
       accountStatus: 'Active',
-      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj6iaX2hI3gAhUom-AKHaLeAqgQjRx6BAgBEAU&url=https%3A%2F%2Fkirby.nintendo.com%2F&psig=AOvVaw3SAF0KO77ChM_o70oIurpZ&ust=1548646764410141'
+      photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161024794260285.jpg'
     };
     component.addUser(newUser);
     expect(component.user).toContain(newUser);
@@ -92,25 +92,25 @@ describe('UsersService', () => {
   it('should get a user by their userId', () => {
     const user1 = {
       id: 1,
-      username: 'OoohBanana',
-      firstname: 'Donkey',
-      lastname: 'Kong',
-      email: 'DK@gmail.com',
+      username: 'JDoe',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      email: 'jdoe@gmail.com',
       reputation: 'good',
       flagScore: 0,
       accountStatus: 'Active',
-      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+      photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
     }
     const user2 = {
       id: 2,
-      username: 'Its-a-Me',
-      firstname: 'Mario',
-      lastname: 'Mario',
-      email: 'SuperMario@gmail.com',
+      username: 'Bmullen',
+      firstname: 'Barbara',
+      lastname: 'Mullen',
+      email: 'bmullen@gmail.com',
       reputation: 'good',
       flagScore: 0,
       accountStatus: 'Active',
-      photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+      photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
     }
     const users: User[] = [
       user1,
@@ -126,25 +126,25 @@ describe('UsersService', () => {
   it('should get a user by an eventId', () => {
     const user1 = {
       id: 1,
-      username: 'OoohBanana',
-      firstname: 'Donkey',
-      lastname: 'Kong',
-      email: 'DK@gmail.com',
+      username: 'JDoe',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      email: 'jdoe@gmail.com',
       reputation: 'good',
       flagScore: 0,
       accountStatus: 'Active',
-      photoUrl: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj93s763YzgAhUjja0KHfYmCO0QjRx6BAgBEAU&url=https%3A%2F%2Fwww.polygon.com%2Ffeatures%2F2018%2F5%2F10%2F17333228%2Fdonkey-kong-rankings&psig=AOvVaw2ygL8rrLXusOqB56PZVJOS&ust=1548636292299824'
+      photoUrl: 'https://www.fakepersongenerator.com/Face/female/female20161025617883789.jpg'
     }
     const user2 = {
       id: 2,
-      username: 'Its-a-Me',
-      firstname: 'Mario',
-      lastname: 'Mario',
-      email: 'SuperMario@gmail.com',
+      username: 'Bmullen',
+      firstname: 'Barbara',
+      lastname: 'Mullen',
+      email: 'bmullen@gmail.com',
       reputation: 'good',
       flagScore: 0,
       accountStatus: 'Active',
-      photoUrl: 'http://mario.nintendo.com/assets/img/home/intro/mario-pose2.png'
+      photoUrl: 'https://www.fakepersongenerator.com/Face/female/female2009102331933570.jpg'
     }
     const users: User[] = [
       user1,
@@ -152,9 +152,9 @@ describe('UsersService', () => {
     ];
     const event1 = {
       id: 25000,
-      name: 'Eat Bananas',
-      category: 'Eat Bananas',
-      address: 'DK\'s Place',
+      name: 'Go Bowling',
+      category: 'Sports',
+      address: '14355 Bearss Avenue',
       ratingScore: 100000000,
       flagScore: 0,
       zip: 15973,
@@ -162,9 +162,9 @@ describe('UsersService', () => {
     };
     const event2 = {
       id: 35000,
-      name: 'Save-a the Princess',
-      category: 'Adventure/Journey',
-      address: 'Bowser\'s Castle',
+      name: 'Community Hiking',
+      category: 'Outdoors',
+      address: 'Morris Bridge Park',
       ratingScore: 100000000,
       flagScore: 0,
       zip: 75391,

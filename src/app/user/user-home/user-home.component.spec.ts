@@ -23,6 +23,7 @@ describe('UserHomeComponent', () => {
     expect(component).toBeTruthy();
   });
   xit('should allow user to get all events', () => {
+    
 
   })
   xit('should allow user to get events by category', () => {
