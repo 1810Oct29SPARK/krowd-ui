@@ -22,8 +22,6 @@ import { UsersService } from './services/users/users.service';
 import { CommentsService } from './services/comments/comments.service';
 import { AdminService } from './services/admin/admin.service';
 
-import 'rxjs/rx';
-
 @NgModule({
   declarations: [
     LandingComponent,
