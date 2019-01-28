@@ -22,22 +22,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserProfileComponent,
     UserAdminComponent,
     UserAllEventsComponent,
-<<<<<<< HEAD
-   
-=======
->>>>>>> 9d9e25a88f69b7a1409effadf97073d8b05bbe25
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
-<<<<<<< HEAD
-  ]
-=======
     FormsModule,
     NgbModule,
     ReactiveFormsModule
   ],
   providers: []
->>>>>>> 9d9e25a88f69b7a1409effadf97073d8b05bbe25
 })
 export class UserModule { }
