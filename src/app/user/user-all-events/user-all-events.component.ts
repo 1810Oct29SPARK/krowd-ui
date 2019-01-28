@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EventsService } from 'src/app/core/services/events/events.service';
+import { Event } from 'src/app/shared/models/event';
 
 @Component({
   selector: 'app-user-all-events',
@@ -10,8 +12,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class UserAllEventsComponent implements OnInit {
 
   closeResult: string;
+  events: Event[] = [];
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public eventService: EventsService) { }
 
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -32,6 +35,12 @@ export class UserAllEventsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getAllEvents() {
+    this.eventService.getAllEvents().subscribe( (e) => {
+      this.events = e;
+    });
   }
 
 }

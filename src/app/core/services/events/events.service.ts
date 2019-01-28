@@ -25,18 +25,18 @@ export class EventsService {
   }
 
   getAllEvents() {
-    return this.httpClient.get<Event[]>('http://localhost:8083/')
-      .map(
-        (event: any[]) => {
-          console.log(event);
-        },
-      )
-      .catch(
-        (error) => {
-          console.log('EventsService: @getAllEvents()');
-          return Observable.throw(error);
-        }
-      );
+    return this.httpClient.get<Event[]>('http://localhost:8085/event/all')
+      // .map(
+      //   (event: any[]) => {
+      //     console.log(event);
+      //   },
+      // )
+      // .catch(
+      //   (error) => {
+      //     console.log('EventsService: @getAllEvents()');
+      //     return Observable.throw(error);
+      //   }
+      // );
   }
 
   addEvent(event: Event) {

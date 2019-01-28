@@ -22,6 +22,7 @@
       </div>
     </div>
     <div class="col-md-4">
+      <!-- the function open pops up a modal with the id allEvent, used on all cards for events -->
       <div class="card" (click)="open(allEvent)">
         <div class="card-img-top card-img-top-250">
           <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
@@ -51,6 +52,7 @@
     </div>
   </div>
 </div>
+<!-- Modal for Events, opens and closes on command with buttons or clicking off the modal -->
 <ng-template #allEvent let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Event Title</h4>
@@ -71,6 +73,7 @@
         <p>Location of event.</p>
       </div>
       <div class="modal-footer">
+        <!-- Buttons on the bottom of the modal for commenting and registering for event -->
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
         <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
       </div>
