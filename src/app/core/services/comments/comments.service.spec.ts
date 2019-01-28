@@ -74,4 +74,35 @@ describe('CommentsService', () => {
     expect(component.comments).toContain(newComment);
   });
 
+  it('should get comment by ID', () => {
+    const comments: Comment[] = [
+      {
+        id: 554,
+        description: 'This event has truly brought our community together.',
+        postedBy: 44,
+        flagScore: 0,
+        eventId: 32,
+        time: Date.now() 
+      },
+      {
+        id: 265,
+        description: 'This event has delivered ten thousand years of joy to my heart.',
+        postedBy: 24,
+        flagScore: 0,
+        eventId: 11,
+        time: Date.now()
+      }
+    ];
+    const newComment: Comment = {
+      id: 1123,
+      description: 'This event has ensured a favorable review from myself.',
+      postedBy: 53,
+      flagScore: 0,
+      eventId: 16,
+      time: Date.now()
+    };
+    component.getCommentById(id: number);
+    expect(component.comments).toContain(newComment);
+  })
+
 });
