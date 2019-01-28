@@ -18,11 +18,12 @@ import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.
     UserNavbarComponent,
     UserProfileComponent,
     UserAdminComponent,
-    UserAllEventsComponent
+    UserAllEventsComponent,
+   
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
   ]
 })
 export class UserModule { }
