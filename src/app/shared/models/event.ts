@@ -12,6 +12,7 @@ export class Event {
     ratingScore: number;
     flagScore: number;
     hostId: number;
+    description: string;
 
     constructor(
         id: number,
