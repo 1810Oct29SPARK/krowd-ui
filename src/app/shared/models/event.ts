@@ -2,7 +2,7 @@ export class Event {
 
     id: number;
     name: string;
-    category: string;
+    category: number;
     date: Date;
     time: any; // Optional
     address: string;
@@ -16,7 +16,7 @@ export class Event {
     constructor(
         id: number,
         name: string,
-        category: string,
+        category: number,
         date: Date,
         time: any,
         address: string,

@@ -15,7 +15,7 @@ export class UserCreateEventComponent implements OnInit {
   submitted = false;
 
   eventName: any = null;
-  eventLocation: any = null;
+  eventAddress: any = null;
   eventCity: any = null;
   eventState: any = null;
   eventZip: any = null;
@@ -29,7 +29,7 @@ export class UserCreateEventComponent implements OnInit {
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
-    new CloudinaryOptions({ cloudName: 'NOLAWolfe', uploadPreset: 'e06zwizv' })
+    new CloudinaryOptions({ cloudName: 'dhazivqjc', uploadPreset: 'zalhcbr6' })
   );
 
   loading: any;
@@ -48,10 +48,13 @@ export class UserCreateEventComponent implements OnInit {
     const userId = 0;
     // this.authService.getCurrentUser();
 
+    const eventCategory = this.assignCategory(value.eventCategory)
+
+
     const newEvent = new Event(
       null,
       value.eventName,
-      value.eventCategory,
+      eventCategory,
       value.eventDate,
       value.eventTime,
       value.eventAddress,
@@ -59,12 +62,35 @@ export class UserCreateEventComponent implements OnInit {
       value.eventState,
       value.eventZip,
       null,
-      null,
+      0,
       userId
     );
     console.log(newEvent);
     this.submitted = true;
-    // this.eventservice.addEvent(newEvent);
+    this.eventservice.addEvent(newEvent);
+  }
+
+  assignCategory(category) {
+    switch (category) {
+      case 'Art': {
+        return 1;
+      }
+      case 'Food & Dring': {
+        return 2;
+      }
+      case 'Music': {
+        return 3;
+      }
+      case 'Outdoors': {
+        return 4;
+      }
+      case 'Sprots': {
+        return 5;
+      }
+      case 'Volunteering': {
+        return 6;
+      }
+    }
   }
 
   upload() {
