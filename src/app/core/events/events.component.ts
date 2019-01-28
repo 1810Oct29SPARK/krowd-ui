@@ -22,4 +22,7 @@ export class EventsComponent implements OnInit {
     //
   }
 
+  getCommentById(id: number) {
+  }
+
 }
