@@ -63,7 +63,8 @@ export class UserCreateEventComponent implements OnInit {
       value.eventZip,
       null,
       0,
-      userId
+      userId,
+      this.imageURL
     );
     console.log(newEvent);
     this.submitted = true;
