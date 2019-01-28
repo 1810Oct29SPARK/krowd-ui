@@ -17,15 +17,12 @@ export class UserEventService {
     userId: number;
     eventId: number;
 
-    getAttendee(userId: number, eventId: number) {
-        this.userId = userId;
-        this.eventId = eventId;
-    }
+
 
     constructor(private httpClient: HttpClient, user: User, event: Event) { }
 
-    getUsersAttendingEvent(userId: number, eventId: number) {
-        return this.httpClient.get<User[]>(`http://localhost:8083/${userId}/${eventId}`)
+    getUsersAttendingEvent(eventId: number) {
+        return this.httpClient.get<User[]>(`http://localhost:8085/userEvent/userByEvent/${eventId}`)
             .map(
                 (event: any[]) => {
                     console.log(event);
@@ -39,8 +36,8 @@ export class UserEventService {
             );
     }
 
-    getEventsUserAttending(userId: number, eventId: number) {
-        return this.httpClient.get<User[]>(`http://localhost:8083/${userId}/${eventId}`)
+    getEventsUserAttending(userId: number) {
+        return this.httpClient.get<User[]>(`http://localhost:8085/userEvent/eventByUser/${userId}`)
             .map(
                 (event: any[]) => {
                     console.log(event);
@@ -55,11 +52,48 @@ export class UserEventService {
     }
 
     addAttendee(userId: number, eventId: number) {
-        return this.httpClient.post(`http:/localhost:8083/${userId}/${eventId}`, this.getAttendee);
+        return this.httpClient.post(`http:/localhost:8085/userEvent/addUserEvent`, { uId: userId, eId: eventId });
     }
 
+    //
+    // not ready : server-Side does not have the referencing method
+    //
     deleteAttendee(userId: number, eventId: number) {
-        return this.httpClient.post(`http:/localhost:8083/${userId}/${eventId}`, this.getAttendee);
+        return this.httpClient.post(`http:/localhost:8083/${userId}/${eventId}`, { uId: userId, eId: eventId });
+    }
+
+    getEventScore(eventId: number) {
+        return this.httpClient.get(`http://localhost:8085/userEvent/scoreEvent/${eventId}`)
+        .map(
+            (event: any) => {
+                console.log(event);
+            },
+        )
+        .catch(
+            (error) => {
+                console.log('UserEventServiceError: @getEventScore');
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    rateEvent(ratingScore: number) {
+        return this.httpClient.put(`http://localhost:8085:/userEvent/rate`, {ratingScore});
+    }
+
+    getReputationByUserId(userId: number) {
+        return this.httpClient.get(`http://localhost:8085/userEvent/getReputation/${userId}`)
+        .map(
+            (event: any) => {
+                console.log(event);
+            },
+        )
+        .catch(
+            (error) => {
+                console.log('UserEvent ServiceError: @getReputationByUserId');
+                return Observable.throw(error);
+            }
+        );
     }
 
 }
