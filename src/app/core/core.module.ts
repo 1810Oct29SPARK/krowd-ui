@@ -15,9 +15,12 @@ import { RegisterComponent } from './register/register.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { FileUploadModule } from 'ng2-file-upload';
-import 'rxjs/rx';
 import { EventsComponent } from './events/events.component';
-import { ServicesComponent } from './services/services.component';
+
+import { EventsService } from './services/events/events.service';
+import { UsersService } from './services/users/users.service';
+import { CommentsService } from './services/comments/comments.service';
+import { AdminService } from './services/admin/admin.service';
 
 @NgModule({
   declarations: [
@@ -25,8 +28,7 @@ import { ServicesComponent } from './services/services.component';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    EventsComponent,
-    ServicesComponent,
+    EventsComponent
   ],
   imports: [
     CommonModule,
@@ -39,11 +41,11 @@ import { ServicesComponent } from './services/services.component';
     MaterialModule,
     CoreRoutingModule,
     Ng2CloudinaryModule,
-    FileUploadModule,
+    FileUploadModule
   ],
   exports: [
     RouterModule
   ],
-  providers: []
+  providers: [EventsService, UsersService, CommentsService, AdminService]
 })
 export class CoreModule { }

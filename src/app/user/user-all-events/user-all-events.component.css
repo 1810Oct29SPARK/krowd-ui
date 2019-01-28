@@ -64,10 +64,14 @@ tbody {
   padding: 5px;
 }
 
-#recent-events td {
-  width: 33%;
+#all-events td {
+  width: 20%;
 }
 
-#current-events td {
-  width: 20%;
+.buttons {
+  padding: 2%;
+}
+
+img {
+  border-radius: 50%;
 }

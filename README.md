@@ -1,4 +1,12 @@
-# KrowdUi
+# KrowdUi  
+
+Captain Branch:
+[![Build Status](https://travis-ci.org/1810Oct29SPARK/krowd-ui.svg?branch=master)](https://travis-ci.org/1810Oct29SPARK/krowd-ui)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=captain&project=1810Oct29SPARK_krowd-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=captain)  
+
+Dev Branch:  
+
+Master Branch:  
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 

@@ -1,29 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
-  providers: [UserService]
+  providers: []
 })
 export class UserComponent implements OnInit {
-  user:{name:string};
-  isUserLoggedIn = false;
-  userDetail;
 
+  users: any = null;
 
-  constructor(private userService:UserService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.userDetail=this.userService.getUser();
-    if(this.userDetail){
-      this.user=this.userDetail;
-      this.isUserLoggedIn = true;
-    }
-    else {
-      this.isUserLoggedIn = false;
-    }
   }
 
 }

@@ -3,20 +3,15 @@ import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-user-admin',
-  templateUrl: './user-admin.component.html',
-  styleUrls: ['./user-admin.component.css']
+  selector: 'app-user-all-events',
+  templateUrl: './user-all-events.component.html',
+  styleUrls: ['./user-all-events.component.css']
 })
-export class UserAdminComponent implements OnInit {
+export class UserAllEventsComponent implements OnInit {
 
-  response: any = null;
   closeResult: string;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal) { }
-
-  // (1) array with elements of type Event
-
-  // (2) send a request to get all events that are flagged
 
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -37,10 +32,6 @@ export class UserAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  showModal() {
-
   }
 
 }

@@ -1,20 +1,28 @@
 <div class="container align-items-center">
   <div class="row">
     <div class=" col-md-12 justify-content-between">
-      <h4> Flagged Events </h4>
+      <h4> All Events </h4>
       <br>
       <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
-      <!-- *NgFor="let flagged of flagged-events"-->
-      <div id="flagged-events">
+      <!-- *NgFor="let event of all-events"-->
+      <!-- <div id="all-events" *ngFor="event of events"> -->
+      <div id="all-events">
         <table class="col-md-12">
-          <tr class="eventList justify-content-between z-depth-2" (click)="showModal()">
+          <tr class="eventList justify-content-between z-depth-2" (click)="open(allEvent)">
+            <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
+            Then we populate the modal with the results. -->
             <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
+            <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> Event Title </span>
+            </td>
             <td class="event-date"> <span class="align-middle"> Date </span> </td>
             <td class="event-time"> <span class="align-middle"> Time </span> </td>
             <td class="event-location"> <span class="align-middle"> Location </span> </td>
           </tr>
-          <tr class="eventList justify-content-between z-depth-2">
+        </table>
+        <table class="col-md-12">
+          <tr class="eventList justify-content-between z-depth-2" (click)="open(allEvent)">
+            <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
+            Then we populate the modal with the results. -->
             <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
             <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> Event Title </span>
             </td>
@@ -27,45 +35,8 @@
     </div>
   </div>
   <br>
-  <br>
-  <h4> Flagged Comments </h4>
-  <br>
-  <div id="comments">
-    <!-- table created if there is anything in the response (user has made comments)-->
-    <table *ngIf="response !== null" class="table">
-      <thead>
-        <th scope="col">Event</th>
-        <th scope="col">Comment</th>
-        <th scope="col">Actions</th>
-      </thead>
-      <tbody>
-        <!-- creates a new row for each user comment, 
-                        using the name of the event, the comment, and the event date-->
-        <tr *ngFor="let comment of commentsList" id="commentsList">
-          <a routerLink="/events/{{eventID}}">
-            <td> {{comment.event_id}} </td>
-          </a>
-          <td> {{comment.data}} </td>
-          <td> {{comment.created | date }} </td>
-          <td>
-            <span class="buttons">
-              <button type="button" class="btn btn-outline-dark">Dismiss</button>
-            </span>
-            <span class="buttons">
-              <button type="button" class="btn btn-outline-dark">Delete</button>
-            </span>
-          </td>
-        </tr>
-        <tr id="default" [hidden]="commentsList">
-          <td></td>
-          <td> No flagged comments to see.</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
-<ng-template #eventFlag let-modal>
+<ng-template #allEvent let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Event Title</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -84,6 +55,5 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Dismiss</button>
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
   </div>
 </ng-template>

@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  
+  response: any = null;
+
   constructor() { }
 
   ngOnInit() {

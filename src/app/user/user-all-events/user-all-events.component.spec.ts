@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageNotFoundComponent } from './page-not-found.component';
+import { UserAllEventsComponent } from './user-all-events.component';
 
-describe('PageNotFoundComponent', () => {
+describe('UserAllEventsComponent', () => {
 
-  let component: PageNotFoundComponent;
-  let fixture: ComponentFixture<PageNotFoundComponent>;
+  let component: UserAllEventsComponent;
+  let fixture: ComponentFixture<UserAllEventsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PageNotFoundComponent]
+      declarations: [UserAllEventsComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageNotFoundComponent);
+    fixture = TestBed.createComponent(UserAllEventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
