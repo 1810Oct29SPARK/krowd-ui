@@ -270,14 +270,19 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
       <br>
-      <img src="{{selectedProfileImg}}">
+      <img id="newImage" src={{picture}}>
       <br>
       <h6> Change Profile Image </h6>
-      <div class="input-group mb-3">
-        <label class="custom-file">
-          <input type="file" id="file" class="custom-file-input">
-          <span class="custom-file-control"></span>
-        </label>
+      <div class="form-row picture-upload">
+        <div class="form-group col-4">
+          <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera" name="eventPhotoID" ngModel>
+          <br>
+          <br>
+          <button [disabled]="loading" (click)="upload()">Upload</button>
+        </div>
+        <div class="form-group col-4">
+          
+        </div>
       </div>
     </form>
   </div>
