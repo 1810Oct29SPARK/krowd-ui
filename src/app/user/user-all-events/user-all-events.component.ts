@@ -15,8 +15,12 @@ export class UserAllEventsComponent implements OnInit {
   commentsList = [];
   closeResult: string;
   events: Event[] = [];
+  eventList2 = [];
+  eventId: any = 1;
+  singleEvent: any = null;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService, private commentService: CommentsService) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal,
+    private eventService: EventsService, private commentService: CommentsService) { }
 
 
   open(content: any) {
@@ -37,34 +41,42 @@ export class UserAllEventsComponent implements OnInit {
     }
   }
 
-  eventList2 = [];
-  eventId: any = 1;
+  ngOnInit() {
+    this.getAllEvents();
+  }
+
   getAllEvents() {
-      console.log(this.eventService.getAllEvents());
-      this.eventService.getAllEvents()
-        .subscribe(
-          (events)=> {
-            for (let event of events) {
-              console.log(event)
-              this.eventList2.push(event)
-              if (event.picture===null){
-                event.picture= "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png";
-                }
-              }
-            },
-          (error)=> console.log(error)
-          );
+    this.eventService.getAllEvents()
+      .subscribe(
+        (events) => {
+          for (let event of events) {
+            this.eventList2.push(event);
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.eventList2;
+  }
 
-
-        console.log(this.eventList2);
-        return this.eventList2;
+  getEventById(value) {
+    this.eventService.getEventById(value)
+      .subscribe(
+        (event) => {
+          this.singleEvent = event;
+        },
+        (error) => console.log(error)
+      );
+    return this.singleEvent;
   }
 
   getComments() {
-    console.log("getComments clicked");
+    console.log('getComments clicked');
     this.commentService.getCommentByEventId(this.eventId)
         .subscribe(
-          (comments)=> {
+          (comments) => {
             for (let comment of comments) {
               console.log(comment);
               // this.commentUserID = comment['user_id'];
@@ -82,21 +94,13 @@ export class UserAllEventsComponent implements OnInit {
               //   this.commentsList.push(this.usercomment);
 
               // }
-              
               // )
-             
               }
             },
-          (error)=> console.log(error)
+          (error) => console.log(error)
           );
-        console.log("Comments list: ")
-        console.log(this.commentsList);
+        console.log('Comments list: ');
         return this.commentsList;
-  }
-  
-
-  ngOnInit() {
-    this.getAllEvents();
   }
 
 }

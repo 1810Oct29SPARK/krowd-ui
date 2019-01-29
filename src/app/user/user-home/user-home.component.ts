@@ -18,6 +18,10 @@ export class UserHomeComponent implements OnInit {
 
   events: Event[] = [];
   singleEvent: any = null;
+  eventList2 = [];
+  eventId: any = 1;
+  comments: Comment[] = [];
+  eventList = [];
 
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -37,9 +41,6 @@ export class UserHomeComponent implements OnInit {
     }
   }
 
-  comments: Comment[] = [];
-
-  eventList = [];
 
   ngOnInit() {
     this.getAllEvents();
@@ -49,17 +50,14 @@ export class UserHomeComponent implements OnInit {
     console.log('modal works');
   }
 
-
-  eventList2 = [];
-  eventId: any = 1;
   getAllEvents() {
     this.eventService.getAllEvents()
       .subscribe(
         (events) => {
           for (let event of events) {
-            this.eventList2.push(event)
+            this.eventList2.push(event);
             if (event.picture === null) {
-              event.picture = "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png";
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
         },
