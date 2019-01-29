@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Comment } from '../../../shared/models/comment';
-import { HttpService } from '../../services/http/http.service'
+import { HttpService } from '../../services/http/http.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class CommentsService {
   private comments: Comment[] = [];
-  
+
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
     'Accept': 'application/json',
@@ -44,7 +44,7 @@ export class CommentsService {
   }
 
   getCommentByEventId(commentId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+ `${commentId}`);
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${commentId}`);
   }
 
   getFlaggedComments(flagScore: number) {
