@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
-import { CommentsService } from '../../core/services/comments/comments.service'
+import { CommentsService } from '../../core/services/comments/comments.service';
 
 
 @Component({
@@ -97,12 +97,6 @@ export class UserAllEventsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEvents();
-  }
-
-  getAllEvents() {
-    this.eventService.getAllEvents().subscribe( (e) => {
-      this.events = e;
-    });
   }
 
 }

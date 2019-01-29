@@ -6,7 +6,7 @@
   <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
   <!-- *NgFor="let event of eventList2"-->
   <div class="card-group" *ngFor="let event of eventList2">
-  <!-- <div class="card-group"> -->
+    <!-- <div class="card-group"> -->
     <div class="col-md-4">
       <div class="card" (click)="open(allEvent)">
         <div class="card-img-top card-img-top-250">
@@ -80,11 +80,11 @@
     <mat-tab (click)="getComments" label="View Comments">
       <div id="maincommentdiv">
         <h4 class="centerize">Comments</h4>
-  
+
         <!-- comment outline-->
         <div *ngFor="let comment of commentsList" class="row commentdiv col-12">
           <div id="UserInfo" class="col-2">
-             <img src={{comment.picture}} class="commentpic centerize"> 
+            <img src={{comment.picture}} class="commentpic centerize">
           </div>
           <div id="comment-body" class="col-10">
             <em>"{{comment.comment.data}}"</em>
@@ -93,28 +93,27 @@
             </span>
           </div>
         </div>
-        <div [hidden] = "!commentsList.length == 0">
+        <div [hidden]="!commentsList.length == 0">
           <br>
-          <p class="centerize">No comments yet.  So why not post the first comment?</p>
+          <p class="centerize">No comments yet. So why not post the first comment?</p>
           <br>
         </div>
-  
-        <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">Post a Comment</button>
-        
+
+        <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">Post a
+          Comment</button>
+
         <form [hidden]="!toggle" (ngSubmit)="onCommentCreated(commentForm)" #commentForm="ngForm">
           <div class="row comment-button">
-          <input type="text" name="data" class="col-9" [(ngModel)] = "data"> 
-          &nbsp;
-          <input type="submit" class="btn btn-outline-success col-2" value="Submit" click="ontoggle()">
-        </div>
+            <input type="text" name="data" class="col-9" [(ngModel)]="data">
+            &nbsp;
+            <input type="submit" class="btn btn-outline-success col-2" value="Submit" click="ontoggle()">
+          </div>
         </form>
-  
-    </div>
+
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
       </div>
     </mat-tab>
   </mat-tab-group>
 </ng-template>
-</div>
-</div>
