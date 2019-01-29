@@ -119,4 +119,51 @@ export class EventsService {
     return this.httpClient.post('', eventId);
   }
 
+  getFlaggedEvents(flagScore: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8085/${flagScore}`)
+      .map(
+        (event: any[]) => {
+          console.log(event);
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('AdminService: @getEventByFlagScore()');
+          return Observable.throw(error);
+        }
+      );
+  }
+
+  getEventsUserAttending(userId: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userId}`)
+        .map(
+            (event: any[]) => {
+                console.log(event);
+            },
+        )
+        .catch(
+            (error) => {
+                console.log('UserEventService: @getUsersAttendingEvent()');
+                return Observable.throw(error);
+            }
+        );
+}
+getEventScore(eventId: number) {
+  return this.httpClient.get(`http://localhost:8085/userEvent/scoreEvent/${eventId}`)
+  .map(
+      (event: any) => {
+          console.log(event);
+      },
+  )
+  .catch(
+      (error) => {
+          console.log('UserEventServiceError: @getEventScore');
+          return Observable.throw(error);
+      }
+  );
+}
+
+rateEvent(ratingScore: number) {
+  return this.httpClient.put(`http://localhost:8085:/userEvent/rate`, {ratingScore});
+}
 }
