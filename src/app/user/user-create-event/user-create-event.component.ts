@@ -22,6 +22,7 @@ export class UserCreateEventComponent implements OnInit {
   eventCategory: any = null;
   eventDescription: any = null;
   eventDate: any = null;
+  eventTime: any = null;
 
   // code for image upload
   selectedFile: File = null;
