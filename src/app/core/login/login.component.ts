@@ -48,9 +48,9 @@ export class LoginComponent {
   constructor(public dialog: MatDialog, public cognitoService: CognitoService) { }
 
   cognitoSignIn(form: NgForm){
-    const username = form.value.username;
-    const password = form.value.password;
-    const newPassword = form.value.newPassword;
+    const username: string = form.value.username;
+    const password: string = form.value.password;
+    const newPassword: string = form.value.newPassword;
     this.cognitoService.cognitoSignIn(username, password, newPassword);
   }
 
