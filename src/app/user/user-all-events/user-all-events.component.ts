@@ -62,9 +62,11 @@ export class UserAllEventsComponent implements OnInit {
   }
 
   getEventById(value) {
+    console.log(value);
     this.eventService.getEventById(value)
       .subscribe(
         (event) => {
+          console.log(event);
           this.singleEvent = event;
         },
         (error) => console.log(error)

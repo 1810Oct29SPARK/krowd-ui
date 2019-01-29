@@ -48,7 +48,7 @@ export class UserCreateEventComponent implements OnInit {
     const userId = 0;
     // this.authService.getCurrentUser();
 
-    const eventCategory = this.assignCategory(value.eventCategory)
+    const eventCategory = this.assignCategory(value.eventCategory);
 
 
     const newEvent = new Event(
