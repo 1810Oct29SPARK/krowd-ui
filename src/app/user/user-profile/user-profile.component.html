@@ -1,5 +1,4 @@
-<button (click)="toggleProfile()"> {{info_button_text}} </button>
-<div id="profile-info" class="container" *ngIf="show_info">
+<div id="profile-info" class="container">
   <br>
   <br>
   <div id="user-section" class="row">
@@ -8,13 +7,24 @@
       </div>
     </div>
     <div class="col-md-1"></div>
-    <div id="user-info" class="col-md-8">
-      <span>
+    <div id="user-info" class="col-md-4">
+      <span id="profile-essentials">
         <h4> First Last </h4>
         <p> Username </p>
+        <p> Reputation Score </p>
       </span>
     </div>
+    <div id="profile-buttons" class="col-md-4">
+      <button (click)="open(editProfile)"> Edit Profile Information </button>
+      <br>
+      <br>
+      <button (click)="toggleEvents()"> {{event_button_text}} </button>
+      <br>
+      <br>
+      <button (click)="toggleComments()"> {{comment_button_text}} </button>
+    </div>
   </div>
+ 
   <br>
   <br>
   <div class="row">
@@ -24,11 +34,10 @@
     </div>
   </div>
   <br><br>
-  <button (click)="open(editProfile)"> Edit Profile Information </button>
+  
 </div>
 <br>
 <br>
-<button (click)="toggleEvents()"> {{event_button_text}} </button>
 <div class="container" *ngIf="show_events">
   <div class="row">
     <div class="col-md-12">
@@ -203,7 +212,6 @@
 </div>
 <br>
 <br>
-<button (click)="toggleComments()"> {{comment_button_text}} </button>
 <div class="row" *ngIf="show_comments">
   <div class="col-md-12">
     <br>
@@ -262,14 +270,19 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
       <br>
-      <img src="{{selectedProfileImg}}">
+      <img id="newImage" src={{picture}}>
       <br>
       <h6> Change Profile Image </h6>
-      <div class="input-group mb-3">
-        <label class="custom-file">
-          <input type="file" id="file" class="custom-file-input">
-          <span class="custom-file-control"></span>
-        </label>
+      <div class="form-row picture-upload">
+        <div class="form-group col-4">
+          <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera" name="eventPhotoID" ngModel>
+          <br>
+          <br>
+          <button [disabled]="loading" (click)="upload()">Upload</button>
+        </div>
+        <div class="form-group col-4">
+          
+        </div>
       </div>
     </form>
   </div>
