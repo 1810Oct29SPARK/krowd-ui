@@ -20,7 +20,6 @@ import { EventsComponent } from './events/events.component';
 import { EventsService } from './services/events/events.service';
 import { UsersService } from './services/users/users.service';
 import { CommentsService } from './services/comments/comments.service';
-import { AdminService } from './services/admin/admin.service';
 
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
@@ -51,6 +50,8 @@ import { CognitoService } from './services/cognito/cognito.service';
   exports: [
     RouterModule
   ],
+
   providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService]
+
 })
 export class CoreModule { }
