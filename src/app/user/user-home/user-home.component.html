@@ -5,87 +5,121 @@
       <p> Welcome to your Homepage! </p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-7 justify-content-between">
-      <h4> Current Events </h4>
-      <br>
-      <!-- *NgFor="let cevents of cevents"-->
-      <div id="current-events">
-        <table class="col-md-12 ">
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td class="event-title"> <span class="align-middle"> Event Title </span> </td>
-            <td class="event-date"> <span class="align-middle"> Date </span> </td>
-            <td class="event-time"> <span class="align-middle"> Time </span> </td>
-            <td class="event-location"> <span class="align-middle"> Location </span> </td>
-          </tr>
-        </table>
+  <!-- Div for 5 current events -->
+  <div class="col-md-12 justify-content-between">
+    <h4> Current Events </h4>
+    <br>
+    <div id="current-events">
+      <div class="card-group">
+        <div class="col-md-4" *ngFor="let event of eventList2">
+          <div class="card" (click)="open(allEvent)">
+            <div (click)="getEventById(event.id)">
+              <div class="card-img-top card-img-top-250">
+                <img class="img-fluid" src="{{event.picture}}" alt="Carousel 1">
+                <div class="card-body">
+                  <h6 class="small text-wide p-b-2">{{event.categoryId.name}}</h6>
+                  <h6 class="small text-wide p-b-2">Created by: {{event.userId.firstname}} {{event.userId.lastname}}</h6>
+                  <h2>
+                    {{event.name}}
+                  </h2>
+                  <p> {{event.description}} </p>
+                  <!-- <button type="button" (click)="getEventById(event.id)">Click here</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-5">
-      <h4> Recent Events </h4>
-      <br>
-      <div id="recent-events">
-        <table class="col-md-12">
-          <!-- *ngFor="let revent in revents-->
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td> <span class="align-middle"> Event Title </span> </td>
-            <td> <span class="align-middle"> Date </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td> <span class="align-middle"> Event Title </span> </td>
-            <td> <span class="align-middle"> Date </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td> <span class="align-middle"> Event Title </span> </td>
-            <td> <span class="align-middle"> Date </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td> <span class="align-middle"> Event Title </span> </td>
-            <td> <span class="align-middle"> Date </span> </td>
-          </tr>
-          <tr class="eventList justify-content-between z-depth-2">
-            <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
-            <td> <span class="align-middle"> Event Title </span> </td>
-            <td> <span class="align-middle"> Date </span> </td>
-          </tr>
-        </table>
+  </div>
+
+  <!-- Div for 5 Recent events -->
+  <div class="col-md-12 justify-content-between">
+    <h4> Recent Events </h4>
+    <br>
+    <div id="current-events">
+      <!-- <div class="card-group" *ngFor="Revent of Recent-events"> -->
+      <div class="card-group">
+        <div class="col-md-4">
+          <div class="card" (click)="open(allEvent)">
+            <div class="card-img-top card-img-top-250">
+              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">Insight</h6>
+                <h2>
+                  Host Event #1
+                </h2>
+                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" (click)="open(allEvent)">
+            <div class="card-img-top card-img-top-250">
+              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">Insight</h6>
+                <h2>
+                  Host Event #1
+                </h2>
+                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" (click)="open(allEvent)">
+            <div class="card-img-top card-img-top-250">
+              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">Insight</h6>
+                <h2>
+                  Host Event #1
+                </h2>
+                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <br>
-<br>
-<br>
+<!--  -->
+<ng-template #allEvent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{singleEvent?.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Event Description">
+      <div class="modal-body">
+        <img src="{{singleEvent?.picture}}" style="height: 200px; width:100%;">
+        <br>
+        <h4>Event Description</h4>
+        <p>{{singleEvent?.description}}</p>
+        <h4>Date & Time</h4>
+        <p>{{singleEvent?.date}}</p>
+        <h4>Location</h4>
+        <p>{{singleEvent?.address.streetAddress}}</p>
+        <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="View Comments">
+      <h4>Comments About The Event</h4>
+      <h6>User name</h6>
+      <p>User comment here.</p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>

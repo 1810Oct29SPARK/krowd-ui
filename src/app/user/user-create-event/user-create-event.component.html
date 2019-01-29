@@ -28,8 +28,8 @@
         <!-- input for the Location of the Event-->
         <div class="form-group">
           <label for="eventName">Event Address*</label>
-          <input required type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Street"
-            [(ngModel)]="eventLocation" #street="ngModel" />
+          <input required type="text" class="form-control" id="eventAddress" name="eventAddress" placeholder="Street"
+            [(ngModel)]="eventAddress" #street="ngModel" />
           <br>
           <input required type="text" class="form-control" id="eventCity" name="eventCity" placeholder="City"
             [(ngModel)]="eventCity" #city="ngModel" />
@@ -40,14 +40,14 @@
                 [(ngModel)]="eventState" #state="ngModel" />
             </div>
             <div class="col">
-              <input required type="text" class="form-control" id="eventZip" name="eventZip" placeholder="Zipcode"
+              <input required type="number" class="form-control" id="eventZip" name="eventZip" placeholder="Zipcode"
                 [(ngModel)]="eventZip" #zip="ngModel" />
             </div>
           </div>
           <br>
 
           <label for="eventTime">Event Time*</label>
-          <input required type="time" class="form-control" id="eventTime" name="eventTime">
+          <input required type="time" class="form-control" id="eventTime" name="eventTime" [(ngModel)]="eventTime">
         </div>
 
         <!-- error message for event address-->
@@ -106,9 +106,8 @@
         <label for="eventImage">Upload an Image (Optional)</label>
         <br>
 
-        <!-- need to add [uploader]="uploader"-->
 
-        <input type="file" ng2FileSelect accept="image/*;capture=camera" name="eventPhotoID" ngModel>
+        <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera" name="eventPhotoID" ngModel>
         <br>
         <br>
         <button [disabled]="loading" (click)="upload()">Upload</button>

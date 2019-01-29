@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Comment } from '../../shared/models/comment';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
-import { Comment } from '../../shared/models/comment';
 
 @Component({
   selector: 'app-user-home',
@@ -11,34 +12,69 @@ import { Comment } from '../../shared/models/comment';
 })
 export class UserHomeComponent implements OnInit {
 
-  comments: Comment[] = [];
+  closeResult: string;
 
+  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
+
+  events: Event[] = [];
+  singleEvent: any = null;
+  eventList2 = [];
+  eventId: any = 1;
+  comments: Comment[] = [];
   eventList = [];
 
-  constructor(private httpClient: HttpClient) { }
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
   ngOnInit() {
-    // this.getAllEvents();
+    this.getAllEvents();
   }
 
   showModal() {
     console.log('modal works');
   }
 
-  // getAllEvents() {
-  //   this.eventsService.getAllEvents()
-  //     .subscribe(
-  //       (events: any) => {
-  //         for (const event of events) {
-  //           this.eventList.push(event);
-  //           if (event.photoUrl === null) {
-  //             event.photoUrl = `http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png`;
-  //           }
-  //         }
-  //       },
-  //       (error) => console.log('user-homeComponentError: getAllEvents')
-  //     );
-  //   return this.eventList;
-  // }
+  getAllEvents() {
+    this.eventService.getAllEvents()
+      .subscribe(
+        (events) => {
+          for (let event of events) {
+            this.eventList2.push(event);
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.eventList2;
+  }
+
+  getEventById(value) {
+    this.eventService.getEventById(value)
+      .subscribe(
+        (event) => {
+          this.singleEvent = event;
+        },
+        (error) => console.log(error)
+      );
+    return this.singleEvent;
+  }
 
 }

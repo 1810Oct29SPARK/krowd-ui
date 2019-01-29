@@ -10,7 +10,11 @@ import { CognitoService } from '../../core/services/cognito/cognito.service'
 })
 export class UserNavbarComponent implements OnInit {
 
+
   constructor(private router: Router, public cognitoService: CognitoService) { }
+  public isCollapsed = true;
+
+
 
   ngOnInit() {
   }

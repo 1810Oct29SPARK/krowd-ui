@@ -11,6 +11,8 @@ import { UserAdminComponent } from './user-admin/user-admin.component';
 import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
+import { MatTabsModule } from '@angular/material';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserRoutingModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule,
+    MatTabsModule
   ],
   providers: []
 })

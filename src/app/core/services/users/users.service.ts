@@ -22,8 +22,9 @@ export class UsersService {
 
   constructor(private httpClient: HttpClient, user: User) { }
 
+  // ready
   getAllUsers() {
-    return this.httpClient.get<User[]>('http://localhost:8083/')
+    return this.httpClient.get<User[]>('http://localhost:8085/user/all')
       .map(
         (user: any) => {
           console.log(user);
@@ -37,15 +38,19 @@ export class UsersService {
       );
   }
 
+  // ********************************************
+  // Implemented By Sercurity team, Not ready Yet
+  // ********************************************
   addUser(user: User) {
-    return this.httpClient.post(`http://localhost:8083`, user);
+    return this.httpClient.post(`http://localhost:8085`, user);
   }
-  // updateEvent(event: Event) {
+
+  // updateUser(event: Event) {
   //   return this.httpClient.put(`http://localhost:8083`), {'id': id, 'Created': Date};
   // }
 
   getUserById(userid: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8083/${userid}`)
+    return this.httpClient.get<User[]>(`http://localhost:8085/user/${userid}`)
       .map(
         (user: any) => {
           console.log(user);
@@ -60,7 +65,7 @@ export class UsersService {
   }
 
   getUserByEventId(eventId: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8083/${eventId}`)
+    return this.httpClient.get<User[]>(`http://localhost:8085/userEvent/userByEvent/${eventId}`)
       .map(
         (user: any) => {
           console.log(user);

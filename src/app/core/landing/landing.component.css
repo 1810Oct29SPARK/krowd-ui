@@ -1,18 +1,14 @@
 .cards {
   width: 30%;
   position: relative;
-  /* margin-left: 500px;
-    margin-top: -200px; */
-  margin: -150px auto;
+  left: 35%;
 }
 
 .buttons {
   padding: 1%;
 }
 
-.login {
-  width: 500px;
+#welcome {
   position: relative;
-  margin-left: 500px;
-  margin-top: 300px;
+  top: 35vh;
 }

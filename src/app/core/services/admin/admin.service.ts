@@ -17,8 +17,12 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient, user: User, event: Event, comment: Comment, admin: Admin) { }
 
+// ********************************************************
+// Not Complete: Server-Side hasnt completed Controller Yet
+// ********************************************************
+
   getUsersByAccountStatus(accountStatus: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8083/${accountStatus}`)
+    return this.httpClient.get<User[]>(`http://localhost:8085/${accountStatus}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -33,7 +37,7 @@ export class AdminService {
   }
 
   getUsersByFlagScore(flagScore: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8083/${flagScore}`)
+    return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -48,7 +52,7 @@ export class AdminService {
   }
 
   getCommentsByFlagScore(flagScore: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8083/${flagScore}`)
+    return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -63,7 +67,7 @@ export class AdminService {
   }
 
   getEventsByFlagScore(flagScore: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8083/${flagScore}`)
+    return this.httpClient.get<Event[]>(`http://localhost:8085/${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
