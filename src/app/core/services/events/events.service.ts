@@ -38,6 +38,20 @@ export class EventsService {
       );
   }
 
+  getAllFlaggedEvents() {
+    return this.httpClient.get<Event[]>('http://localhost:8085/event/byFlag')
+    .map((events) => {
+      let flaggedEvent = events;
+      return flaggedEvent;
+    })
+      .catch(
+        (error) => {
+          console.log('EventsService: @getAllEvents()');
+          return Observable.throw(error);
+        }
+      );
+  }
+
   addEvent(event: Event) {
     return this.httpClient.post(`http://localhost:8085/event/add`, event);
   }
@@ -57,6 +71,8 @@ export class EventsService {
       .map(
         (event: any[]) => {
           console.log(event);
+          let signleEvent = event;
+          return signleEvent;
         },
       )
       .catch(

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EventsService } from 'src/app/core/services/events/events.service';
+import { Event } from 'src/app/shared/models/event';
 
 @Component({
   selector: 'app-user-admin',
@@ -12,7 +14,7 @@ export class UserAdminComponent implements OnInit {
   response: any = null;
   closeResult: string;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
 
   // (1) array with elements of type Event
 
@@ -37,10 +39,29 @@ export class UserAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllFlaggedEvents();
   }
 
   showModal() {
+  }
 
+  flaggedEvents = [];
+  eventId: any = 1;
+  getAllFlaggedEvents() {
+    this.eventService.getAllFlaggedEvents()
+      .subscribe(
+        (events) => {
+          console.log(events);
+          for (let event of events) {
+            this.flaggedEvents.push(event)
+            if (event.picture === null) {
+              event.picture = "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png";
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.flaggedEvents;
   }
 
 }
