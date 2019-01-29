@@ -71,7 +71,6 @@ export class EventsService {
     return this.httpClient.get<Event[]>(HttpService.baseUrl + `event/byId/${eventId}`)
       .map(
         (event: any[]) => {
-          console.log(event);
           let signleEvent = event;
           return signleEvent;
         },
@@ -117,7 +116,7 @@ export class EventsService {
   }
 
   registerForEvent(eventId: number, userId: number) {
-    return this.httpClient.post('', eventId);
+    return this.httpClient.post(`http://localhost:8085/userEvent/addUserEvent`, eventId);
   }
 
   getFlaggedEvents(flagScore: number) {

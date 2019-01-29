@@ -6,11 +6,12 @@ export class Event {
     date: Date;
     time: any; // Optional
     address: string;
+    apartment: string;
     city: string;
     state: string;
     zip: number;
     ratingScore: number;
-    flagScore: number;
+    flag: number;
     hostId: number;
     description: string;
     picture: string;
@@ -22,11 +23,12 @@ export class Event {
         date: Date,
         time: any,
         address: string,
+        apartment: string,
         city: string,
         state: string,
         zip: number,
         ratingScore: number,
-        flagScore: number,
+        flag: number,
         hostId: number,
         picture: string
     ) {
@@ -36,11 +38,12 @@ export class Event {
         this.date = date;
         this.time = time;
         this.address = address;
+        this.apartment = apartment;
         this.city = city,
             this.state = state,
             this.zip = zip;
         this.ratingScore = ratingScore;
-        this.flagScore = flagScore;
+        this.flag = flag;
         this.hostId = hostId;
         this.picture = picture;
     }

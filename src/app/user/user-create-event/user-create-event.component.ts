@@ -59,6 +59,7 @@ export class UserCreateEventComponent implements OnInit {
       value.eventDate,
       value.eventTime,
       value.eventAddress,
+      value.eventApartment,
       value.eventCity,
       value.eventState,
       value.eventZip,
