@@ -31,7 +31,7 @@ export class CommentsService {
   }
   // updateEvent(event: Event) {
   //   return this.httpClient.put(`http://localhost:8080`), {'id': id, 'Created': Date};
-  // }
+  //
 
   getCommentById(id: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8083`);
@@ -45,7 +45,7 @@ export class CommentsService {
     return this.httpClient.get<Comment[]>(`http://localhost:8080/${commentId}`);
   }
 
-  getCommentsByFlagScore(flagScore: number) {
+  getFlaggedComments(flagScore: number) {
     return this.httpClient.get<Comment[]>(`http://localhost:8085/${flagScore}`)
       .map(
         (event: any[]) => {

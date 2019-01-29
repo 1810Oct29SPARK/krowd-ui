@@ -94,7 +94,7 @@ export class UsersService {
       );
   }
 
-  getUsersByFlagScore(flagScore: number) {
+  getFlaggedUsers(flagScore: number) {
     return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
       .map(
         (event: any[]) => {

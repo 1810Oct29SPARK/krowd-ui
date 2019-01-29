@@ -20,7 +20,6 @@ import { EventsComponent } from './events/events.component';
 import { EventsService } from './services/events/events.service';
 import { UsersService } from './services/users/users.service';
 import { CommentsService } from './services/comments/comments.service';
-import { AdminService } from './services/admin/admin.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +45,6 @@ import { AdminService } from './services/admin/admin.service';
   exports: [
     RouterModule
   ],
-  providers: [EventsService, UsersService, CommentsService, AdminService]
+  providers: [EventsService, UsersService, CommentsService]
 })
 export class CoreModule { }
