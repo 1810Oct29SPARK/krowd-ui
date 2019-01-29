@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
 import { Observable } from 'rxjs';
+import { HttpService } from '../http/http.service'
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
@@ -24,7 +25,7 @@ export class UsersService {
 
   // ready
   getAllUsers() {
-    return this.httpClient.get<User[]>('http://localhost:8085/user/all')
+    return this.httpClient.get<User[]>(HttpService.baseUrl + 'user/all')
       .map(
         (user: any) => {
           console.log(user);
@@ -42,7 +43,7 @@ export class UsersService {
   // Implemented By Sercurity team, Not ready Yet
   // ********************************************
   addUser(user: User) {
-    return this.httpClient.post(`http://localhost:8085`, user);
+    return this.httpClient.post(HttpService.baseUrl, user);
   }
 
   // updateUser(event: Event) {
@@ -50,7 +51,7 @@ export class UsersService {
   // }
 
   getUserById(userid: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/user/${userid}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `user/${userid}`)
       .map(
         (user: any) => {
           console.log(user);
@@ -65,7 +66,7 @@ export class UsersService {
   }
 
   getUserByEventId(eventId: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/userEvent/userByEvent/${eventId}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `userEvent/userByEvent/${eventId}`)
       .map(
         (user: any) => {
           console.log(user);
