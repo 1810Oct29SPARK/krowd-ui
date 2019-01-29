@@ -1,0 +1,131 @@
+<div [hidden]="submitted">
+  <h1>Create an Event</h1>
+  <h6>Please fill out the information below to create an event.</h6>
+  <p>* denotes required field</p>
+</div>
+
+<div class="card box-shadow" [hidden]="submitted">
+  <!-- "#eventForm" creates a local variable for the form called eventForm-->
+  <form (ngSubmit)="onEventCreated(eventForm)" #eventForm="ngForm">
+
+    <!-- input for the Name of the Event-->
+    <div class="form-group" id="nameField">
+      <label for="eventName">Name of Event*</label>
+      <input required type="text" class="form-control" id="eventName" name="eventName" placeholder="example: Morning Hike"
+        [(ngModel)]="eventName" #name="ngModel" />
+    </div>
+
+    <!-- error message denoting name as a required field, 
+        pristine means the field has not been touched yet-->
+    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+      Event name is required
+    </div>
+
+    <!-- div for putting Category & number of people & description in the same column-->
+    <div class="form-row">
+      <div class="form-group col-3">
+
+        <!-- input for the Location of the Event-->
+        <div class="form-group">
+          <label for="eventName">Event Address*</label>
+          <input required type="text" class="form-control" id="eventAddress" name="eventAddress" placeholder="Street"
+            [(ngModel)]="eventAddress" #street="ngModel" />
+          <br>
+          <input required type="text" class="form-control" id="eventCity" name="eventCity" placeholder="City"
+            [(ngModel)]="eventCity" #city="ngModel" />
+          <br>
+          <div class="form-row">
+            <div class="col">
+              <input required type="text" class="form-control" id="eventState" name="eventState" placeholder="State"
+                [(ngModel)]="eventState" #state="ngModel" />
+            </div>
+            <div class="col">
+              <input required type="number" class="form-control" id="eventZip" name="eventZip" placeholder="Zipcode"
+                [(ngModel)]="eventZip" #zip="ngModel" />
+            </div>
+          </div>
+          <br>
+
+          <label for="eventTime">Event Time*</label>
+          <input required type="time" class="form-control" id="eventTime" name="eventTime" [(ngModel)]="eventTime">
+        </div>
+
+        <!-- error message for event address-->
+        <div [hidden]="street.valid || street.pristine" class="alert alert-danger">
+          Event address is required
+        </div>
+
+      </div>
+
+      <!-- div to provide spacing between Calendar and other Information -->
+      <div class="form-group col">
+      </div>
+
+      <div class="form-group col-4">
+        <!-- input for event category dropdown-->
+        <label for="eventCategory">Category*</label>
+        <select required class="form-control" id="eventCategory" name="eventCategory" [(ngModel)]="eventCategory">
+          <option>Art</option>
+          <option>Food & Drink</option>
+          <option>Music</option>
+          <option>Outdoors</option>
+          <option>Sports</option>
+          <option>Volunteering</option>
+        </select>
+        <br>
+
+        <!-- input for event description-->
+        <label for="eventDescription">Description*</label>
+        <textarea required class="form-control" name="eventDescription" id="eventDescription" rows="6" maxlength="200"
+          placeholder="Please provide a short description of the event (under 200 characters)." required [(ngModel)]="eventDescription"
+          #description="ngModel">
+        </textarea>
+
+        <br [hidden]="description.valid || description.pristine">
+
+        <!-- error message for event description-->
+        <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+          Event description is required
+        </div>
+      </div>
+
+      <!-- div to provide spacing between Calendar and other Information -->
+      <div class="form-group col">
+      </div>
+
+      <!-- Calendar for picking the event date-->
+      <div class="form-group col">
+        <label for="eventDate">Event Date*</label>
+        <ngb-datepicker #d [(ngModel)]="eventDate" name="eventDate" required></ngb-datepicker>
+      </div>
+
+    </div>
+
+    <div class="form-row picture-upload">
+      <div class="form-group col-4">
+        <label for="eventImage">Upload an Image (Optional)</label>
+        <br>
+
+
+        <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera" name="eventPhotoID" ngModel>
+        <br>
+        <br>
+        <button [disabled]="loading" (click)="upload()">Upload</button>
+      </div>
+      <div class="form-group col-4">
+        <img src={{picture}}>
+      </div>
+    </div>
+
+    <!-- Submit button, shows as disabled if the form is not valid 
+    (doesn't have all required fields filled out)-->
+    <div class="form-group" id="eventButton">
+      <button type="submit" class="btn btn-success" [disabled]="!eventForm.form.valid">Create Event</button>
+    </div>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h1>Your event has been created!</h1>
+  <h6>Use the navigation above to return to a previous page.</h6>
+</div>
