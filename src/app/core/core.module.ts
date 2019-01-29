@@ -51,7 +51,7 @@ import { CognitoService } from './services/cognito/cognito.service';
     RouterModule
   ],
 
-  providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService]
+  providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService]
 
 })
 export class CoreModule { }

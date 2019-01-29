@@ -29,7 +29,6 @@
     "angular-bootstrap-md": "^7.3.0",
     "aws-amplify": "^1.1.19",
     "aws-amplify-angular": "^2.1.6",
-    "bootstrap": "^4.2.1",
     "bootstrap": "^4.0.0-beta",
     "chart.js": "^2.5.0",
     "cloudinary": "^1.13.2",
