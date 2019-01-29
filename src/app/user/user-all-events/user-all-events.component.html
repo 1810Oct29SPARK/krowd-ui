@@ -12,11 +12,12 @@
           <div class="card-img-top card-img-top-250">
             <img class="img-fluid" src={{event.picture}} alt="Carousel 1">
             <div class="card-body">
-              <h6 class="small text-wide p-b-2">Insight</h6>
+              <h6 class="small text-wide p-b-2">{{event.categoryId.name}}</h6>
+              <h6 class="small text-wide p-b-2">Created by: {{event.userId.firstname}} {{event.userId.lastname}}</h6>
               <h2>
                 {{event.name}}
               </h2>
-              <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
+              <p> {{event.description}} </p>
             </div>
           </div>
         </div>
@@ -35,45 +36,44 @@
   <mat-tab-group>
     <mat-tab label="Event Description">
       <div class="modal-body">
-        <img src='http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png' style="height: 200px; width:100%;">
+        <img src='{{singleEvent?.picture}}' style="height: 200px; width:100%;">
         <br>
         <h4>Event Description</h4>
-        <p>This is the event's description.</p>
+        <p>{{singleEvent?.description}}</p>
         <h4>Date & Time</h4>
-        <p>date</p>
+        <p>{{singleEvent?.date}}</p>
         <h4>Location</h4>
-        <p>location</p>
-        <p>location</p>
+        <p>{{singleEvent?.address.streetAddress}}</p>
+        <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
       </div>
     </mat-tab>
+
+    <!-- comments tab -->
     <mat-tab (click)="getComments" label="View Comments">
       <div id="maincommentdiv">
         <h4 class="centerize">Comments</h4>
 
         <!-- comment outline-->
-        <!-- <div *ngFor="let comment of commentsList" class="row commentdiv col-12">
-          <div id="UserInfo" class="col-2">
-            <img src={{comment.picture}} class="commentpic centerize">
-          </div>
+        <div class="row commentdiv col-12">
           <div id="comment-body" class="col-10">
-            <em>"{{comment.comment.data}}"</em>
+            <em>"stuff"</em>
             <span id="comment-metadata">
-              <p>User: {{comment.username}} &nbsp; &nbsp; {{comment.created | date}}</p>
+              <p>User: username &nbsp; &nbsp; created</p>
             </span>
           </div>
-        </div> -->
+        </div>
         <div [hidden]="!commentsList.length == 0">
           <br>
           <p class="centerize">No comments yet. So why not post the first comment?</p>
           <br>
         </div>
-
+      </div>
+      <div class="modal-footer">
         <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">Post a
           Comment</button>
-
         <form [hidden]="!toggle" (ngSubmit)="onCommentCreated(commentForm)" #commentForm="ngForm">
           <div class="row comment-button">
             <input type="text" name="data" class="col-9" [(ngModel)]="data">
@@ -81,10 +81,6 @@
             <input type="submit" class="btn btn-outline-success col-2" value="Submit" click="ontoggle()">
           </div>
         </form>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
       </div>
     </mat-tab>
   </mat-tab-group>

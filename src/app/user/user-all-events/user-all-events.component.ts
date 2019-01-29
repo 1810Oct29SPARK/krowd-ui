@@ -18,9 +18,18 @@ export class UserAllEventsComponent implements OnInit {
   eventList2 = [];
   eventId: any = 1;
   singleEvent: any = null;
+  toggle: boolean = false;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal,
     private eventService: EventsService, private commentService: CommentsService) { }
+
+    ontoggle() {
+      if (this.toggle === true) {
+      this.toggle = false;
+        } else {
+        this.toggle = true;
+       }
+      }
 
 
   open(content: any) {
