@@ -1,0 +1,14 @@
+.cards {
+  width: 30%;
+  position: relative;
+  left: 35%;
+}
+
+.buttons {
+  padding: 1%;
+}
+
+#welcome {
+  position: relative;
+  top: 35vh;
+}
