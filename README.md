@@ -1,12 +1,22 @@
 # KrowdUi  
 
-Captain Branch:
 [![Build Status](https://travis-ci.org/1810Oct29SPARK/krowd-ui.svg?branch=master)](https://travis-ci.org/1810Oct29SPARK/krowd-ui)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=captain&project=1810Oct29SPARK_krowd-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=captain)  
-
-Dev Branch:  
 
 Master Branch:  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=1810Oct29SPARK_krowd-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=1810Oct29SPARK_krowd-ui&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=1810Oct29SPARK_krowd-ui&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui)  
+
+Dev Branch:  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=1810Oct29SPARK_krowd-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=dev)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=1810Oct29SPARK_krowd-ui&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=dev)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?branch=dev&project=1810Oct29SPARK_krowd-ui&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=dev)  
+
+Captain Branch:  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=captain&project=1810Oct29SPARK_krowd-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=captain)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?branch=captain&project=1810Oct29SPARK_krowd-ui&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=captain)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?branch=captain&project=1810Oct29SPARK_krowd-ui&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=1810Oct29SPARK_krowd-ui&branch=captain)  
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 

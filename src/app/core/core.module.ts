@@ -21,6 +21,10 @@ import { EventsService } from './services/events/events.service';
 import { UsersService } from './services/users/users.service';
 import { CommentsService } from './services/comments/comments.service';
 
+
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { CognitoService } from './services/cognito/cognito.service';
+
 @NgModule({
   declarations: [
     LandingComponent,
@@ -40,11 +44,14 @@ import { CommentsService } from './services/comments/comments.service';
     MaterialModule,
     CoreRoutingModule,
     Ng2CloudinaryModule,
-    FileUploadModule
+    FileUploadModule,
+    AmplifyAngularModule
   ],
   exports: [
     RouterModule
   ],
-  providers: [EventsService, UsersService, CommentsService]
+
+  providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService]
+
 })
 export class CoreModule { }
