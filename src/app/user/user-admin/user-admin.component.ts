@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
-import { Event } from 'src/app/shared/models/event';
 
 @Component({
   selector: 'app-user-admin',
@@ -13,6 +12,8 @@ export class UserAdminComponent implements OnInit {
 
   response: any = null;
   closeResult: string;
+  flaggedEvents = [];
+  eventId: any = 1;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
 
@@ -42,20 +43,15 @@ export class UserAdminComponent implements OnInit {
     this.getAllFlaggedEvents();
   }
 
-  showModal() {
-  }
-
-  flaggedEvents = [];
-  eventId: any = 1;
   getAllFlaggedEvents() {
     this.eventService.getAllFlaggedEvents()
       .subscribe(
         (events) => {
           console.log(events);
           for (let event of events) {
-            this.flaggedEvents.push(event)
+            this.flaggedEvents.push(event);
             if (event.picture === null) {
-              event.picture = "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png";
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
         },

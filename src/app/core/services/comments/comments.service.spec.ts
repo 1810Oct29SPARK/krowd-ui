@@ -82,7 +82,7 @@ describe('CommentsService', () => {
         postedBy: 44,
         flagScore: 0,
         eventId: 32,
-        time: Date.now() 
+        time: Date.now()
       },
       {
         id: 265,
@@ -103,6 +103,6 @@ describe('CommentsService', () => {
     };
     component.getCommentById(3);
     expect(component.comments).toContain(newComment);
-  })
+  });
 
 });
