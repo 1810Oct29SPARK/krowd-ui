@@ -1,18 +1,8 @@
 <h2 mat-dialog-title>Please Enter Credentials</h2>
-<mat-dialog-content class="mat-typography">
-  <div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="Username">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input matInput placeholder="Password">
-    </mat-form-field>
-    <p>
-      <mat-checkbox [formControl]="disableSelect">Remember Me</mat-checkbox>
-    </p>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Sign In</button>
-</mat-dialog-actions>
+<form (ngSubmit)="cognitoSignIn(f)" #f="ngForm">
+  <input class="form-control" placeholder="Username" ngModel name="username" required>
+  <input type="password" class="form-control" placeholder="Password" ngModel name="password" required>
+  <button type="submit" mdbBtn color="red" class="waves-light" mdbWavesEffect>Login</button>
+</form>
+
+<!-- <amplify-authenticator></amplify-authenticator> -->
