@@ -34,6 +34,8 @@
     </button>
   </div>
   <mat-tab-group>
+
+    <!-- Tab for event description -->
     <mat-tab label="Event Description">
       <div class="modal-body">
         <img src='{{singleEvent?.picture}}' style="height: 200px; width:100%;">
@@ -47,6 +49,7 @@
         <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
       </div>
       <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" (click)="modal.close('Dismiss clicked')">Flag This Event</button>
         <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
       </div>
     </mat-tab>
@@ -57,7 +60,7 @@
         <h4 class="centerize">Comments</h4>
 
         <!-- comment outline-->
-        <div class="row commentdiv col-12">
+        <div class="row commentdiv col-12" *ngFor="let comment of comments">
           <div id="comment-body" class="col-10">
             <em>"stuff"</em>
             <span id="comment-metadata">
@@ -76,9 +79,9 @@
           Comment</button>
         <form [hidden]="!toggle" (ngSubmit)="onCommentCreated(commentForm)" #commentForm="ngForm">
           <div class="row comment-button">
-            <input type="text" name="data" class="col-9" [(ngModel)]="data">
+            <input type="text" name="data" class="col" [(ngModel)]="data">
             &nbsp;
-            <input type="submit" class="btn btn-outline-success col-2" value="Submit" click="ontoggle()">
+            <input type="submit" class="btn btn-outline-success col-3" value="Submit" click="ontoggle()">
           </div>
         </form>
       </div>

@@ -22,6 +22,15 @@ export class UserHomeComponent implements OnInit {
   eventId: any = 1;
   comments: Comment[] = [];
   eventList = [];
+  toggle: boolean = false;
+
+  ontoggle() {
+    if (this.toggle === true) {
+    this.toggle = false;
+      } else {
+      this.toggle = true;
+     }
+    }
 
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
