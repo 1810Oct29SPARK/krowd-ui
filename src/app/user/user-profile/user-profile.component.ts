@@ -12,12 +12,13 @@ export class UserProfileComponent implements OnInit {
 
 
   public show_info: Boolean = false;
-  public info_button_text: any = "Show Profile Info";
+  public info_button_text: any = 'Show Profile Info';
   public show_events: Boolean = false;
-  public event_button_text: any = "Show My Events";
+  public event_button_text: any = 'Show My Events';
   public show_comments: Boolean = false;
-  public comment_button_text: any = "Show My Comments";
+  public comment_button_text: any = 'Show My Comments';
   closeResult: string;
+  response: any = null;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal) { }
 
@@ -28,9 +29,9 @@ export class UserProfileComponent implements OnInit {
     this.show_info = !this.show_info;
 
     if (this.show_info) {
-      this.info_button_text = "Hide Profile Info";
+      this.info_button_text = 'Hide Profile Info';
     } else {
-      this.info_button_text = "Show Profile Info";
+      this.info_button_text = 'Show Profile Info';
     }
 
   }
@@ -39,9 +40,9 @@ export class UserProfileComponent implements OnInit {
     this.show_events = !this.show_events;
 
     if (this.show_events) {
-      this.event_button_text = "Hide My Events";
+      this.event_button_text = 'Hide My Events';
     } else {
-      this.event_button_text = "Show My Events";
+      this.event_button_text = 'Show My Events';
     }
   }
 
@@ -49,9 +50,9 @@ export class UserProfileComponent implements OnInit {
     this.show_comments = !this.show_comments;
 
     if (this.show_comments) {
-      this.comment_button_text = "Hide My Comments";
+      this.comment_button_text = 'Hide My Comments';
     } else {
-      this.comment_button_text = "Show My Comments";
+      this.comment_button_text = 'Show My Comments';
     }
   }
 
@@ -72,7 +73,5 @@ export class UserProfileComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  response: any = null;
 
 }
