@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '../material.module';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CoreRoutingModule } from './core-routing.module';
 import { LandingComponent } from './landing/landing.component';
@@ -48,7 +49,8 @@ import { TokenInterceptorService } from './services/cognito/token-interceptor.se
     CoreRoutingModule,
     Ng2CloudinaryModule,
     FileUploadModule,
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    MatButtonModule
   ],
   exports: [
     RouterModule

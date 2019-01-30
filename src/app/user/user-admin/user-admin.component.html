@@ -15,7 +15,11 @@
           <td class="event-date"> <span class="align-middle"> {{flagged.date}} </span> </td>
           <td class="event-time"> <span class="align-middle"> Time </span> </td>
           <td class="event-location"> <span class="align-middle"> {{flagged.address.streetAddress}} </span> </td>
-        </tr>
+          <td>
+            <span class="buttons">
+              <button type="button" class="btn btn-outline-dark" color="warn">unflag</button>
+            </span> </td>
+            </tr>
         </table>
       </div>
     </div>
@@ -76,7 +80,7 @@
       <p> {{flaggedEvents.date}} </p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Dismiss</button>
+      <button type="button" class="btn btn-outline-dark" (click)="dismissFlaggedEvent(flagged)">Dismiss</button>
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
     </div>
   </ng-template>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
+import { Event } from '../../shared/models/event';
 
 @Component({
   selector: 'app-user-admin',
@@ -9,7 +10,7 @@ import { EventsService } from 'src/app/core/services/events/events.service';
   styleUrls: ['./user-admin.component.css']
 })
 export class UserAdminComponent implements OnInit {
-
+  
   response: any = null;
   closeResult: string;
   flaggedEvents = [];
@@ -58,6 +59,13 @@ export class UserAdminComponent implements OnInit {
         (error) => console.log(error)
       );
     return this.flaggedEvents;
+  }
+
+  dismissFlaggedEvent(flagged: Event) {
+    flagged.flag = 0;
+    this.modalService.dismissAll();
+    this.eventService.updateEvent(flagged);
+   
   }
 
 }
