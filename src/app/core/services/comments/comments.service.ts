@@ -21,7 +21,7 @@ export class CommentsService {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, comment: Comment) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   getAllComments() {
