@@ -16,6 +16,7 @@ import { Category } from 'src/app/shared/models/category';
 export class EventsService {
 
   private events: Event[] = [];
+  private something: Event[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
@@ -124,10 +125,11 @@ export class EventsService {
   }
 
   getFlaggedEvents(flagScore: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<Event[]>(`http://localhost:8085/event/byFlag`)
       .map(
         (event: any[]) => {
-          console.log(event);
+          return this.something = event;
+          console.log(this.something);
         },
       )
       .catch(
