@@ -52,7 +52,6 @@ export class UserAdminComponent implements OnInit {
     this.getAllFlaggedComments();
   }
 
-consoleFunc(){console.log("fug man");}
 
   getAllFlaggedEvents() {
     this.eventService.getAllFlaggedEvents()
@@ -117,7 +116,7 @@ consoleFunc(){console.log("fug man");}
     });
     this.flaggedEvents.splice(index,1);
     // this.eventService.getAllFlaggedEvents();
-    //this should be changged
+    // this should be changged
   }
   unflagComment(value) {
     let index = this.flaggedComments.indexOf(value);
@@ -130,12 +129,11 @@ consoleFunc(){console.log("fug man");}
       'flag': this.flagNewComment.flag,
       'timestamp': this.flagNewComment.timestamp,
       'userId': this.flagNewComment.userId,
-      'eventId': this.flagNewComment.eventId 
+      'eventId': this.flagNewComment.eventId
     }).subscribe((result) => {
     });
-    this.flaggedComments.splice(index,1);
-    //this should be changed
 
+    this.flaggedComments.splice(index,1);
   }
 
   deleteComment(value) {

@@ -70,10 +70,10 @@
           <td> {{comment.created | date }} </td>
           <td>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark" (click)="consoleFunc();unflagComment(comment);">Dismiss</button>
+              <button type="button" class="btn btn-outline-dark" (click)="unflagComment(comment)">Dismiss</button>
             </span>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark" (click)="consoleFunc();deleteComment(comment);consoleFunc();">Delete</button>
+              <button type="button" class="btn btn-outline-dark" (click)="deleteComment(comment)">Delete</button>
             </span>
           </td>
         </tr>
