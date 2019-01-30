@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: '../user/user.module#UserModule',
-    // canActivate: [AuthGaurdService]
+    canActivate: [AuthGaurdService]
   },
   {
     path: 'landing', component: LandingComponent,
