@@ -13,7 +13,6 @@ import { UsersService } from 'src/app/core/services/users/users.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-
 export class UserProfileComponent implements OnInit {
 
 
@@ -27,6 +26,7 @@ export class UserProfileComponent implements OnInit {
   response: any = null;
   selectedFile: File = null;
   imageURL: string;
+  userId: number;
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
@@ -35,15 +35,29 @@ export class UserProfileComponent implements OnInit {
 
   loading: any;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService, private userService: UsersService) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService, public userService: UsersService) { }
 
   cognitoUsername: string;
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
+      console.log(this.cognitoUsername);
+      this.populateProfile(this.cognitoUsername);
     });
+    
+    
   }
+
+  populateProfile(username: string) {
+    console.log(username);
+    this.userService.getUserByUsername(username)
+    .subscribe((data) => {
+      console.log(data);
+    })
+  }
+
+
 
   toggleProfile() {
     this.show_info = !this.show_info;

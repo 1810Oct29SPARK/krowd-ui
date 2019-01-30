@@ -21,7 +21,7 @@ export class UsersService {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, user: User) { }
+  constructor(private httpClient: HttpClient) { }
 
   // ready
   getAllUsers() {
@@ -39,31 +39,29 @@ export class UsersService {
       );
   }
 
-  // ********************************************
-  // Implemented By Sercurity team, Not ready Yet
-  // ********************************************
-  addUser(user: User) {
-    return this.httpClient.post(HttpService.baseUrl, user);
-  }
+
 
   // updateUser(event: Event) {
   //   return this.httpClient.put(`http://localhost:8083`), {'id': id, 'Created': Date};
   // }
 
 
-  getUserByUsername(username: string) {
-    return this.httpClient.get<User[]>(HttpService.baseUrl + `user/${username}`)
-    .map(
-      (user: any) => {
-        console.log(user);
-      }
-    )
-    .catch(
-      (error) => {
-        console.log('UserServiceError: @getUserByUsername');
-        return Observable.throw(error);
-      }
-    )
+  registerUser(username: string, email: string, firstname: string, lastname: string) {
+    return this.httpClient.post('http://localhost:8085/user/create', {
+      "username": username, 
+      "email": email,
+      "firstname": firstname,
+      "lastname": lastname,
+      "reputation": 0,
+      "roleId": 2
+
+    })
+  
+  }
+
+  getUserByUsername(username: string): Observable<any> {
+    // console.log(HttpService.baseUrl + `user/${username}`);
+    return this.httpClient.get(HttpService.baseUrl + `user/${username}`);
   }
 
   getUserById(userid: number) {

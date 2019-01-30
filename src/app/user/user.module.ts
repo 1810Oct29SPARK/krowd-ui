@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MatTabsModule } from '@angular/material';
+import { UsersService } from '../core/services/users/users.service';
 
 
 @NgModule({
@@ -34,6 +35,6 @@ import { MatTabsModule } from '@angular/material';
     FileUploadModule,
     MatTabsModule
   ],
-  providers: []
+  providers: [UsersService]
 })
 export class UserModule { }
