@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
 import { HttpService } from '../../services/http/http.service';
+import { Comment } from 'src/app/shared/models/comment';
+import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 import 'rxjs';
@@ -15,6 +17,9 @@ import 'rxjs/add/operator/catch';
 export class EventsService {
 
   private events: Event[] = [];
+  private something: Event[] = [];
+  private everything: Comment[] =[];
+  private comments: Comment[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
@@ -40,8 +45,7 @@ export class EventsService {
   }
 
   getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl + `${userid}`)
-      .map((events) => {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `${userid}`) .map((events) => {
         let userEventData = events;
         return userEventData;
       },
@@ -64,6 +68,22 @@ export class EventsService {
         (error) => {
           console.log('EventsService: @getAllEvents()');
           return throwError(error);
+        }
+      );
+  }
+  
+  getFlaggedComments() {
+    return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByFlag/1`)
+      .map(
+        (comments) => {
+          let flaggedComment = comments;
+          return flaggedComment;
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('AdminService: @getAllComments()');
+          return Observable.throw(error);
         }
       );
   }
@@ -129,4 +149,53 @@ export class EventsService {
     })
   }
 
+  // getFlaggedEvents(flagScore: number) {
+  //   return this.httpClient.get<Event[]>(`http://localhost:8085/event/byFlag`)
+  //     .map(
+  //       (event: any[]) => {
+  //         return this.something = event;
+  //         console.log(this.something);
+  //       },
+  //     )
+  //     .catch(
+  //       (error) => {
+  //         console.log('AdminService: @getEventByFlagScore()');
+  //         return Observable.throw(error);
+  //       }
+  //     );
+  // }
+
+
+  getEventsUserAttending(userId: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userId}`)
+        .map(
+            (event: any[]) => {
+                console.log(event);
+            },
+        )
+        .catch(
+            (error) => {
+                console.log('UserEventService: @getUsersAttendingEvent()');
+                return Observable.throw(error);
+            }
+        );
+}
+getEventScore(eventId: number) {
+  return this.httpClient.get(`http://localhost:8085/userEvent/scoreEvent/${eventId}`)
+  .map(
+      (event: any) => {
+          console.log(event);
+      },
+  )
+  .catch(
+      (error) => {
+          console.log('UserEventServiceError: @getEventScore');
+          return Observable.throw(error);
+      }
+  );
+}
+
+rateEvent(ratingScore: number) {
+  return this.httpClient.put(`http://localhost:8085:/userEvent/rate`, {ratingScore});
+}
 }

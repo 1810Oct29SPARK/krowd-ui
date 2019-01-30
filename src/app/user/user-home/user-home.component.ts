@@ -108,6 +108,7 @@ export class UserHomeComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
+          console.log(this.singleEvent);
         },
         (error) => console.log(error)
       );
