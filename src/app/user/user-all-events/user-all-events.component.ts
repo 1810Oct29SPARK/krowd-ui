@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
 import { CommentsService } from '../../core/services/comments/comments.service';
+import { Comment } from 'src/app/shared/models/comment';
 
 
 @Component({
@@ -18,9 +19,21 @@ export class UserAllEventsComponent implements OnInit {
   eventList2 = [];
   eventId: any = 1;
   singleEvent: any = null;
+  toggle: boolean = false;
+  comments: Comment[] = [];
+  flagNewEvent: any;
+  updateEvent: any;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal,
     private eventService: EventsService, private commentService: CommentsService) { }
+
+    ontoggle() {
+      if (this.toggle === true) {
+      this.toggle = false;
+        } else {
+        this.toggle = true;
+       }
+      }
 
 
   open(content: any) {
@@ -101,6 +114,33 @@ export class UserAllEventsComponent implements OnInit {
           );
         console.log('Comments list: ');
         return this.commentsList;
+  }
+
+  getCommentByEventId(value) {
+    console.log(value);
+    this.commentService.getCommentByEventId(value)
+      .subscribe(
+        (comment) => {
+          console.log(event);
+          this.comments = comment;
+        },
+        (error) => console.log(error)
+      );
+    return this.comments;
+  }
+
+  flagEvent(value) {
+    console.log(value);
+    this.eventService.updateEvent(value)
+    .subscribe(
+      (event) => {
+        console.log(event);
+        this.updateEvent = event;
+        this.updateEvent.flag = 1;
+        this.flagNewEvent = this.updateEvent;
+      },
+      (error) => console.log(error)
+    );
   }
 
 }

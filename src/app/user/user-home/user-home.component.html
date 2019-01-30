@@ -99,7 +99,7 @@
   <mat-tab-group>
     <mat-tab label="Event Description">
       <div class="modal-body">
-        <img src="{{singleEvent?.picture}}" style="height: 200px; width:100%;">
+        <img src='{{singleEvent?.picture}}' style="height: 200px; width:100%;">
         <br>
         <h4>Event Description</h4>
         <p>{{singleEvent?.description}}</p>
@@ -118,7 +118,15 @@
       <h6>User name</h6>
       <p>User comment here.</p>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Write A Comment.</button>
+        <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">Post a
+          Comment</button>
+        <form [hidden]="!toggle" (ngSubmit)="onCommentCreated(commentForm)" #commentForm="ngForm">
+          <div class="row comment-button">
+            <input type="text" name="data" class="col" [(ngModel)]="data">
+            &nbsp;
+            <input type="submit" class="btn btn-outline-success col-3" value="Submit" click="ontoggle()">
+          </div>
+        </form>
       </div>
     </mat-tab>
   </mat-tab-group>

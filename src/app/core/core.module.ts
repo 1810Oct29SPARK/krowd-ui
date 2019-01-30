@@ -20,7 +20,6 @@ import { EventsComponent } from './events/events.component';
 import { EventsService } from './services/events/events.service';
 import { UsersService } from './services/users/users.service';
 import { CommentsService } from './services/comments/comments.service';
-import { AdminService } from './services/admin/admin.service';
 
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
@@ -54,11 +53,13 @@ import { TokenInterceptorService } from './services/cognito/token-interceptor.se
   exports: [
     RouterModule
   ],
+
   providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }]
+
 })
 export class CoreModule { }
