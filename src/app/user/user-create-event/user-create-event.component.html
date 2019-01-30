@@ -6,7 +6,7 @@
 
 <div class="card box-shadow" [hidden]="submitted">
   <!-- "#eventForm" creates a local variable for the form called eventForm-->
-  <form (ngSubmit)="onEventCreated(eventForm)" #eventForm="ngForm">
+  <form (ngSubmit)="createEvent(eventForm)" #eventForm="ngForm">
 
     <!-- input for the Name of the Event-->
     <div class="form-group" id="nameField">
