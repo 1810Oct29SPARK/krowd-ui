@@ -7,6 +7,8 @@ import { Event } from 'src/app/shared/models/event';
 import { CommentsService } from '../../core/services/comments/comments.service';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 @Component({
   selector: 'app-user-home',
@@ -17,8 +19,13 @@ export class UserHomeComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService,
-    private commentService: CommentsService, private http: HttpClient) { }
+  constructor(public dialog: MatDialog, 
+    private modalService: NgbModal, 
+    private eventService: EventsService,
+    private commentService: CommentsService, 
+    private http: HttpClient, 
+    private cognitoService: CognitoService,
+    private userService: UsersService) { }
 
   events: Event[] = [];
   singleEvent: any = null;
@@ -29,8 +36,10 @@ export class UserHomeComponent implements OnInit {
   toggle: boolean = false;
   flagNewEvent: any;
   updateEvent: any;
-  userId: any = 2;
+  userId: any;
   submitted = false;
+  cognitoUsername: string;
+  user: any;
 
   ontoggle() {
     if (this.toggle === true) {
@@ -61,6 +70,17 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEvents();
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+      this.userService.getUserByUsername(this.cognitoUsername)
+        .subscribe (user => {
+          this.user = user 
+          console.log(this.user);
+          this.userId = parseInt(this.user.id);
+          console.log(this.userId);
+        }
+          );
+    });
   }
 
   showModal() {
@@ -121,11 +141,10 @@ export class UserHomeComponent implements OnInit {
   //     );
   // }
 
-  registerForEvent(form: NgForm) {
-    this.http.post('http://localhost:8085/userEvent/addUserEvent', {
-      'userId': this.userId,
-      'eventId': this.eventId,
-    }).subscribe((result) => {
+  
+    registerForEvent(form: NgForm) {
+      this.eventService.registerForEvent(this.eventId, this.userId)
+        .subscribe((result) => {
     });
     this.submitted = true;
   }

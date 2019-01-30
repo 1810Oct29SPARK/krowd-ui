@@ -6,10 +6,10 @@
       </div>
       <div class="menu">
         <ul>
+          <li><a *ngIf="userRole == 'Admin'" [routerLink]="[ 'admin' ]"><strong>Admin</strong></a></li>
           <li><a [routerLink]="[ 'home' ]"><strong>Home</strong></a></li>
           <li><a [routerLink]="[ 'create' ]"><strong>Create Event</strong></a></li>
           <li><a [routerLink]="[ 'profile' ]"><strong>Profile</strong></a></li>
-          <li><a [routerLink]="[ 'admin' ]"><strong>Admin</strong></a></li>
           <li><a style="cursor: pointer;" (click)="onLogout()"><strong>Logout</strong></a></li>
         </ul>
       </div>
