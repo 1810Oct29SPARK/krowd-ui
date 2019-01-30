@@ -21,15 +21,16 @@ export class CommentsService {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, comment: Comment) { }
+  constructor(private httpClient: HttpClient) { }
 
+  comment: Comment;
 
   getAllComments() {
     return this.httpClient.get<Event[]>(HttpService.baseUrl);
   }
 
-  addComment(comment: Comment) {
-    return this.httpClient.post(HttpService.baseUrl, comment);
+  addComment(comment: any) {
+    return this.httpClient.post(HttpService.baseUrl + 'comment/createcomment', comment);
   }
   // updateEvent(event: Event) {
   //   return this.httpClient.put(`http://localhost:8080`), {'id': id, 'Created': Date};
