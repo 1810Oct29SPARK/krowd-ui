@@ -57,6 +57,7 @@ export class UsersService {
 
   getUserByUsername(username: string): Observable<any> {
     // console.log(HttpService.baseUrl + `user/${username}`);
+    console.log(username);
     return this.httpClient.get(HttpService.baseUrl + `user/${username}`);
   }
 

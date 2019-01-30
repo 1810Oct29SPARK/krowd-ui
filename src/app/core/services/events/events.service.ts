@@ -39,7 +39,7 @@ export class EventsService {
   }
 
   getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userid}`)
+    return this.httpClient.get<Event[]>(`http://localhost:8085/comment/getByUser/${userid}`)
       .map((events) => {
         let userEventData = events;
         return userEventData;
