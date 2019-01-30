@@ -165,7 +165,7 @@ export class UserHomeComponent implements OnInit {
 
 
     registerForEvent(form: NgForm) {
-      this.eventService.registerForEvent(this.eventId, this.userId)
+      this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
         .subscribe((result) => {
     });
     this.submitted = true;
