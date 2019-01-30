@@ -25,8 +25,12 @@ import { CommentsService } from './services/comments/comments.service';
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { CognitoService } from './services/cognito/cognito.service';
+import { User } from '../shared/models/user';
+import { Event } from '../shared/models/event';
+import { Comment } from '../shared/models/comment';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -55,13 +59,11 @@ import { TokenInterceptorService } from './services/cognito/token-interceptor.se
   exports: [
     RouterModule
   ],
-
   providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }]
-
 })
 export class CoreModule { }
