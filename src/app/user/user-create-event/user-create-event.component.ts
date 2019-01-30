@@ -58,37 +58,7 @@ export class UserCreateEventComponent implements OnInit {
   'eventPhotoID': ''
 }).subscribe((result) => {
 });
-    // console.log('Event Successfully Created');
-    // console.log(form);
-    // const value = form.value;
-    // console.log(form.value);
-
-    // const userId = 0;
-    // // this.authService.getCurrentUser();
-
-    // const eventCategory = this.assignCategory(value.eventCategory);
-
-
-    // const newEvent = new Event(
-    //   null,
-    //   value.eventName,
-    //   eventCategory,
-    //   value.eventDate,
-    //   value.eventTime,
-    //   value.eventAddress,
-    //   value.eventApartment,
-    //   value.eventCity,
-    //   value.eventState,
-    //   value.eventZip,
-    //   null,
-    //   0,
-    //   userId,
-    //   this.imageURL
-    // );
     this.submitted = true;
-    // this.eventservice.addEvent(value.eventName, value.eventCategory, value.eventDate, value.eventTime,
-    //   value.eventAddress, value.eventApartment, value.eventCity, value.eventState, value.eventZip, null,
-    //   0, value.userId, this.eventPhotoID);
   }
 
   assignCategory(category) {

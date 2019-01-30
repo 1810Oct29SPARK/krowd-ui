@@ -5,6 +5,8 @@ import { Comment } from '../../shared/models/comment';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
 import { CommentsService } from '../../core/services/comments/comments.service';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-home',
@@ -16,17 +18,19 @@ export class UserHomeComponent implements OnInit {
   closeResult: string;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService,
-    private commentService: CommentsService) { }
+    private commentService: CommentsService, private http: HttpClient) { }
 
   events: Event[] = [];
   singleEvent: any = null;
   eventList2 = [];
-  eventId: any = 1;
+  eventId: any = 10;
   comments: Comment[] = [];
   eventList = [];
   toggle: boolean = false;
   flagNewEvent: any;
   updateEvent: any;
+  userId: any = 2;
+  submitted = false;
 
   ontoggle() {
     if (this.toggle === true) {
@@ -115,6 +119,15 @@ export class UserHomeComponent implements OnInit {
         },
         (error) => console.log(error)
       );
+  }
+
+  registerForEvent(form: NgForm) {
+    this.http.post('http://localhost:8085/userEvent/addUserEvent', {
+      'userId': this.userId,
+      'eventId': this.eventId,
+    }).subscribe((result) => {
+    });
+    this.submitted = true;
   }
 
 }
