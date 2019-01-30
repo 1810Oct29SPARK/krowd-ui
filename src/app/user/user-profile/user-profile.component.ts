@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class UserProfileComponent implements OnInit {
 
   loading: any;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService, private userService: UsersService) { }
 
   cognitoUsername: string;
 
