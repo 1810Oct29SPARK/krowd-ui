@@ -4,12 +4,9 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class CognitoService {
 
   constructor(public httpClient: HttpClient) { }

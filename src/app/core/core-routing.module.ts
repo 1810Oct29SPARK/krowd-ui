@@ -8,20 +8,21 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {  path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'user',
     loadChildren: '../user/user.module#UserModule',
     // canLoad: []
   },
-  { path: 'landing', component: LandingComponent,
+  {
+    path: 'landing', component: LandingComponent,
     children: [
-      { path: 'login', component: LoginComponent},
+      { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      {path: 'confirm', component: ConfirmEmailComponent }
+      { path: 'confirm', component: ConfirmEmailComponent }
     ]
-
   },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 
