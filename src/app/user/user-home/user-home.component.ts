@@ -9,7 +9,6 @@ import { User } from 'src/app/shared/models/user';
 import { CommentsService } from 'src/app/core/services/comments/comments.service';
 import { Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
-import { CommentsService } from '../../core/services/comments/comments.service';
 import { HttpClient } from '@angular/common/http';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
