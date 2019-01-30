@@ -107,24 +107,47 @@ export class UserHomeComponent implements OnInit {
     return this.comments;
   }
 
-  flagEvent(value) {
-    console.log(value);
-    this.eventService.updateEvent(value)
-      .subscribe(
-        (event) => {
-          console.log(event);
-          this.updateEvent = event;
-          this.updateEvent.flag = 1;
-          this.flagNewEvent = this.updateEvent;
-        },
-        (error) => console.log(error)
-      );
-  }
+  // flagEvent(value) {
+  //   console.log(value);
+  //   this.eventService.updateEvent(value)
+  //     .subscribe(
+  //       (event) => {
+  //         console.log(event);
+  //         this.updateEvent = event;
+  //         this.updateEvent.flag = 1;
+  //         this.flagNewEvent = this.updateEvent;
+  //       },
+  //       (error) => console.log(error)
+  //     );
+  // }
 
   registerForEvent(form: NgForm) {
     this.http.post('http://localhost:8085/userEvent/addUserEvent', {
       'userId': this.userId,
       'eventId': this.eventId,
+    }).subscribe((result) => {
+    });
+    this.submitted = true;
+  }
+
+  flagEvent(value) {
+    this.flagNewEvent = value;
+    this.flagNewEvent.flag = 1;
+    console.log(value);
+    this.http.put('http://localhost:8085/event/update', {
+        'eventID' : this.flagNewEvent.id,
+        'eventName' : this.flagNewEvent.name,
+        'eventCategory' : this.flagNewEvent.categoryId.id,
+        'eventDate' : this.flagNewEvent.date,
+        'eventAddress' : this.flagNewEvent.address.streetAddress,
+        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
+        'eventCity' : this.flagNewEvent.address.city,
+        'eventState' : this.flagNewEvent.address.state,
+        'eventZip' : this.flagNewEvent.address.zip,
+        'eventDescription' : this.flagNewEvent.description,
+        'eventFlag' : this.flagNewEvent.flag,
+        'userID' : this.flagNewEvent.userId.id,
+        'eventPhotoID' : this.flagNewEvent.picture
     }).subscribe((result) => {
     });
     this.submitted = true;
