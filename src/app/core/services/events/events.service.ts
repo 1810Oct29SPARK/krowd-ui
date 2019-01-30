@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
+import { Comment } from 'src/app/shared/models/comment'
 import { Observable } from 'rxjs';
 
 import 'rxjs';
@@ -16,6 +17,8 @@ export class EventsService {
 
   private events: Event[] = [];
   private something: Event[] = [];
+  private everything: Comment[] =[];
+  private comments: Comment[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
@@ -64,6 +67,22 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('EventsService: @getAllEvents()');
+          return Observable.throw(error);
+        }
+      );
+  }
+  
+  getFlaggedComments() {
+    return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByFlag/1`)
+      .map(
+        (comments) => {
+          let flaggedComment = comments;
+          return flaggedComment;
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('AdminService: @getAllComments()');
           return Observable.throw(error);
         }
       );
@@ -123,22 +142,22 @@ export class EventsService {
     return this.httpClient.post(`http://localhost:8085/userEvent/addUserEvent`, eventId);
   }
 
-<<<<<<< HEAD
-  getFlaggedEvents(flagScore: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/event/byFlag`)
-      .map(
-        (event: any[]) => {
-          return this.something = event;
-          console.log(this.something);
-        },
-      )
-      .catch(
-        (error) => {
-          console.log('AdminService: @getEventByFlagScore()');
-          return Observable.throw(error);
-        }
-      );
-  }
+  // getFlaggedEvents(flagScore: number) {
+  //   return this.httpClient.get<Event[]>(`http://localhost:8085/event/byFlag`)
+  //     .map(
+  //       (event: any[]) => {
+  //         return this.something = event;
+  //         console.log(this.something);
+  //       },
+  //     )
+  //     .catch(
+  //       (error) => {
+  //         console.log('AdminService: @getEventByFlagScore()');
+  //         return Observable.throw(error);
+  //       }
+  //     );
+  // }
+
 
   getEventsUserAttending(userId: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userId}`)
@@ -172,6 +191,4 @@ getEventScore(eventId: number) {
 rateEvent(ratingScore: number) {
   return this.httpClient.put(`http://localhost:8085:/userEvent/rate`, {ratingScore});
 }
-=======
->>>>>>> 54ae5f03f1265babe165570d5c888df66bb60cbd
 }
