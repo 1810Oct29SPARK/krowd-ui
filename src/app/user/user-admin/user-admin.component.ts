@@ -50,7 +50,7 @@ export class UserAdminComponent implements OnInit {
     this.getAllFlaggedComments();
   }
 
-consoleFunc(){console.log("fug man");}
+consoleFunc() {console.log('fug man'); }
 
   getAllFlaggedEvents() {
     this.eventService.getAllFlaggedEvents()
@@ -114,7 +114,7 @@ consoleFunc(){console.log("fug man");}
     });
     window.location.reload();
     // this.eventService.getAllFlaggedEvents();
-    //this should be changged
+    // this should be changged
   }
   unflagComment(value) {
     this.flagNewComment = value;
@@ -126,11 +126,11 @@ consoleFunc(){console.log("fug man");}
       'flag': this.flagNewComment.flag,
       'timestamp': this.flagNewComment.timestamp,
       'userId': this.flagNewComment.userId,
-      'eventId': this.flagNewComment.eventId 
+      'eventId': this.flagNewComment.eventId
     }).subscribe((result) => {
     });
     window.location.reload();
-    //this should be changed
+    // this should be changed
 
   }
 

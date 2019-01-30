@@ -18,7 +18,7 @@ export class EventsService {
 
   private events: Event[] = [];
   private something: Event[] = [];
-  private everything: Comment[] =[];
+  private everything: Comment[] = [];
   private comments: Comment[] = [];
 
   httpHeaders = new HttpHeaders({
@@ -71,7 +71,7 @@ export class EventsService {
         }
       );
   }
-  
+
   getFlaggedComments() {
     return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByFlag/1`)
       .map(
@@ -146,7 +146,7 @@ export class EventsService {
     return this.httpClient.post(HttpService.baseUrl + 'userEvent/addUserEvent', {
       'userId': userId,
       'eventId': eventId,
-    })
+    });
   }
 
   // getFlaggedEvents(flagScore: number) {

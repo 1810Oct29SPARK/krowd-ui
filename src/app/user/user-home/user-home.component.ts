@@ -19,11 +19,11 @@ export class UserHomeComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(public dialog: MatDialog, 
-    private modalService: NgbModal, 
+  constructor(public dialog: MatDialog,
+    private modalService: NgbModal,
     private eventService: EventsService,
-    private commentService: CommentsService, 
-    private http: HttpClient, 
+    private commentService: CommentsService,
+    private http: HttpClient,
     private cognitoService: CognitoService,
     private userService: UsersService) { }
 
@@ -74,7 +74,7 @@ export class UserHomeComponent implements OnInit {
       this.cognitoUsername = authUser.username;
       this.userService.getUserByUsername(this.cognitoUsername)
         .subscribe (user => {
-          this.user = user 
+          this.user = user;
           console.log(this.user);
           this.userId = parseInt(this.user.id);
           console.log(this.userId);
@@ -142,7 +142,7 @@ export class UserHomeComponent implements OnInit {
   //     );
   // }
 
-  
+
     registerForEvent(form: NgForm) {
       this.eventService.registerForEvent(this.eventId, this.userId)
         .subscribe((result) => {

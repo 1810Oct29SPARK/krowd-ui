@@ -55,7 +55,7 @@ export class UsersService {
 
   }
 
-  getUserByUsername(username: string): Observable<any> { 
+  getUserByUsername(username: string): Observable<any> {
     return this.httpClient.get(HttpService.baseUrl + `user/${username}`);
   }
 

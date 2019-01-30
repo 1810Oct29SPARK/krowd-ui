@@ -18,14 +18,14 @@ export class UserNavbarComponent implements OnInit {
 
   cognitoUsername: string;
   user: any;
-  userRole: any;  
+  userRole: any;
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
       this.userService.getUserByUsername(this.cognitoUsername)
         .subscribe (user => {
-          this.user = user 
+          this.user = user;
           console.log(this.user);
           this.userRole = this.user.roleId.name;
           console.log(this.userRole);
