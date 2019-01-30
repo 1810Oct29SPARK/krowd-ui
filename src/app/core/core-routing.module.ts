@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGaurdService } from './services/guard/auth-gaurd.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,7 +13,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: '../user/user.module#UserModule',
-    // canLoad: []
+    canActivate: [AuthGaurdService]
   },
   {
     path: 'landing', component: LandingComponent,
