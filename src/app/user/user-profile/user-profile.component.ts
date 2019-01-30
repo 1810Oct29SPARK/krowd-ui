@@ -57,6 +57,7 @@ export class UserProfileComponent implements OnInit {
       this.populateProfile(this.cognitoUsername);
     });
     this.getEventsByUserId();
+    this.getCommetsByUserId();
   }
 
   populateProfile(username: string) {
@@ -171,8 +172,8 @@ export class UserProfileComponent implements OnInit {
         (comments) => {
           console.log(comments);
           for (let comment of comments) {
-            console.log('comments');
             this.userComment.push(comment);
+            console.log(this.userComment);
           }
           // this.userComment.push(comments);
           // console.log('after loop' + this.userComment);
