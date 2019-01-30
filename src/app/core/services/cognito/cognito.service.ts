@@ -22,6 +22,22 @@ export class CognitoService {
     return null;
   }
 
+  registerNewUser(username: string, email: string, firstname: string, lastname: string): any {
+    this.httpClient.post('http://ec2-3-91-103-185.compute-1.amazonaws.com:8080/krowd-boot/user/create', {
+      'username': username,
+      'email': email,
+      'firstname': firstname,
+      'lastname': lastname,
+      'picture': 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjn3bTR55XgAhVOq' +
+      'lkKHdbTDUQQjRx6BAgBEAU&url=https%3A%2F%2Fafribary.com%2Fauthors%2Fanonymous-user&psig=AOvVaw2t8NFmGK' +
+      '1yDh5n6eWlI9QS&ust=1548948139047611',
+      'reputation': 0,
+      'roleId': 2
+    }).subscribe(data => {
+      console.log(data);
+    });
+  }
+
   // get the current authorized user from local storage
   getCurrentAuthUser(): any {
     return Auth.currentAuthenticatedUser()
@@ -45,9 +61,12 @@ export class CognitoService {
     this.httpClient.post('', accessToken);
   }
 
-  async cognitoSignUp(username: string, email: string, password: string): Promise<void> {
+  async cognitoSignUp(username: string, email: string, password: string, firstname: string, lastname: string): Promise<void> {
     const user: any = await Auth.signUp({ username, password, attributes: { email } })
       .catch(err => console.log(err));
+      if (user != null) {
+        this.registerNewUser(username, email, firstname, lastname);
+      }
     console.log(user);
   }
 
