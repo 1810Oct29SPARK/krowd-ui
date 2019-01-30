@@ -1,10 +1,8 @@
 /**
  * @author Max and JeremyS
  */
-
-import { Time } from '@angular/common';
-import {User} from './user';
-import {Event} from './event';
+import { User } from './user';
+import { Event } from './event';
 
 export class Comment {
 
@@ -13,7 +11,7 @@ export class Comment {
     flag: number;
     timestamp: any;
     userId: User;
-    eventId: Event; 
+    eventId: Event;
 
     constructor(
         id: number,

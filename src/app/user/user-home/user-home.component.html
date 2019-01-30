@@ -67,8 +67,8 @@
       <h6>User name</h6>
       <p>User comment here.</p>
       <div class="modal-footer">
-        <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">Post a
-          Comment</button>
+        <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">
+          Post a Comment</button>
         <form [hidden]="!toggle" (ngSubmit)="onCommentCreated(commentForm)" #commentForm="ngForm">
           <div class="row comment-button">
             <input type="text" name="data" class="col" [(ngModel)]="data">

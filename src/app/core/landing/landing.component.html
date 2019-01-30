@@ -32,18 +32,17 @@
   <h1>Krowd</h1>
   <h3>A social hangout app</h3>
   <div id="card" class="card">
-      <div class="card-body">
-        <h5 class="card-title">Find your Krowd</h5>
-        <p class="card-text">To use the app, please Log In or Register below.</p>
-        <div style="text-align:center" [hidden]="toggled">
-          <a routerLink='register' (click) ="toggle()"class="btn btn-success event-button">Register!</a>
-          &nbsp; &nbsp;
-          <a routerLink='login' (click) ="toggle()"class="btn btn-success event-button">Log In!</a>
-        </div>
-        <router-outlet></router-outlet>
-
+    <div class="card-body">
+      <h5 class="card-title">Find your Krowd</h5>
+      <p class="card-text">To use the app, please Log In or Register below.</p>
+      <div style="text-align:center">
+        <a routerLink='register' class="btn btn-success event-button">Register!</a>
+        &nbsp; &nbsp;
+        <a routerLink='login' class="btn btn-success event-button">Log In!</a>
       </div>
+      <router-outlet></router-outlet>
+
     </div>
-    
+  </div>
 
 </header>

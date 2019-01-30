@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
-import { CommentsService } from 'src/app/core/services/comments/comments.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { CommentsService } from 'src/app/core/services/comments/comments.service';
 
 
 @Component({
@@ -12,7 +13,6 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-
 export class UserProfileComponent implements OnInit {
 
 
@@ -30,6 +30,7 @@ export class UserProfileComponent implements OnInit {
 
   selectedFile: File = null;
   imageURL: string;
+  userId: number;
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
@@ -38,17 +39,31 @@ export class UserProfileComponent implements OnInit {
 
   loading: any;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService,
-    private eventService: EventsService, private commentService: CommentsService) { }
+  constructor(
+    public dialog: MatDialog,
+    private modalService: NgbModal,
+    public cognitoService: CognitoService,
+    public userService: UsersService,
+    public eventService: EventsService,
+    public commentService: CommentsService
+  ) { }
 
   cognitoUsername: string;
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
+      console.log(this.cognitoUsername);
+      this.populateProfile(this.cognitoUsername);
     });
-    this.getEventsByUserId();
-    this.getCommetsByUserId();
+  }
+
+  populateProfile(username: string) {
+    console.log(username);
+    this.userService.getUserByUsername(username)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   toggleProfile() {
@@ -135,16 +150,16 @@ export class UserProfileComponent implements OnInit {
 
   getCommetsByUserId() {
     let userId: number = parseInt(sessionStorage.getItem('id'), 10);
-    this.commentService.getEventsByUserId(userId)
+    this.commentService.getCommentByUserId(userId)
       .subscribe(
         (comments) => {
           console.log(comments);
-          // for (let comment of comments) {
-          //   console.log('comments');
-          //   this.userComment.push(comment);
-          // }
-          this.userComment.push(comments);
-          console.log('after loop' + this.userComment);
+          for (let comment of comments) {
+            console.log('comments');
+            this.userComment.push(comment);
+          }
+          // this.userComment.push(comments);
+          // console.log('after loop' + this.userComment);
         },
         (error) => console.log(error)
       );

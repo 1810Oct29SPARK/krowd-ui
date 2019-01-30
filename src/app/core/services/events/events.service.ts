@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
+<<<<<<< HEAD
 import { Comment } from 'src/app/shared/models/comment'
 import { Observable } from 'rxjs';
+=======
+import { throwError } from 'rxjs';
+>>>>>>> 289adf20beb3d905a3d2dba8d2fc2daf190e4ac7
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
-import { Category } from 'src/app/shared/models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -31,43 +34,43 @@ export class EventsService {
 
   getAllEvents() {
     return this.httpClient.get<Event[]>('http://localhost:8085/event/all')
-    .map((events) => {
-      let eventData = events;
-      return eventData;
-    })
+      .map((events) => {
+        let eventData = events;
+        return eventData;
+      })
       .catch(
         (error) => {
           console.log('EventsService: @getAllEvents()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
   getEventsByUserId(userid: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userid}`)
-      .map( (events) => {
-          let userEventData = events;
-          return userEventData;
-        },
+      .map((events) => {
+        let userEventData = events;
+        return userEventData;
+      },
       )
       .catch(
         (error) => {
           console.log('EventsService: @getEventsByUserId()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
   getAllFlaggedEvents() {
     return this.httpClient.get<Event[]>('http://localhost:8085/event/byFlag')
-    .map((events) => {
-      let flaggedEvent = events;
-      return flaggedEvent;
-    })
+      .map((events) => {
+        let flaggedEvent = events;
+        return flaggedEvent;
+      })
       .catch(
         (error) => {
           console.log('EventsService: @getAllEvents()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -92,7 +95,7 @@ export class EventsService {
     eventAddress: string, eventApartment: string, eventCity: string, eventState: string, eventZip: string,
     eventDescription: string, eventFlag: number, userId: string, eventPhotoID: string) {
     console.log('in eventService');
-    return this.httpClient.post(`http://localhost:8085/event/add`, {name});
+    return this.httpClient.post(`http://localhost:8085/event/add`, { name });
   }
 
 
@@ -116,7 +119,7 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('EventsService: @getEventById()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -133,7 +136,7 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('EventsService: @getEventsByCategory()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
