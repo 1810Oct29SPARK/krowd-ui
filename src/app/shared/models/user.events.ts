@@ -1,17 +1,27 @@
+/**
+ * @author Max and JeremyS
+ */
+
+import { User } from './user';
+import { Event } from './event';
+
 export class UserEvents {
 
-    userId: number;
-    eventId: number;
-    eventRating: number; // possibly deprecated by #Server-side
+    id: number;
+    user: User;
+    event: Event;
+    rating: number; // possibly deprecated by #Server-side
 
     constructor(
-        userId: number,
-        eventId: number,
-        eventRating: number
+        id: number,
+        user: User,
+        event: Event,
+        rating: number
     ) {
-        this.userId = userId;
-        this.eventId = eventId;
-        this.eventRating = eventRating;
+        this.id = id;
+        this.user = user;
+        this.event = event;
+        this.rating = rating;
     }
 
 }
