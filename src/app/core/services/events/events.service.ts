@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
 import { Observable } from 'rxjs';
+import { HttpService } from '../../services/http/http.service';
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
