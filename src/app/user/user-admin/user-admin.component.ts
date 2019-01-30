@@ -5,6 +5,7 @@ import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from '../../shared/models/event';
 import { HttpClient } from '@angular/common/http';
 import { Comment } from '../../shared/models/comment';
+import { HttpService } from 'src/app/core/services/http/http.service';
 
 @Component({
   selector: 'app-user-admin',
@@ -20,6 +21,7 @@ export class UserAdminComponent implements OnInit {
   eventId: any = 1;
   flagNewEvent: any;
   flagNewComment: any;
+  commentToKill: any;
 
   constructor(public dialog: MatDialog, private http: HttpClient, private modalService: NgbModal, private eventService: EventsService) { }
 
@@ -93,10 +95,11 @@ consoleFunc() {console.log('fug man'); }
   // consoleFunc(flagged){console.log(flagged);}
 
   unflagEvent(value) {
+    let index = this.flaggedEvents.indexOf(value);
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 0;
     console.log(value);
-    this.http.put('http://localhost:8085/event/update', {
+    this.http.put(HttpService.baseUrl+'/event/update', {
         'eventID' : this.flagNewEvent.id,
         'eventName' : this.flagNewEvent.name,
         'eventCategory' : this.flagNewEvent.categoryId.id,
@@ -112,15 +115,16 @@ consoleFunc() {console.log('fug man'); }
         'eventPhotoID' : this.flagNewEvent.picture
     }).subscribe((result) => {
     });
-    window.location.reload();
+    this.flaggedEvents.splice(index,1);
     // this.eventService.getAllFlaggedEvents();
     // this should be changged
   }
   unflagComment(value) {
+    let index = this.flaggedComments.indexOf(value);
     this.flagNewComment = value;
     this.flagNewComment.flag = 0;
     console.log(value);
-    this.http.post('http://localhost:8085/admin/unflagcomment', {
+    this.http.post(HttpService.baseUrl+'/admin/unflagcomment', {
       'id': this.flagNewComment.id,
       'comment': this.flagNewComment.comment,
       'flag': this.flagNewComment.flag,
@@ -129,9 +133,24 @@ consoleFunc() {console.log('fug man'); }
       'eventId': this.flagNewComment.eventId
     }).subscribe((result) => {
     });
+<<<<<<< HEAD
+    this.flaggedComments.splice(index,1);
+    //this should be changed
+=======
     window.location.reload();
     // this should be changed
+>>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
 
+  }
+
+  deleteComment(value) {
+    let index = this.flaggedComments.indexOf(value);
+    this.commentToKill = value;
+    this.http.post(HttpService.baseUrl+'/comment/deletecomment', {
+      'id':this.commentToKill.id
+    }).subscribe((result)=> {
+    });
+    this.flaggedComments.splice(index,1);
   }
 
 }
