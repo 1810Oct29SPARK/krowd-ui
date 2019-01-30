@@ -8,6 +8,7 @@ import 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
+import { Category } from 'src/app/shared/models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +54,11 @@ export class EventsService {
       );
   }
 
-  addEvent(event: Event) {
-    return this.httpClient.post(HttpService.baseUrl + `event/add`, event);
+  addEvent(eventName: string, eventCategory: string, eventDate: string,
+    eventAddress: string, eventApartment: string, eventCity: string, eventState: string, eventZip: string,
+    eventDescription: string, eventFlag: number, userId: string, eventPhotoID: string) {
+    console.log('in eventService');
+    return this.httpClient.post(`http://localhost:8085/event/add`, {name});
   }
 
 

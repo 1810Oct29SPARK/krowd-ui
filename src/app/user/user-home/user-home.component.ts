@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from '../../shared/models/comment';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
+import { CommentsService } from '../../core/services/comments/comments.service';
 
 @Component({
   selector: 'app-user-home',
@@ -14,7 +15,8 @@ export class UserHomeComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService,
+    private commentService: CommentsService) { }
 
   events: Event[] = [];
   singleEvent: any = null;
@@ -23,14 +25,16 @@ export class UserHomeComponent implements OnInit {
   comments: Comment[] = [];
   eventList = [];
   toggle: boolean = false;
+  flagNewEvent: any;
+  updateEvent: any;
 
   ontoggle() {
     if (this.toggle === true) {
-    this.toggle = false;
-      } else {
+      this.toggle = false;
+    } else {
       this.toggle = true;
-     }
     }
+  }
 
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -84,6 +88,33 @@ export class UserHomeComponent implements OnInit {
         (error) => console.log(error)
       );
     return this.singleEvent;
+  }
+
+  getCommentByEventId(value) {
+    console.log(value);
+    this.commentService.getCommentByEventId(value)
+      .subscribe(
+        (comment) => {
+          console.log(event);
+          this.comments = comment;
+        },
+        (error) => console.log(error)
+      );
+    return this.comments;
+  }
+
+  flagEvent(value) {
+    console.log(value);
+    this.eventService.updateEvent(value)
+      .subscribe(
+        (event) => {
+          console.log(event);
+          this.updateEvent = event;
+          this.updateEvent.flag = 1;
+          this.flagNewEvent = this.updateEvent;
+        },
+        (error) => console.log(error)
+      );
   }
 
 }
