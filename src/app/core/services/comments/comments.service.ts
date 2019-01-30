@@ -7,7 +7,7 @@ import { HttpService } from '../../services/http/http.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,15 +41,15 @@ export class CommentsService {
 
   getEventsByUserId(userid: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8085/comment/getById/${userid}`)
-      .map( (comments) => {
-          let userComments = comments;
-          return userComments;
-        },
+      .map((comments) => {
+        let userComments = comments;
+        return userComments;
+      },
       )
       .catch(
         (error) => {
           console.log('EventsService: @getEventsByUserId()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -68,15 +68,15 @@ export class CommentsService {
       .catch(
         (error) => {
           console.log('AdminService: @getCommentsByFlagScore()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
   flagComment(commentId: number) {
     return this.httpClient.post(HttpService.baseUrl + 'comment/flagcomment', {
-      "id": commentId
-    })
+      'id': commentId
+    });
   }
 
 }

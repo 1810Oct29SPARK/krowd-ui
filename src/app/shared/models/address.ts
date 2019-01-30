@@ -1,7 +1,6 @@
 /**
  * @author Max and JeremyS
  */
-
 export class Address {
 
     id: number;
@@ -9,7 +8,7 @@ export class Address {
     apartment: string;
     city: string;
     state: string;
-    zip: number
+    zip: number;
 
     constructor(
         id: number,

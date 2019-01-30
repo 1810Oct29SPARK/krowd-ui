@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
-import { Observable } from 'rxjs';
-import { HttpService } from '../http/http.service'
+import { Observable, throwError } from 'rxjs';
+import { HttpService } from '../http/http.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
@@ -34,29 +34,25 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserServiceError: @getAllUsers()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
-
-
 
   // updateUser(event: Event) {
   //   return this.httpClient.put(`http://localhost:8083`), {'id': id, 'Created': Date};
   // }
 
-
   registerUser(username: string, email: string, firstname: string, lastname: string) {
     return this.httpClient.post('http://localhost:8085/user/create', {
-      "username": username, 
-      "email": email,
-      "firstname": firstname,
-      "lastname": lastname,
-      "reputation": 0,
-      "roleId": 2
+      'username': username,
+      'email': email,
+      'firstname': firstname,
+      'lastname': lastname,
+      'reputation': 0,
+      'roleId': 2
+    });
 
-    })
-  
   }
 
   getUserByUsername(username: string): Observable<any> {
@@ -74,7 +70,7 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserServiceError: @getUserById()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -89,7 +85,7 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserServiceError: @getUserByEventId()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -104,7 +100,7 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('AdminService: @getUserByAccountStatus()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -119,7 +115,7 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('AdminService: @getUserByFlagScore()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -133,7 +129,7 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserEventService: @getUsersAttendingEvent()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -159,8 +155,9 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserEvent ServiceError: @getReputationByUserId');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
+
 }
