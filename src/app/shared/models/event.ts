@@ -1,51 +1,47 @@
 export class Event {
 
-    id: number;
-    name: string;
-    category: number;
-    date: Date;
-    time: any; // Optional
-    address: string;
-    apartment: string;
-    city: string;
-    state: string;
-    zip: number;
-    ratingScore: number;
-    flag: number;
-    hostId: number;
-    description: string;
-    picture: string;
+    eventID: number;
+    eventName: string;
+    eventCategory: number;
+    eventDate: string;
+    eventAddress: string;
+    eventApartment: string;
+    eventCity: string;
+    eventState: string;
+    eventZip: number;
+    eventDescription: string;
+    eventFlag: string;
+    userID: string;
+    eventPhotoID: string;
 
     constructor(
-        id: number,
-        name: string,
-        category: number,
-        date: Date,
-        time: any,
-        address: string,
-        apartment: string,
-        city: string,
-        state: string,
-        zip: number,
-        ratingScore: number,
-        flag: number,
-        hostId: number,
-        picture: string
+        eventID: number,
+        eventName: string,
+        eventCategory: number,
+        eventDate: string,
+        eventAddress: string,
+        eventApartment: string,
+        eventCity: string,
+        eventState: string,
+        eventZip: number,
+        eventDescription: string,
+        eventFlag: string,
+        userID: string,
+        eventPhotoID: string,
     ) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.date = date;
-        this.time = time;
-        this.address = address;
-        this.apartment = apartment;
-        this.city = city,
-            this.state = state,
-            this.zip = zip;
-        this.ratingScore = ratingScore;
-        this.flag = flag;
-        this.hostId = hostId;
-        this.picture = picture;
+        this.eventID = eventID;
+        this.eventName = eventName;
+        this.eventCategory = eventCategory;
+        this.eventDate = eventDate;
+        this.eventAddress = eventAddress;
+        this.eventApartment = eventApartment;
+        this.eventCity = eventCity,
+        this.eventState = eventState,
+        this.eventZip = eventZip;
+        this.eventDescription = eventDescription;
+        this.eventFlag = eventFlag;
+        this.userID = userID;
+        this.eventPhotoID = eventPhotoID;
     }
 
 }
