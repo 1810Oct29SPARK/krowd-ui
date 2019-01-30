@@ -9,6 +9,10 @@ import { User } from 'src/app/shared/models/user';
 import { CommentsService } from 'src/app/core/services/comments/comments.service';
 import { Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { CommentsService } from '../../core/services/comments/comments.service';
+import { HttpClient } from '@angular/common/http';
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 @Component({
   selector: 'app-user-home',
@@ -18,19 +22,29 @@ import { formatDate } from '@angular/common';
 export class UserHomeComponent implements OnInit {
 
   closeResult: string;
-  user: User;
-  userId: number;
-  constructor(public dialog: MatDialog, private modalService: NgbModal,
-    private eventService: EventsService, private commentService: CommentsService) { }
+
+  constructor(public dialog: MatDialog, 
+    private modalService: NgbModal, 
+    private eventService: EventsService,
+    private commentService: CommentsService, 
+    private http: HttpClient, 
+    private cognitoService: CognitoService,
+    private userService: UsersService) { }
 
   events: Event[] = [];
   singleEvent: any = null;
   eventList2 = [];
-  eventId: any = 1;
+  eventId: any = 10;
   comments: Comment[] = [];
   comment: Comment;
   eventList = [];
   toggle: boolean = false;
+  flagNewEvent: any;
+  updateEvent: any;
+  userId: any;
+  submitted = false;
+  cognitoUsername: string;
+  user: any;
 
   ontoggle() {
     if (this.toggle === true) {
@@ -61,6 +75,17 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEvents();
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+      this.userService.getUserByUsername(this.cognitoUsername)
+        .subscribe (user => {
+          this.user = user 
+          console.log(this.user);
+          this.userId = parseInt(this.user.id);
+          console.log(this.userId);
+        }
+          );
+    });
   }
 
   showModal() {
@@ -88,6 +113,7 @@ export class UserHomeComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
+          console.log(this.singleEvent);
         },
         (error) => console.log(error)
       );
@@ -109,6 +135,64 @@ export class UserHomeComponent implements OnInit {
         (event) =>
           this.comments.push(comment)
       );
+  }
+
+  // getCommentByEventId(value) {
+  //   console.log(value);
+  //   this.commentService.getCommentByEventId(value)
+  //     .subscribe(
+  //       (comment) => {
+  //         console.log(event);
+  //         this.comments = comment;
+  //       },
+  //       (error) => console.log(error)
+  //     );
+  //   return this.comments;
+  // }
+
+  // flagEvent(value) {
+  //   console.log(value);
+  //   this.eventService.updateEvent(value)
+  //     .subscribe(
+  //       (event) => {
+  //         console.log(event);
+  //         this.updateEvent = event;
+  //         this.updateEvent.flag = 1;
+  //         this.flagNewEvent = this.updateEvent;
+  //       },
+  //       (error) => console.log(error)
+  //     );
+  // }
+
+  
+    registerForEvent(form: NgForm) {
+      this.eventService.registerForEvent(this.eventId, this.userId)
+        .subscribe((result) => {
+    });
+    this.submitted = true;
+  }
+
+  flagEvent(value) {
+    this.flagNewEvent = value;
+    this.flagNewEvent.flag = 1;
+    console.log(value);
+    this.http.put('http://localhost:8085/event/update', {
+        'eventID' : this.flagNewEvent.id,
+        'eventName' : this.flagNewEvent.name,
+        'eventCategory' : this.flagNewEvent.categoryId.id,
+        'eventDate' : this.flagNewEvent.date,
+        'eventAddress' : this.flagNewEvent.address.streetAddress,
+        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
+        'eventCity' : this.flagNewEvent.address.city,
+        'eventState' : this.flagNewEvent.address.state,
+        'eventZip' : this.flagNewEvent.address.zip,
+        'eventDescription' : this.flagNewEvent.description,
+        'eventFlag' : this.flagNewEvent.flag,
+        'userID' : this.flagNewEvent.userId.id,
+        'eventPhotoID' : this.flagNewEvent.picture
+    }).subscribe((result) => {
+    });
+    this.submitted = true;
   }
 
 }

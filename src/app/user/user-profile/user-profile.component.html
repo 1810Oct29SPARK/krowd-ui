@@ -1,279 +1,134 @@
-<button (click)="toggleProfile()"> {{info_button_text}} </button>
-<div id="profile-info" class="container" *ngIf="show_info">
+<div id="profile-info" class="container">
   <br>
   <br>
   <div id="user-section" class="row">
     <div class="col-md-3">
       <div id="profile-image">
+        <img class="img-fluid" src="{{userInfo?.picture}}" alt="Carousel 1">
       </div>
     </div>
     <div class="col-md-1"></div>
-    <div id="user-info" class="col-md-8">
-      <span>
-        <h4> First Last </h4>
-        <p> Username </p>
+    <div id="user-info" class="col-md-4">
+      <span id="profile-essentials">
+        <h4> {{userInfo?.firstname}} {{userInfo?.lastname}} </h4>
+        <p> Username: {{userInfo?.username}} </p>
+        <p> Reputation Score: {{userInfo?.reputation}} </p>
       </span>
     </div>
-  </div>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-md-12">
-      <h3> About Me </h3>
-      <p> This is the "About Me" text. </p>
+    <div id="profile-buttons" class="col-md-4">
+      <button (click)="open(editProfile)"> Edit Profile Information </button>
+      <br>
+      <br>
+      <button (click)="toggleEvents()"> {{event_button_text}} </button>
+      <br>
+      <br>
+      <button (click)="toggleComments()"> {{comment_button_text}} </button>
     </div>
   </div>
+
   <br><br>
-  <button (click)="open(editProfile)"> Edit Profile Information </button>
+
 </div>
 <br>
 <br>
-<button (click)="toggleEvents()"> {{event_button_text}} </button>
 <div class="container" *ngIf="show_events">
   <div class="row">
     <div class="col-md-12">
       <br>
       <h3> My Events </h3>
       <br>
-      <h4> Hosting </h4>
-    </div>
-  </div>
-  <div class="carousel slide pre-scrollable" data-ride="carousel" id="postsCarousel">
-    <div class="container p-t-0 m-t-2 carousel-inner">
-      <div class="row row-equal carousel-item active m-t-0">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Insight</h6>
-              <h2>
-                Host Event #1
-              </h2>
-              <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Development</h6>
-              <h2>
-                Event Title #2
-              </h2>
-              <p> Host Event #2's description. </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Design</h6>
-              <h2>
-                Event Title #3
-              </h2>
-              <p> Host Event #3's description </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Design</h6>
-              <h2>
-                Event Title #4
-              </h2>
-              <p> Host Event #4's description </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-md-12">
-      <br>
       <h4> Attending </h4>
     </div>
   </div>
-  <!-- *ngIf = "attending_events.length != 0"-->
-  <div class="carousel slide pre-scrollable" data-ride="carousel" id="postsCarousel">
-    <div class="container p-t-0 m-t-2 carousel-inner">
-      <div class="row row-equal carousel-item active m-t-0">
-        <div class="col-md-4">
-          <!-- *ngFor = "let event of attending_events" -->
-          <div class="card">
+  <div id="current-events">
+    <div class="card-group">
+      <div class="col-md-4" *ngFor="let event of attendingEvents">
+        <div class="card" (click)="open(singleEventUser)">
+          <div (click)="getEventById(event.id)">
             <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">{{this.event.category}}</h6>
-              <h2>
-                {{this.event.name}}
-              </h2>
-              <p> {{this.event.description}} </p>
+              <img class="img-fluid" src="{{event.eventId.picture}}" alt="Carousel 1">
+              <div class="card-body">
+                <h6 class="small text-wide p-b-2">{{event.eventId.name}}</h6>
+                <h6 class="small text-wide p-b-2">Created by: {{event.userId.firstname}} {{event.userId.lastname}}</h6>
+                <h2>
+                  {{event.name}}
+                </h2>
+                <p> {{event.description}} </p>
+                <!-- <button type="button" (click)="getEventById(event.id)">Click here</button> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <br>
-  <br>
+</div>
+<br>
+<br>
+<div class="container" *ngIf="show_comments">
   <div class="row">
     <div class="col-md-12">
       <br>
-      <h4> Attended </h4>
+      <h3> My Comments </h3>
     </div>
   </div>
-  <div class="carousel slide pre-scrollable" data-ride="carousel" id="postsCarousel">
-    <div class="container p-t-0 m-t-2 carousel-inner">
-      <div class="row row-equal carousel-item active m-t-0">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Insight</h6>
-              <h2>
-                Event #1
-              </h2>
-              <p> This is Event #1's description. Hopefully it stays centers like it is. </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Development</h6>
-              <h2>
-                Event #2
-              </h2>
-              <p> Event #2's description. </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Design</h6>
-              <h2>
-                Event #3
-              </h2>
-              <p> Event #3's description </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
-            </div>
-            <div class="card-block p-t-2">
-              <h6 class="small text-wide p-b-2">Design</h6>
-              <h2>
-                Event #4
-              </h2>
-              <p> Event #4's description </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<br>
-<br>
-<button (click)="toggleComments()"> {{comment_button_text}} </button>
-<div class="row" *ngIf="show_comments">
-  <div class="col-md-12">
-    <br>
-    <h3> My Comments </h3>
-  </div>
-</div>
-<div class="box-shadow" *ngIf="show_comments">
-  <div id="comments">
-    <!-- table created if there is anything in the response (user has made comments)-->
-    <table *ngIf="response !== null" class="table">
-      <thead>
-        <th scope="col">Event</th>
-        <th scope="col">Comment</th>
-        <th scope="col">Date</th>
-      </thead>
-      <tbody>
-        <!-- creates a new row for each user comment, 
+  <div class="box-shadow" *ngIf="show_comments">
+    <div id="comments">
+      <!-- table created if there is anything in the response (user has made comments)-->
+      <table class="table">
+        <thead>
+          <th scope="col">Event</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Date</th>
+        </thead>
+        <tbody>
+          <!-- creates a new row for each user comment, 
                     using the name of the event, the comment, and the event date-->
-        <tr *ngFor="let comment of commentsList" id="commentsList">
-          <a routerLink="/events/{{eventID}}">
-            <td> {{comment.event_id}} </td>
-          </a>
-          <td> {{comment.data}} </td>
-          <td> {{comment.created | date }} </td>
-        </tr>
-        <tr id="default" [hidden]="commentsList">
+          <tr *ngFor="let comment of userComment" id="commentsList">
+            <td> {{comment.eventId.name}} </td>
+            <td> {{comment.comment}} </td>
+            <td> {{comment.timestamp | date }} </td>
+          </tr>
+          <!-- <tr id="default" [hidden]="commentsList">
           <td></td>
           <td>No comments yet.</td>
           <td></td>
-        </tr>
-      </tbody>
-    </table>
+        </tr> -->
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <br>
 <br>
 <br>
 <br>
-<ng-template #editProfile let-modal>
+<ng-template #singleEventUser let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Edit Profile Information</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{singleEvent?.name}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <form>
-      <label for="firstInput"> First Name </label>
-      <input id="firstInput" class="form-control" type="text">
-      <br>
-      <label for="lastInput"> Last Name </label>
-      <input id="lastInput" class="form-control" type="text">
-      <br>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1"> About Me </label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <mat-tab-group>
+    <mat-tab label="Event Description">
+      <div class="modal-body">
+        <img src='{{singleEvent?.picture}}' style="height: 200px; width:100%;">
+        <br>
+        <h4>Event Description</h4>
+        <p>{{singleEvent?.description}}</p>
+        <h4>Date & Time</h4>
+        <p>{{singleEvent?.date}}</p>
+        <h4>Location</h4>
+        <p>{{singleEvent?.address.streetAddress}}</p>
+        <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
       </div>
-      <br>
-      <img src="{{selectedProfileImg}}">
-      <br>
-      <h6> Change Profile Image </h6>
-      <div class="input-group mb-3">
-        <label class="custom-file">
-          <input type="file" id="file" class="custom-file-input">
-          <span class="custom-file-control"></span>
-        </label>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success" (click)="flagEvent(singleEvent)">
+          Flag This Event</button>
+        <button type="button" class="btn btn-outline-warning" (click)="registerForEvent()">
+          Register Now!</button>
       </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Submit clicked')"> Submit Changes </button>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
 </ng-template>

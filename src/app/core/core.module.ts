@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '../material.module';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CoreRoutingModule } from './core-routing.module';
 import { LandingComponent } from './landing/landing.component';
@@ -27,6 +28,9 @@ import { CognitoService } from './services/cognito/cognito.service';
 import { User } from '../shared/models/user';
 import { Event } from '../shared/models/event';
 import { Comment } from '../shared/models/comment';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { Comment } from '../shared/models/comment';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    EventsComponent
+    EventsComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     CommonModule,
@@ -48,13 +53,17 @@ import { Comment } from '../shared/models/comment';
     CoreRoutingModule,
     Ng2CloudinaryModule,
     FileUploadModule,
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    MatButtonModule
   ],
   exports: [
     RouterModule
   ],
-
-  providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService]
-
+  providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }]
 })
 export class CoreModule { }

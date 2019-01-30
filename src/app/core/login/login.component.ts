@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CognitoService } from '../services/cognito/cognito.service';
+import { UsersService } from '../services/users/users.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -11,30 +13,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-username: String;
-password: String;
-email: String;
-newPassword: String;
-
-
-function getCodeFromUserInput(){
-  return null;
-}
-
-function getInfoFromUserInput(){
-  return null;
-}
-
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
-  
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -45,9 +29,14 @@ export class LoginComponent {
 
   disableSelect = new FormControl(false);
 
-  constructor(public dialog: MatDialog, public cognitoService: CognitoService) { }
+  constructor(
+    public dialog: MatDialog,
+    public cognitoService: CognitoService,
+    public userService: UsersService,
+    public router: Router
+  ) { }
 
-  cognitoSignIn(form: NgForm){
+  cognitoSignIn(form: NgForm) {
     const username: string = form.value.username;
     const password: string = form.value.password;
     const newPassword: string = form.value.newPassword;

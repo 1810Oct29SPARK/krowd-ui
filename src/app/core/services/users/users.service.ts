@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
-import { Observable } from 'rxjs';
-import { HttpService } from '../http/http.service'
+import { Observable, throwError } from 'rxjs';
+import { HttpService } from '../http/http.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
@@ -21,7 +21,7 @@ export class UsersService {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, user: User) { }
+  constructor(private httpClient: HttpClient) { }
 
   // ready
   getAllUsers() {
@@ -34,21 +34,30 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserServiceError: @getAllUsers()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
-  }
-
-  // ********************************************
-  // Implemented By Sercurity team, Not ready Yet
-  // ********************************************
-  addUser(user: User) {
-    return this.httpClient.post(HttpService.baseUrl, user);
   }
 
   // updateUser(event: Event) {
   //   return this.httpClient.put(`http://localhost:8083`), {'id': id, 'Created': Date};
   // }
+
+  registerUser(username: string, email: string, firstname: string, lastname: string) {
+    return this.httpClient.post('http://localhost:8085/user/create', {
+      'username': username,
+      'email': email,
+      'firstname': firstname,
+      'lastname': lastname,
+      'reputation': 0,
+      'roleId': 2
+    });
+
+  }
+
+  getUserByUsername(username: string): Observable<any> { 
+    return this.httpClient.get(HttpService.baseUrl + `user/${username}`);
+  }
 
   getUserById(userid: number) {
     return this.httpClient.get<User[]>(HttpService.baseUrl + `user/${userid}`)
@@ -60,7 +69,7 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserServiceError: @getUserById()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -75,13 +84,13 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserServiceError: @getUserByEventId()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
   getUsersByAccountStatus(accountStatus: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${accountStatus}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `${accountStatus}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -90,13 +99,13 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('AdminService: @getUserByAccountStatus()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
   getFlaggedUsers(flagScore: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -105,12 +114,12 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('AdminService: @getUserByFlagScore()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
   getUsersAttendingEvent(eventId: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/userEvent/userByEvent/${eventId}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `userEvent/userByEvent/${eventId}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -119,24 +128,24 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserEventService: @getUsersAttendingEvent()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
   addAttendee(userId: number, eventId: number) {
-    return this.httpClient.post(`http:/localhost:8085/userEvent/addUserEvent`, { uId: userId, eId: eventId });
+    return this.httpClient.post(HttpService.baseUrl + `userEvent/addUserEvent`, { uId: userId, eId: eventId });
   }
 
   //
   // not ready : server-Side does not have the referencing method
   //
   deleteAttendee(userId: number, eventId: number) {
-    return this.httpClient.post(`http:/localhost:8083/${userId}/${eventId}`, { uId: userId, eId: eventId });
+    return this.httpClient.post(HttpService.baseUrl + `${userId}/${eventId}`, { uId: userId, eId: eventId });
   }
 
   getUserReputation(userId: number) {
-    return this.httpClient.get(`http://localhost:8085/userEvent/getReputation/${userId}`)
+    return this.httpClient.get(HttpService.baseUrl + `userEvent/getReputation/${userId}`)
       .map(
         (event: any) => {
           console.log(event);
@@ -145,8 +154,9 @@ export class UsersService {
       .catch(
         (error) => {
           console.log('UserEvent ServiceError: @getReputationByUserId');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
+
 }

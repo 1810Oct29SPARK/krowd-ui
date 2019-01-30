@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
+import { HttpService } from '../../services/http/http.service';
+import { Comment } from 'src/app/shared/models/comment';
 import { Observable } from 'rxjs';
-import { HttpService } from '../../services/http/http.service'
+import { throwError } from 'rxjs';
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
@@ -15,6 +17,9 @@ import 'rxjs/add/operator/catch';
 export class EventsService {
 
   private events: Event[] = [];
+  private something: Event[] = [];
+  private everything: Comment[] =[];
+  private comments: Comment[] = [];
 
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
@@ -26,35 +31,68 @@ export class EventsService {
   }
 
   getAllEvents() {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl +'event/all')
-    .map((events) => {
-      let eventData = events;
-      return eventData;
-    })
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/all')
+      .map((events) => {
+        let eventData = events;
+        return eventData;
+      })
       .catch(
         (error) => {
           console.log('EventsService: @getAllEvents()');
-          return Observable.throw(error);
+          return throwError(error);
+        }
+      );
+  }
+
+  getEventsByUserId(userid: number) {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `${userid}`) .map((events) => {
+        let userEventData = events;
+        return userEventData;
+      },
+      )
+      .catch(
+        (error) => {
+          console.log('EventsService: @getEventsByUserId()');
+          return throwError(error);
         }
       );
   }
 
   getAllFlaggedEvents() {
     return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/byFlag')
-    .map((events) => {
-      let flaggedEvent = events;
-      return flaggedEvent;
-    })
+      .map((events) => {
+        let flaggedEvent = events;
+        return flaggedEvent;
+      })
       .catch(
         (error) => {
           console.log('EventsService: @getAllEvents()');
+          return throwError(error);
+        }
+      );
+  }
+  
+  getFlaggedComments() {
+    return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByFlag/1`)
+      .map(
+        (comments) => {
+          let flaggedComment = comments;
+          return flaggedComment;
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('AdminService: @getAllComments()');
           return Observable.throw(error);
         }
       );
   }
 
-  addEvent(event: Event) {
-    return this.httpClient.post(HttpService.baseUrl + `event/add`, event);
+  addEvent(eventName: string, eventCategory: string, eventDate: string,
+    eventAddress: string, eventApartment: string, eventCity: string, eventState: string, eventZip: string,
+    eventDescription: string, eventFlag: number, userId: string, eventPhotoID: string) {
+    console.log('in eventService');
+    return this.httpClient.post(HttpService.baseUrl + `event/add`, { name });
   }
 
 
@@ -64,7 +102,7 @@ export class EventsService {
   }
 
   updateEvent(event: Event) {
-    return this.httpClient.put(HttpService.baseUrl + `update`, event);
+    return this.httpClient.put(HttpService.baseUrl + `update/`, event);
   }
 
   getEventById(eventId: number) {
@@ -78,7 +116,7 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('EventsService: @getEventById()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -95,44 +133,38 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('EventsService: @getEventsByCategory()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
-  getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl + `byUser/${userid}`)
-      .map(
-        (event: any[]) => {
-          console.log(event);
-        },
-      )
-      .catch(
-        (error) => {
-          console.log('EventsService: @getEventsByUserId()');
-          return Observable.throw(error);
-        }
-      );
-  }
+  // registerForEvent(eventId: number, userId: number) {
+  //   return this.httpClient.post(HttpService.baseUrl + `userEvent/addUserEvent`, eventId);
+  // }
 
   registerForEvent(eventId: number, userId: number) {
-    return this.httpClient.post(`http://localhost:8085/userEvent/addUserEvent`, eventId);
+    return this.httpClient.post(HttpService.baseUrl + 'userEvent/addUserEvent', {
+      'userId': userId,
+      'eventId': eventId,
+    })
   }
 
-  getFlaggedEvents(flagScore: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/${flagScore}`)
-      .map(
-        (event: any[]) => {
-          console.log(event);
-        },
-      )
-      .catch(
-        (error) => {
-          console.log('AdminService: @getEventByFlagScore()');
-          return Observable.throw(error);
-        }
-      );
-  }
+  // getFlaggedEvents(flagScore: number) {
+  //   return this.httpClient.get<Event[]>(`http://localhost:8085/event/byFlag`)
+  //     .map(
+  //       (event: any[]) => {
+  //         return this.something = event;
+  //         console.log(this.something);
+  //       },
+  //     )
+  //     .catch(
+  //       (error) => {
+  //         console.log('AdminService: @getEventByFlagScore()');
+  //         return Observable.throw(error);
+  //       }
+  //     );
+  // }
+
 
   getEventsUserAttending(userId: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userId}`)

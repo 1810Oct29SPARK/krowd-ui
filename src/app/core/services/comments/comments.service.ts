@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Comment } from '../../../shared/models/comment';
-import { HttpService } from '../../services/http/http.service'
+import { HttpService } from '../../services/http/http.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentsService {
   private comments: Comment[] = [];
-  
+
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
     'Accept': 'application/json',
@@ -26,7 +26,7 @@ export class CommentsService {
   comment: Comment;
 
   getAllComments() {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl);
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'comment/getallcomments');
   }
 
   addComment(comment: any) {
@@ -40,16 +40,27 @@ export class CommentsService {
     return this.httpClient.get<Comment[]>(HttpService.baseUrl);
   }
 
-  getCommentsByUserId(userId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${userId}`);
+  getEventsByUserId(userid: number) {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `comment/getById/${userid}`)
+      .map((comments) => {
+        let userComments = comments;
+        return userComments;
+      },
+      )
+      .catch(
+        (error) => {
+          console.log('EventsService: @getEventsByUserId()');
+          return throwError(error);
+        }
+      );
   }
 
-  getCommentByEventId(commentId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+ `${commentId}`);
+  getCommentByUserId(userId: number) {
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `comment/getByUser/${userId}`);
   }
 
   getFlaggedComments(flagScore: number) {
-    return this.httpClient.get<Comment[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -58,10 +69,15 @@ export class CommentsService {
       .catch(
         (error) => {
           console.log('AdminService: @getCommentsByFlagScore()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
 
+  flagComment(commentId: number) {
+    return this.httpClient.post(HttpService.baseUrl + 'comment/flagcomment', {
+      'id': commentId
+    });
+  }
 
 }

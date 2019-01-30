@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>A code has been emailed to you</h2>
+<form (ngSubmit)="cognitoConfirm(f)" #f="ngForm">
+  <input class="form-control" placeholder="Username" ngModel name="username" required>
+  <input class="form-control" placeholder="Code" ngModel name="code" required>
+  <button type="submit" mdbBtn color="red" class="waves-light" mdbWavesEffect>Verify</button>
+</form>
