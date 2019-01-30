@@ -1,24 +1,18 @@
+/**
+ * @author Max and JeremyS
+ */
+
 export class Admin {
 
     id: number;
-    username: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    // cognitoStuff: ???
+    name: string;
 
     constructor(
         id: number,
-        username: string,
-        firstname: string,
-        lastname: string,
-        email: string
+        name: string
     ) {
         this.id = id;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
+        this.name = name;
     }
 
 }

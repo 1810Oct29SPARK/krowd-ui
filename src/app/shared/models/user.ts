@@ -1,3 +1,8 @@
+/**
+ * @author Max and JeremyS
+ */
+
+import { Admin } from './admin';
 
 export class User {
 
@@ -9,8 +14,9 @@ export class User {
     reputation: number;
     flagScore: number;
     photoUrl: string;
-    // cognitoStuff: ???
+    cognitoStuff: string;
     accountStatus: number;
+    roleId: Admin;
 
 constructor(
     id: number,
@@ -21,7 +27,8 @@ constructor(
     reputation: number,
     flagScore: number,
     accountStatus: number,
-    photoUrl: string
+    photoUrl: string,
+    roleId: Admin
 ) {
     this.id = id;
     this.username = username;
@@ -32,6 +39,7 @@ constructor(
     this.flagScore = flagScore;
     this.accountStatus = accountStatus;
     this.photoUrl = photoUrl;
+    this.roleId = roleId;
 }
 
 }
