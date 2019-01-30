@@ -24,13 +24,10 @@ export class UserProfileComponent implements OnInit {
   public comment_button_text: any = 'Show My Comments';
   closeResult: string;
   response: any = null;
-<<<<<<< HEAD
   attendingEvents = [];
   eventList2 = [];
   userComment = [];
 
-=======
->>>>>>> cac8d2fad5a8c0ee749fd05ca346e175322f5b10
   selectedFile: File = null;
   imageURL: string;
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
@@ -50,11 +47,8 @@ export class UserProfileComponent implements OnInit {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
     });
-<<<<<<< HEAD
     this.getEventsByUserId();
     this.getCommetsByUserId();
-=======
->>>>>>> cac8d2fad5a8c0ee749fd05ca346e175322f5b10
   }
 
   toggleProfile() {
@@ -174,22 +168,3 @@ export class UserProfileComponent implements OnInit {
 
   }
 }
-<<<<<<< HEAD
-=======
-  upload() {
-    this.loading = true;
-    this.uploader.uploadAll();
-    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-      let res: any = JSON.parse(response);
-      console.log(res);
-      this.imageURL = res.url;
-      console.log(this.imageURL);
-      this.picture = this.imageURL;
-    };
-    this.uploader.onErrorItem = function (fileItem, response, status, headers) {
-      console.info('onErrorItem', fileItem, response, status, headers);
-    };
-
-  }
-}
->>>>>>> cac8d2fad5a8c0ee749fd05ca346e175322f5b10

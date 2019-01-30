@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
 import { Observable } from 'rxjs';
-<<<<<<< HEAD
-import { HttpService } from '../../services/http/http.service';
-=======
->>>>>>> cac8d2fad5a8c0ee749fd05ca346e175322f5b10
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
@@ -30,11 +26,7 @@ export class EventsService {
   }
 
   getAllEvents() {
-<<<<<<< HEAD
-    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/all')
-=======
     return this.httpClient.get<Event[]>('http://localhost:8085/event/all')
->>>>>>> cac8d2fad5a8c0ee749fd05ca346e175322f5b10
     .map((events) => {
       let eventData = events;
       return eventData;
@@ -126,24 +118,6 @@ export class EventsService {
       );
   }
 
-<<<<<<< HEAD
-=======
-  // getEventsByUserId(userid: number) {
-  //   return this.httpClient.get<Event[]>(`http://localhost:8085/byUser/${userid}`)
-  //     .map(
-  //       (event: any[]) => {
-  //         console.log(event);
-  //       },
-  //     )
-  //     .catch(
-  //       (error) => {
-  //         console.log('EventsService: @getEventsByUserId()');
-  //         return Observable.throw(error);
-  //       }
-  //     );
-  // }
-
->>>>>>> cac8d2fad5a8c0ee749fd05ca346e175322f5b10
   registerForEvent(eventId: number, userId: number) {
     return this.httpClient.post(`http://localhost:8085/userEvent/addUserEvent`, eventId);
   }
