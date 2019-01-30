@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EventsService } from 'src/app/core/services/events/events.service';
+import { CommentsService } from 'src/app/core/services/comments/comments.service';
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -19,10 +24,31 @@ export class UserProfileComponent implements OnInit {
   public comment_button_text: any = 'Show My Comments';
   closeResult: string;
   response: any = null;
+  attendingEvents = [];
+  eventList2 = [];
+  userComment = [];
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal) { }
+  selectedFile: File = null;
+  imageURL: string;
+  picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+
+  uploader: CloudinaryUploader = new CloudinaryUploader(
+    new CloudinaryOptions({ cloudName: 'dhazivqjc', uploadPreset: 'zalhcbr6' })
+  );
+
+  loading: any;
+
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService,
+    private eventService: EventsService, private commentService: CommentsService) { }
+
+  cognitoUsername: string;
 
   ngOnInit() {
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+    });
+    this.getEventsByUserId();
+    this.getCommetsByUserId();
   }
 
   toggleProfile() {
@@ -74,4 +100,71 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  getEventsByUserId() {
+    let userId: number = parseInt(sessionStorage.getItem('id'), 10);
+    this.eventService.getEventsByUserId(userId)
+      .subscribe(
+        (events) => {
+          for (let event of events) {
+            this.attendingEvents.push(event);
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.attendingEvents;
+  }
+
+  getAllEvents() {
+    this.eventService.getAllEvents()
+      .subscribe(
+        (events) => {
+          for (let event of events) {
+            this.eventList2.push(event);
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.eventList2;
+  }
+
+  getCommetsByUserId() {
+    let userId: number = parseInt(sessionStorage.getItem('id'), 10);
+    this.commentService.getEventsByUserId(userId)
+      .subscribe(
+        (comments) => {
+          console.log(comments);
+          // for (let comment of comments) {
+          //   console.log('comments');
+          //   this.userComment.push(comment);
+          // }
+          this.userComment.push(comments);
+          console.log('after loop' + this.userComment);
+        },
+        (error) => console.log(error)
+      );
+    return this.userComment;
+  }
+
+
+  upload() {
+    this.loading = true;
+    this.uploader.uploadAll();
+    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+      let res: any = JSON.parse(response);
+      console.log(res);
+      this.imageURL = res.url;
+      console.log(this.imageURL);
+      this.picture = this.imageURL;
+    };
+    this.uploader.onErrorItem = function (fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+    };
+
+  }
 }

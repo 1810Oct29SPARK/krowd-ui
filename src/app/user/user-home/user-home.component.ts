@@ -4,7 +4,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from '../../shared/models/comment';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
-// import { CommentsService } from '../../core/services/comments/comments.service';
+import { CommentsService } from '../../core/services/comments/comments.service';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-home',
@@ -16,18 +18,19 @@ export class UserHomeComponent implements OnInit {
   closeResult: string;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService,
-    // private commentService: CommentsService
-    ) { }
+    private commentService: CommentsService, private http: HttpClient) { }
 
   events: Event[] = [];
   singleEvent: any = null;
   eventList2 = [];
-  eventId: any = 1;
+  eventId: any = 10;
   comments: Comment[] = [];
   eventList = [];
   toggle: boolean = false;
   flagNewEvent: any;
   updateEvent: any;
+  userId: any = 2;
+  submitted = false;
 
   ontoggle() {
     if (this.toggle === true) {
@@ -91,31 +94,63 @@ export class UserHomeComponent implements OnInit {
     return this.singleEvent;
   }
 
-  // getCommentByEventId(value) {
-  //   console.log(value);
-  //   this.commentService.getCommentByEventId(value)
-  //     .subscribe(
-  //       (comment) => {
-  //         console.log(event);
-  //         this.comments = comment;
-  //       },
-  //       (error) => console.log(error)
-  //     );
-  //   return this.comments;
-  // }
-
-  flagEvent(value) {
+  getCommentByEventId(value) {
     console.log(value);
-    this.eventService.updateEvent(value)
+    this.commentService.getCommentByEventId(value)
       .subscribe(
-        (event) => {
+        (comment) => {
           console.log(event);
-          this.updateEvent = event;
-          this.updateEvent.flag = 1;
-          this.flagNewEvent = this.updateEvent;
+          this.comments = comment;
         },
         (error) => console.log(error)
       );
+    return this.comments;
+  }
+
+  // flagEvent(value) {
+  //   console.log(value);
+  //   this.eventService.updateEvent(value)
+  //     .subscribe(
+  //       (event) => {
+  //         console.log(event);
+  //         this.updateEvent = event;
+  //         this.updateEvent.flag = 1;
+  //         this.flagNewEvent = this.updateEvent;
+  //       },
+  //       (error) => console.log(error)
+  //     );
+  // }
+
+  registerForEvent(form: NgForm) {
+    this.http.post('http://localhost:8085/userEvent/addUserEvent', {
+      'userId': this.userId,
+      'eventId': this.eventId,
+    }).subscribe((result) => {
+    });
+    this.submitted = true;
+  }
+
+  flagEvent(value) {
+    this.flagNewEvent = value;
+    this.flagNewEvent.flag = 1;
+    console.log(value);
+    this.http.put('http://localhost:8085/event/update', {
+        'eventID' : this.flagNewEvent.id,
+        'eventName' : this.flagNewEvent.name,
+        'eventCategory' : this.flagNewEvent.categoryId.id,
+        'eventDate' : this.flagNewEvent.date,
+        'eventAddress' : this.flagNewEvent.address.streetAddress,
+        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
+        'eventCity' : this.flagNewEvent.address.city,
+        'eventState' : this.flagNewEvent.address.state,
+        'eventZip' : this.flagNewEvent.address.zip,
+        'eventDescription' : this.flagNewEvent.description,
+        'eventFlag' : this.flagNewEvent.flag,
+        'userID' : this.flagNewEvent.userId.id,
+        'eventPhotoID' : this.flagNewEvent.picture
+    }).subscribe((result) => {
+    });
+    this.submitted = true;
   }
 
 }

@@ -32,60 +32,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Div for 5 Recent events -->
-  <div class="col-md-12 justify-content-between">
-    <h4> Recent Events </h4>
-    <br>
-    <div id="current-events">
-      <!-- <div class="card-group" *ngFor="Revent of Recent-events"> -->
-      <div class="card-group">
-        <div class="col-md-4">
-          <div class="card" (click)="open(allEvent)">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-              <div class="card-body">
-                <h6 class="small text-wide p-b-2">Insight</h6>
-                <h2>
-                  Host Event #1
-                </h2>
-                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card" (click)="open(allEvent)">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-              <div class="card-body">
-                <h6 class="small text-wide p-b-2">Insight</h6>
-                <h2>
-                  Host Event #1
-                </h2>
-                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card" (click)="open(allEvent)">
-            <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-              <div class="card-body">
-                <h6 class="small text-wide p-b-2">Insight</h6>
-                <h2>
-                  Host Event #1
-                </h2>
-                <p> This is Host Event #1's description. Hopefully it stays centers like it is. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 <br>
 <!--  -->
@@ -110,9 +56,15 @@
         <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
       </div>
       <div class="modal-footer">
+<<<<<<< HEAD
         <button type="button" class="btn btn-outline-success" (click)="modal.close('Dismiss clicked')">
           Flag This Event</button>
         <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">
+=======
+        <button type="button" class="btn btn-outline-success" (click)="flagEvent(singleEvent)">
+          Flag This Event</button>
+        <button type="button" class="btn btn-outline-warning" (click)="registerForEvent()">
+>>>>>>> 54ae5f03f1265babe165570d5c888df66bb60cbd
           Register Now!</button>
       </div>
     </mat-tab>

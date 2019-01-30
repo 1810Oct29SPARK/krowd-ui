@@ -1,50 +1,44 @@
-export class Event {
+/**
+ * @author Max and JeremyS
+ */
 
+import { Category } from './category';
+import { User } from './user';
+
+
+export class Event {
     id: number;
     name: string;
-    category: number;
-    date: Date;
-    time: any; // Optional
-    address: string;
-    apartment: string;
-    city: string;
-    state: string;
-    zip: number;
-    ratingScore: number;
-    flag: number;
-    hostId: number;
     description: string;
     picture: string;
+    date: Date;
+    address: string;
+    score: number;
+    flag: number;
+    userId: User;
+    categoryId: Category;
 
     constructor(
         id: number,
         name: string,
-        category: number,
+        description: string,
+        picture: string,
         date: Date,
-        time: any,
         address: string,
-        apartment: string,
-        city: string,
-        state: string,
-        zip: number,
-        ratingScore: number,
+        score: number,
         flag: number,
-        hostId: number,
-        picture: string
+        userId: User,
+        categoryId: Category,
     ) {
         this.id = id;
         this.name = name;
-        this.category = category;
+        this.description = description;
+        this.categoryId = categoryId;
         this.date = date;
-        this.time = time;
         this.address = address;
-        this.apartment = apartment;
-        this.city = city,
-            this.state = state,
-            this.zip = zip;
-        this.ratingScore = ratingScore;
+        this.score = score;
         this.flag = flag;
-        this.hostId = hostId;
+        this.userId = userId;
         this.picture = picture;
     }
 

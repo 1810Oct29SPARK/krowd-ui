@@ -21,7 +21,7 @@ export class CommentsService {
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, comment: Comment) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   getAllComments() {
@@ -39,8 +39,19 @@ export class CommentsService {
     return this.httpClient.get<Comment[]>(HttpService.baseUrl);
   }
 
-  getCommentsByUserId(userId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${userId}`);
+  getEventsByUserId(userid: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8085/comment/getById/${userid}`)
+      .map( (comments) => {
+          let userComments = comments;
+          return userComments;
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('EventsService: @getEventsByUserId()');
+          return Observable.throw(error);
+        }
+      );
   }
 
   getCommentByEventId(commentId: number) {

@@ -23,28 +23,29 @@ export class CognitoService {
   }
 
   // get the current authorized user from local storage
-  getCurrentAuthUser(): any{
-     return Auth.currentAuthenticatedUser()
-      .then(data => { 
-        return data })
+  getCurrentAuthUser(): any {
+    return Auth.currentAuthenticatedUser()
+      .then(data => {
+        return data;
+      })
       .catch(err => console.log(err));
   }
 
   // get the current session tokens from local storage
-  getCurrentSessionTokens(): any{
+  getCurrentSessionTokens(): any {
     return Auth.currentSession()
       .then(data => {
-        return data
+        return data;
       })
       .catch(err => console.log(err));
   }
 
   // send the access token to the server for session storage
-  sendAccessToken(accessToken: string): any{
+  sendAccessToken(accessToken: string): any {
     this.httpClient.post('', accessToken);
   }
 
-  async cognitoSignUp(username: string, password: string, email: string): Promise<void> {
+  async cognitoSignUp(username: string, email: string, password: string): Promise<void> {
     const user: any = await Auth.signUp({ username, password, attributes: { email } })
       .catch(err => console.log(err));
     console.log(user);
@@ -63,13 +64,13 @@ export class CognitoService {
 
   /**Sign In function used to authenticate the user with AWS Cognito.
    * If the user has a challengeName, it will require the user to do another step.
-   * This could be using a text/email for multi-factor authentication or changing their 
+   * This could be using a text/email for multi-factor authentication or changing their
    * password because it needs to be updated.
    * Cognito sends back the user, idToken, accessToken, and refreshToken.
    * We send the username from the user and the accessToken to the server to use the username and store
-   * the accessToken for verification purposes later on. 
+   * the accessToken for verification purposes later on.
   */
-   async cognitoSignIn(username: string, password: string, newPassword: string): Promise<void> {
+  async cognitoSignIn(username: string, password: string, newPassword: string): Promise<void> {
     try {
       const user: any = await Auth.signIn(username, password);
       if (user.challengeName === 'SMS_MFA' ||
@@ -81,16 +82,17 @@ export class CognitoService {
       } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
         const { requiredAttributes }: any = user.challengeParam;
 
-        const { username, email }: any = this.getInfoFromUserInput();
+        const { email }: any = this.getInfoFromUserInput();
         const loggedUser: any = await Auth.completeNewPassword(user, newPassword, { email });
       } else if (user.challengeName === 'MFA_SETUP') {
         Auth.setupTOTP(user);
       } else {
-        this.getCurrentAuthUser().then(authUser => { 
+        this.getCurrentAuthUser().then(authUser => {
           console.log(authUser.username);
         });
         this.getCurrentSessionTokens().then(tokens => {
           console.log(tokens.accessToken.jwtToken);
+          localStorage.setItem('accessToken', tokens.accessToken.jwtToken);
           this.sendAccessToken(tokens.accessToken.jwtToken);
         });
       }
@@ -106,8 +108,9 @@ export class CognitoService {
 
   }
 
-  amplifySignOut(){
+  amplifySignOut() {
     Auth.signOut()
       .catch(err => console.log(err));
+      localStorage.clear();
   }
 }

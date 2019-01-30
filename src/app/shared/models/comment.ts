@@ -1,29 +1,33 @@
+/**
+ * @author Max and JeremyS
+ */
+
 import { Time } from '@angular/common';
+import {User} from './user';
+import {Event} from './event';
 
 export class Comment {
 
     id: number;
-    description: string;
-
-    postedBy: number; // FK
-    time: any; // Optional
-
-    flagScore: number;
-    eventId: number; // FK
+    comment: string;
+    flag: number;
+    timestamp: any;
+    userId: User;
+    eventId: Event; 
 
     constructor(
         id: number,
-        description: string,
-        postedBy: number,
-        time: any,
-        flagScore: number,
-        eventId: number
+        comment: string,
+        userId: User,
+        timestamp: any,
+        flag: number,
+        eventId: Event
     ) {
         this.id = id;
-        this.description = description;
-        this.postedBy = postedBy;
-        this.time = time;
-        this.flagScore = flagScore;
+        this.comment = comment;
+        this.userId = userId;
+        this.timestamp = timestamp;
+        this.flag = flag;
         this.eventId = eventId;
     }
 
