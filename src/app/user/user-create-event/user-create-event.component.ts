@@ -4,6 +4,7 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { HttpClient } from '@angular/common/http';
 import { Event } from '../../shared/models/event';
 import { EventsService } from '../../core/services/events/events.service';
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 
 @Component({
   selector: 'app-user-create-event',
@@ -13,6 +14,8 @@ import { EventsService } from '../../core/services/events/events.service';
 export class UserCreateEventComponent implements OnInit {
 
   submitted = false;
+
+  cognitoUsername: string;
 
   eventName: any = null;
   eventAddress: any = null;
@@ -37,9 +40,12 @@ export class UserCreateEventComponent implements OnInit {
 
   loading: any;
 
-  constructor(private http: HttpClient, private eventservice: EventsService) { }
+  constructor(private http: HttpClient, private eventservice: EventsService, public cognitoService: CognitoService) { }
 
   ngOnInit() {
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+    });
   }
 
   createEvent(form: NgForm) {

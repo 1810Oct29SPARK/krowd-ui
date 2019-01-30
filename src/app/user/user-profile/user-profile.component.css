@@ -87,3 +87,14 @@ td {
 a {
   text-decoration: none;
 }
+
+#profile-essentials {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+#newImage {
+  height: 150px;
+  width: auto;
+}
