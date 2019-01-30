@@ -76,8 +76,8 @@ export class UserHomeComponent implements OnInit {
         .subscribe (user => {
           this.user = user;
           console.log(this.user);
-          // this.userId = parseInt(this.user.id);
-          // console.log(this.userId);
+          this.userId = parseInt(this.user.id, 10);
+          console.log(this.userId);
         }
           );
     });
