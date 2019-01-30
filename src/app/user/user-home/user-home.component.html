@@ -50,7 +50,7 @@
         <h4>Event Description</h4>
         <p>{{singleEvent?.description}}</p>
         <h4>Date & Time</h4>
-        <p>{{singleEvent?.date}}</p>
+        <p>{{singleEvent?.date | date}}</p>
         <h4>Location</h4>
         <p>{{singleEvent?.address.streetAddress}}</p>
         <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
