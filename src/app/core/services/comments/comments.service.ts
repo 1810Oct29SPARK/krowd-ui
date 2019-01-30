@@ -25,7 +25,7 @@ export class CommentsService {
 
 
   getAllComments() {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl);
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'comment/getallcomments');
   }
 
   addComment(comment: Comment) {
@@ -62,5 +62,10 @@ export class CommentsService {
       );
   }
 
+  flagComment(commentId: number) {
+    return this.httpClient.post(HttpService.baseUrl + 'comment/flagcomment', {
+      "id": commentId
+    })
+  }
 
 }

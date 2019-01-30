@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CognitoService } from '../services/cognito/cognito.service';
+import { UsersService } from '../services/users/users.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,13 +28,14 @@ export class LoginComponent {
 
   disableSelect = new FormControl(false);
 
-  constructor(public dialog: MatDialog, public cognitoService: CognitoService) { }
+  constructor(public dialog: MatDialog, public cognitoService: CognitoService, public userService: UsersService) { }
 
   cognitoSignIn(form: NgForm) {
     const username: string = form.value.username;
     const password: string = form.value.password;
     const newPassword: string = form.value.newPassword;
     this.cognitoService.cognitoSignIn(username, password, newPassword);
+
   }
 
 }

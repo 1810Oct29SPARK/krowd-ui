@@ -23,6 +23,7 @@ export class UserAllEventsComponent implements OnInit {
   comments: Comment[] = [];
   flagNewEvent: any;
   updateEvent: any;
+  commentId: any;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal,
     private eventService: EventsService, private commentService: CommentsService) { }
@@ -56,6 +57,9 @@ export class UserAllEventsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEvents();
+    this.commentService.getAllComments().subscribe((data) => {
+      console.log(data);
+    })
   }
 
   getAllEvents() {
@@ -141,6 +145,13 @@ export class UserAllEventsComponent implements OnInit {
       },
       (error) => console.log(error)
     );
+  }
+
+  flagComment(commentId) {
+    console.log('flagComment() triggered!')
+    this.commentService.flagComment(commentId).subscribe((comments) => {
+      console.log(comments);
+    })
   }
 
 }

@@ -58,6 +58,8 @@
     <mat-tab (click)="getComments" label="View Comments">
       <div id="maincommentdiv">
         <h4 class="centerize">Comments</h4>
+<!-- May have to replace 6 with this.comments.id-->
+        <button type="button" (click)="flagComment(6)"> Flag Comment </button>
 
         <!-- comment outline-->
         <div class="row commentdiv col-12" *ngFor="let comment of comments">
@@ -66,7 +68,7 @@
             <span id="comment-metadata">
               <p>User: username &nbsp; &nbsp; created</p>
             </span>
-            <i class="fas fa-flag"></i>
+            
           </div>
         </div>
         <div [hidden]="!commentsList.length == 0">
