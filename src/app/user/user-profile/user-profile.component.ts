@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EventsService } from 'src/app/core/services/events/events.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,10 +20,13 @@ export class UserProfileComponent implements OnInit {
   public comment_button_text: any = 'Show My Comments';
   closeResult: string;
   response: any = null;
+  attendingEvents = [];
+  eventList2 = [];
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
 
   ngOnInit() {
+    this.getEventsByUserId();
   }
 
   toggleProfile() {
@@ -72,6 +76,39 @@ export class UserProfileComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  getEventsByUserId() {
+    let userId: number = parseInt(sessionStorage.getItem('id'), 10);
+    this.eventService.getEventsByUserId(userId)
+      .subscribe(
+        (events) => {
+          for (let event of events) {
+            this.attendingEvents.push(event);
+            if (event.eventPhotoID === null) {
+              event.eventPhotoID = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.attendingEvents;
+  }
+
+  getAllEvents() {
+    this.eventService.getAllEvents()
+      .subscribe(
+        (events) => {
+          for (let event of events) {
+            this.eventList2.push(event);
+            if (event.eventPhotoID === null) {
+              event.eventPhotoID = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            }
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.eventList2;
   }
 
 }

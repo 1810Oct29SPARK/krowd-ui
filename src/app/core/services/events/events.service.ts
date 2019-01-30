@@ -39,6 +39,22 @@ export class EventsService {
       );
   }
 
+  getEventsByUserId(userid: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userid}`)
+      .map( (events) => {
+          console.log(event);
+          let userEventData = events;
+          return userEventData;
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('EventsService: @getEventsByUserId()');
+          return Observable.throw(error);
+        }
+      );
+  }
+
   getAllFlaggedEvents() {
     return this.httpClient.get<Event[]>('http://localhost:8085/event/byFlag')
     .map((events) => {
@@ -103,20 +119,20 @@ export class EventsService {
       );
   }
 
-  getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/byUser/${userid}`)
-      .map(
-        (event: any[]) => {
-          console.log(event);
-        },
-      )
-      .catch(
-        (error) => {
-          console.log('EventsService: @getEventsByUserId()');
-          return Observable.throw(error);
-        }
-      );
-  }
+  // getEventsByUserId(userid: number) {
+  //   return this.httpClient.get<Event[]>(`http://localhost:8085/byUser/${userid}`)
+  //     .map(
+  //       (event: any[]) => {
+  //         console.log(event);
+  //       },
+  //     )
+  //     .catch(
+  //       (error) => {
+  //         console.log('EventsService: @getEventsByUserId()');
+  //         return Observable.throw(error);
+  //       }
+  //     );
+  // }
 
   registerForEvent(eventId: number, userId: number) {
     return this.httpClient.post(`http://localhost:8085/userEvent/addUserEvent`, eventId);
