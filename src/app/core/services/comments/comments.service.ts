@@ -54,8 +54,8 @@ export class CommentsService {
       );
   }
 
-  getCommentByEventId(commentId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${commentId}`);
+  getCommentByUserId(userId: number) {
+    return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByUser/${userId}`);
   }
 
   getFlaggedComments(flagScore: number) {

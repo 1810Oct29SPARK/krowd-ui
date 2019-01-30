@@ -94,18 +94,18 @@ export class UserHomeComponent implements OnInit {
     return this.singleEvent;
   }
 
-  getCommentByEventId(value) {
-    console.log(value);
-    this.commentService.getCommentByEventId(value)
-      .subscribe(
-        (comment) => {
-          console.log(event);
-          this.comments = comment;
-        },
-        (error) => console.log(error)
-      );
-    return this.comments;
-  }
+  // getCommentByEventId(value) {
+  //   console.log(value);
+  //   this.commentService.getCommentByEventId(value)
+  //     .subscribe(
+  //       (comment) => {
+  //         console.log(event);
+  //         this.comments = comment;
+  //       },
+  //       (error) => console.log(error)
+  //     );
+  //   return this.comments;
+  // }
 
   // flagEvent(value) {
   //   console.log(value);

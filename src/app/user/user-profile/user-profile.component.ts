@@ -135,16 +135,16 @@ export class UserProfileComponent implements OnInit {
 
   getCommetsByUserId() {
     let userId: number = parseInt(sessionStorage.getItem('id'), 10);
-    this.commentService.getEventsByUserId(userId)
+    this.commentService.getCommentByUserId(userId)
       .subscribe(
         (comments) => {
           console.log(comments);
-          // for (let comment of comments) {
-          //   console.log('comments');
-          //   this.userComment.push(comment);
-          // }
-          this.userComment.push(comments);
-          console.log('after loop' + this.userComment);
+          for (let comment of comments) {
+            console.log('comments');
+            this.userComment.push(comment);
+          }
+          // this.userComment.push(comments);
+          // console.log('after loop' + this.userComment);
         },
         (error) => console.log(error)
       );
