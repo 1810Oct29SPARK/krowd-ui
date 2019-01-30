@@ -144,7 +144,6 @@ export class UserProfileComponent implements OnInit {
           //   this.userComment.push(comment);
           // }
           this.userComment.push(comments);
-          console.log('after loop' + this.userComment);
         },
         (error) => console.log(error)
       );
