@@ -79,4 +79,7 @@ export class CommentsService {
     });
   }
 
+  getCommentsByEventId(eventId: number) {
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + 'comment/getByEvent/' + eventId);
+  }
 }

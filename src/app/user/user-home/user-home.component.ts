@@ -7,6 +7,8 @@ import { Event } from 'src/app/shared/models/event';
 import { CommentsService } from '../../core/services/comments/comments.service';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 
 @Component({
   selector: 'app-user-home',
@@ -18,7 +20,7 @@ export class UserHomeComponent implements OnInit {
   closeResult: string;
 
   constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService,
-    private commentService: CommentsService, private http: HttpClient) { }
+    private commentService: CommentsService, private http: HttpClient, public userService: UsersService, public cognitoService: CognitoService) { }
 
   events: Event[] = [];
   singleEvent: any = null;
@@ -31,7 +33,18 @@ export class UserHomeComponent implements OnInit {
   updateEvent: any;
   userId: any = 2;
   submitted = false;
+  cognitoUsername: string;
+  commentList = [];
+  commentList2 = [];
+  commentListFinal = [];
 
+  getUser(username:string) {
+    console.log(username);
+    this.userService.getUserByUsername(username)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
   ontoggle() {
     if (this.toggle === true) {
       this.toggle = false;
@@ -43,6 +56,7 @@ export class UserHomeComponent implements OnInit {
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      console.log(result);
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -61,6 +75,11 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEvents();
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+      this.getUser(this.cognitoUsername)
+    })
+    
   }
 
   showModal() {
@@ -77,9 +96,12 @@ export class UserHomeComponent implements OnInit {
               event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
+          console.log(events);
+         
         },
         (error) => console.log(error)
       );
+      console.log(this.eventList2);
     return this.eventList2;
   }
 
@@ -88,12 +110,26 @@ export class UserHomeComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
+          console.log(value);
+          this.getCommentsByEventId(value);
         },
         (error) => console.log(error)
       );
     return this.singleEvent;
   }
 
+  getCommentsByEventId(eventId: any) {
+    console.log(eventId);
+    this.commentService.getCommentsByEventId(eventId).subscribe((comments) => {
+      for (let comment of comments) {
+        if (comment.eventId.id == eventId) {
+        this.commentListFinal.push(comment);
+        console.log(comment);
+        }
+      }
+      return(this.commentListFinal);
+    })
+  }
   // getCommentByEventId(value) {
   //   console.log(value);
   //   this.commentService.getCommentByEventId(value)

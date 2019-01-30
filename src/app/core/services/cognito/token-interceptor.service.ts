@@ -16,7 +16,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     request = request.clone(
       {
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          Authorization: localStorage.getItem('accessToken')
         }
       });
     return next.handle(request);
