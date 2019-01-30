@@ -3,6 +3,11 @@ import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
 
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -20,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   public comment_button_text: any = 'Show My Comments';
   closeResult: string;
   response: any = null;
+<<<<<<< HEAD
   attendingEvents = [];
   eventList2 = [];
 
@@ -27,6 +33,26 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getEventsByUserId();
+=======
+  selectedFile: File = null;
+  imageURL: string;
+  picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+
+  uploader: CloudinaryUploader = new CloudinaryUploader(
+    new CloudinaryOptions({ cloudName: 'dhazivqjc', uploadPreset: 'zalhcbr6' })
+  );
+
+  loading: any;
+
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService) { }
+
+  cognitoUsername: string;
+
+  ngOnInit() {
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+    });
+>>>>>>> 0c87891fcd16f721e3de36af9fb2b36155d79f7b
   }
 
   toggleProfile() {
@@ -78,6 +104,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   getEventsByUserId() {
     let userId: number = parseInt(sessionStorage.getItem('id'), 10);
     this.eventService.getEventsByUserId(userId)
@@ -112,3 +139,21 @@ export class UserProfileComponent implements OnInit {
   }
 
 }
+=======
+  upload() {
+    this.loading = true;
+    this.uploader.uploadAll();
+    this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
+      let res: any = JSON.parse(response);
+      console.log(res);
+      this.imageURL = res.url;
+      console.log(this.imageURL);
+      this.picture = this.imageURL;
+    };
+    this.uploader.onErrorItem = function (fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+    };
+
+  }
+}
+>>>>>>> 0c87891fcd16f721e3de36af9fb2b36155d79f7b

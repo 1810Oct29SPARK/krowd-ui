@@ -27,6 +27,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class LandingComponent {
 
+
+
   @Input() position = 'down';
 
   // delare boolean values for the info and items on the profile page

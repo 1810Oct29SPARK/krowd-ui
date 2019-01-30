@@ -1,0 +1,20 @@
+{
+    "projectName": "krowdui",
+    "projectPath": "C:\\Users\\jbj30\\Documents\\Revature\\Workspace\\gitrepos\\Krowd\\krowd-ui",
+    "defaultEditor": "code",
+    "frontendHandler": {
+        "javascript": "C:\\Users\\jbj30\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-frontend-javascript"
+    },
+    "javascript": {
+        "framework": "angular",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "dist",
+            "BuildCommand": "npm.cmd run-script build",
+            "StartCommand": "ng serve"
+        }
+    },
+    "providers": {
+        "awscloudformation": "C:\\Users\\jbj30\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-provider-awscloudformation"
+    }
+}

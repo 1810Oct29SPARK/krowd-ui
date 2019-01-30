@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Please Enter Info</h2>
+<!-- <h2 mat-dialog-title>Please Enter Info</h2>
 <mat-dialog-content class="mat-typography">
   <div class="example-container">
     <mat-form-field>
@@ -31,4 +31,12 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Join the Krowd!</button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->
+
+<h2 mat-dialog-title>Please Enter Your Information</h2>
+<form (ngSubmit)="cognitoSignUp(f)" #f="ngForm">
+  <input class="form-control" placeholder="Username" ngModel name="username" required>
+  <input class="form-control" placeholder="Email" ngModel name="email" required>
+  <input type="password" class="form-control" placeholder="Password" ngModel name="password" required>
+  <button type="submit" mdbBtn color="red" class="waves-light" mdbWavesEffect>Create User</button>
+</form>

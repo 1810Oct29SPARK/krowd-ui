@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,7 +20,12 @@ import { EventsComponent } from './events/events.component';
 import { EventsService } from './services/events/events.service';
 import { UsersService } from './services/users/users.service';
 import { CommentsService } from './services/comments/comments.service';
-import { AdminService } from './services/admin/admin.service';
+
+
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { CognitoService } from './services/cognito/cognito.service';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { AdminService } from './services/admin/admin.service';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    EventsComponent
+    EventsComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     CommonModule,
@@ -41,11 +47,19 @@ import { AdminService } from './services/admin/admin.service';
     MaterialModule,
     CoreRoutingModule,
     Ng2CloudinaryModule,
-    FileUploadModule
+    FileUploadModule,
+    AmplifyAngularModule
   ],
   exports: [
     RouterModule
   ],
-  providers: [EventsService, UsersService, CommentsService, AdminService]
+
+  providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }]
+
 })
 export class CoreModule { }
