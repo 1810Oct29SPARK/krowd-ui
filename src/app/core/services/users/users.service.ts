@@ -90,7 +90,7 @@ export class UsersService {
   }
 
   getUsersByAccountStatus(accountStatus: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${accountStatus}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `${accountStatus}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -105,7 +105,7 @@ export class UsersService {
   }
 
   getFlaggedUsers(flagScore: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -119,7 +119,7 @@ export class UsersService {
       );
   }
   getUsersAttendingEvent(eventId: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/userEvent/userByEvent/${eventId}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `userEvent/userByEvent/${eventId}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -134,18 +134,18 @@ export class UsersService {
   }
 
   addAttendee(userId: number, eventId: number) {
-    return this.httpClient.post(`http:/localhost:8085/userEvent/addUserEvent`, { uId: userId, eId: eventId });
+    return this.httpClient.post(HttpService.baseUrl + `userEvent/addUserEvent`, { uId: userId, eId: eventId });
   }
 
   //
   // not ready : server-Side does not have the referencing method
   //
   deleteAttendee(userId: number, eventId: number) {
-    return this.httpClient.post(`http:/localhost:8083/${userId}/${eventId}`, { uId: userId, eId: eventId });
+    return this.httpClient.post(HttpService.baseUrl + `${userId}/${eventId}`, { uId: userId, eId: eventId });
   }
 
   getUserReputation(userId: number) {
-    return this.httpClient.get(`http://localhost:8085/userEvent/getReputation/${userId}`)
+    return this.httpClient.get(HttpService.baseUrl + `userEvent/getReputation/${userId}`)
       .map(
         (event: any) => {
           console.log(event);

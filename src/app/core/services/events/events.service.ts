@@ -123,7 +123,7 @@ export class EventsService {
   // }
 
   registerForEvent(eventId: number, userId: number) {
-    return this.httpClient.post('http://localhost:8085/userEvent/addUserEvent', {
+    return this.httpClient.post(HttpService.baseUrl + 'userEvent/addUserEvent', {
       'userId': userId,
       'eventId': eventId,
     })
