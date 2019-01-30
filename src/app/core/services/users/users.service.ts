@@ -50,6 +50,22 @@ export class UsersService {
   //   return this.httpClient.put(`http://localhost:8083`), {'id': id, 'Created': Date};
   // }
 
+
+  getUserByUsername(username: string) {
+    return this.httpClient.get<User[]>(HttpService.baseUrl + `user/${username}`)
+    .map(
+      (user: any) => {
+        console.log(user);
+      }
+    )
+    .catch(
+      (error) => {
+        console.log('UserServiceError: @getUserByUsername');
+        return Observable.throw(error);
+      }
+    )
+  }
+
   getUserById(userid: number) {
     return this.httpClient.get<User[]>(HttpService.baseUrl + `user/${userid}`)
       .map(

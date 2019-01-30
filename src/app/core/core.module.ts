@@ -54,7 +54,7 @@ import { TokenInterceptorService } from './services/cognito/token-interceptor.se
     RouterModule
   ],
 
-  providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService,
+  providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
