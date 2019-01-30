@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,9 +21,14 @@ export class UserProfileComponent implements OnInit {
   closeResult: string;
   response: any = null;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService) { }
+
+  cognitoUsername: string;
 
   ngOnInit() {
+    this.cognitoService.getCurrentAuthUser().then(authUser => {
+      this.cognitoUsername = authUser.username;
+    });
   }
 
   toggleProfile() {

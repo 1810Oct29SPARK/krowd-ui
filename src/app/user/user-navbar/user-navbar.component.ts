@@ -15,15 +15,10 @@ export class UserNavbarComponent implements OnInit {
   public isCollapsed = true;
 
   cognitoUsername: string;
-  cognitoAccessToken: string;
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
-      console.log(this.cognitoAccessToken);
-    });
-    this.cognitoService.getCurrentSessionTokens().then(authToken => {
-      this.cognitoAccessToken = authToken.accessToken.jwtToken;
     });
   }
 
