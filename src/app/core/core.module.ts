@@ -26,6 +26,7 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { CognitoService } from './services/cognito/cognito.service';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
+import { AuthGaurdService } from './services/guard/auth-gaurd.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { TokenInterceptorService } from './services/cognito/token-interceptor.se
     RouterModule
   ],
 
-  providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService,
+  providers: [EventsService, UsersService, CommentsService, AmplifyService, AuthGaurdService, CognitoService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CognitoService } from '../services/cognito/cognito.service';
 import { UsersService } from '../services/users/users.service';
@@ -21,11 +21,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegisterComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
 
   constructor(
     public dialog: MatDialog,
