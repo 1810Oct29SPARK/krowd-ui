@@ -8,7 +8,6 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
-import { UserAllEventsComponent } from '../user/user-all-events/user-all-events.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -24,7 +23,6 @@ import { UsersService } from '../core/services/users/users.service';
     UserNavbarComponent,
     UserProfileComponent,
     UserAdminComponent,
-    UserAllEventsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
@@ -14,7 +14,15 @@ const routes: Routes = [
     loadChildren: '../user/user.module#UserModule',
     // canLoad: []
   },
-  { path: '', component: LandingComponent },
+  {
+    path: 'landing', component: LandingComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'confirm', component: ConfirmEmailComponent }
+    ]
+  },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 

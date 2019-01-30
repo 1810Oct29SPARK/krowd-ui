@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     const password: string = form.value.password;
     const firstname: string = form.value.firstname;
     const lastname: string = form.value.lastname;
-    this.cognitoService.cognitoSignUp(username, email, password)
+    this.cognitoService.cognitoSignUp(username, email, password);
     // .then((data) => {
     //   this.userService.registerUser(username, email, firstname, lastname);
     // }).catch(error => {
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   makeRequest() {

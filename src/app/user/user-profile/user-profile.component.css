@@ -22,15 +22,6 @@
   padding: 20px;
 }
 
-.card {
-  margin: 25px;
-  width: 17rem;
-}
-
-.card-padding {
-  padding: 20px;
-}
-
 p {
   margin: 0px 20px auto;
 }
@@ -39,10 +30,6 @@ p {
 .row-equal > div[class*="col-"] {
   display: flex;
   flex: 1 0 auto;
-}
-
-.row-equal .card {
-  width: 100%;
 }
 
 /* ensure equal card height inside carousel */
@@ -57,12 +44,6 @@ p {
 .carousel-inner > .row-equal.active.right {
   opacity: 0.5;
   display: flex;
-}
-
-/* control image height */
-.card-img-top-250 {
-  max-height: 250px;
-  overflow: hidden;
 }
 
 .btn {

@@ -28,13 +28,13 @@ export class UserAllEventsComponent implements OnInit {
   constructor(public dialog: MatDialog, private modalService: NgbModal,
     private eventService: EventsService, private commentService: CommentsService) { }
 
-    ontoggle() {
-      if (this.toggle === true) {
+  ontoggle() {
+    if (this.toggle === true) {
       this.toggle = false;
-        } else {
-        this.toggle = true;
-       }
-      }
+    } else {
+      this.toggle = true;
+    }
+  }
 
 
   open(content: any) {
@@ -59,7 +59,7 @@ export class UserAllEventsComponent implements OnInit {
     this.getAllEvents();
     this.commentService.getAllComments().subscribe((data) => {
       console.log(data);
-    })
+    });
   }
 
   getAllEvents() {
@@ -91,38 +91,38 @@ export class UserAllEventsComponent implements OnInit {
 
   getComments() {
     console.log('getComments clicked');
-    this.commentService.getCommentByEventId(this.eventId)
-        .subscribe(
-          (comments) => {
-            for (let comment of comments) {
-              console.log(comment);
-              // this.commentUserID = comment['user_id'];
-              // console.log(this.commentUserID);
-              // this.dataService.getUserById(this.commentUserID)
-              // .subscribe((res)=> {
-              //   console.log(res);
-              //   this.usercomment = {
-              //     username: res['username'],
-              //     picture: res['photo_url'],
-              //     comment: comment
-              //   }
-              //   console.log("New user comment:");
-              //   console.log(this.usercomment);
-              //   this.commentsList.push(this.usercomment);
+    this.commentService.getCommentByUserId(this.eventId)
+      .subscribe(
+        (comments) => {
+          for (let comment of comments) {
+            console.log(comment);
+            // this.commentUserID = comment['user_id'];
+            // console.log(this.commentUserID);
+            // this.dataService.getUserById(this.commentUserID)
+            // .subscribe((res)=> {
+            //   console.log(res);
+            //   this.usercomment = {
+            //     username: res['username'],
+            //     picture: res['photo_url'],
+            //     comment: comment
+            //   }
+            //   console.log("New user comment:");
+            //   console.log(this.usercomment);
+            //   this.commentsList.push(this.usercomment);
 
-              // }
-              // )
-              }
-            },
-          (error) => console.log(error)
-          );
-        console.log('Comments list: ');
-        return this.commentsList;
+            // }
+            // )
+          }
+        },
+        (error) => console.log(error)
+      );
+    console.log('Comments list: ');
+    return this.commentsList;
   }
 
   getCommentByEventId(value) {
     console.log(value);
-    this.commentService.getCommentByEventId(value)
+    this.commentService.getCommentByUserId(value)
       .subscribe(
         (comment) => {
           console.log(event);
@@ -136,22 +136,22 @@ export class UserAllEventsComponent implements OnInit {
   flagEvent(value) {
     console.log(value);
     this.eventService.updateEvent(value)
-    .subscribe(
-      (event) => {
-        console.log(event);
-        this.updateEvent = event;
-        this.updateEvent.flag = 1;
-        this.flagNewEvent = this.updateEvent;
-      },
-      (error) => console.log(error)
-    );
+      .subscribe(
+        (event) => {
+          console.log(event);
+          this.updateEvent = event;
+          this.updateEvent.flag = 1;
+          this.flagNewEvent = this.updateEvent;
+        },
+        (error) => console.log(error)
+      );
   }
 
   flagComment(commentId) {
-    console.log('flagComment() triggered!')
+    console.log('flagComment() triggered!');
     this.commentService.flagComment(commentId).subscribe((comments) => {
       console.log(comments);
-    })
+    });
   }
 
 }

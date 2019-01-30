@@ -49,7 +49,7 @@
         <p>{{singleEvent?.address.city}}, {{singleEvent?.address.state}} {{singleEvent?.address.zip}}</p>
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-outline-success" (click)="modal.close('Dismiss clicked')">Flag This Event</button>
+        <button type="button" class="btn btn-outline-success" (click)="modal.close('Dismiss clicked')">Flag This Event</button>
         <button type="button" class="btn btn-outline-warning" (click)="modal.close('Dismiss clicked')">Register Now!</button>
       </div>
     </mat-tab>
@@ -58,7 +58,7 @@
     <mat-tab (click)="getComments" label="View Comments">
       <div id="maincommentdiv">
         <h4 class="centerize">Comments</h4>
-<!-- May have to replace 6 with this.comments.id-->
+        <!-- May have to replace 6 with this.comments.id-->
         <button type="button" (click)="flagComment(6)"> Flag Comment </button>
 
         <!-- comment outline-->
@@ -68,7 +68,7 @@
             <span id="comment-metadata">
               <p>User: username &nbsp; &nbsp; created</p>
             </span>
-            
+
           </div>
         </div>
         <div [hidden]="!commentsList.length == 0">
