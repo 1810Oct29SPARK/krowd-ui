@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
-
+import { CommentsService } from 'src/app/core/services/comments/comments.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
-
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 
 
@@ -25,15 +24,10 @@ export class UserProfileComponent implements OnInit {
   public comment_button_text: any = 'Show My Comments';
   closeResult: string;
   response: any = null;
-<<<<<<< HEAD
   attendingEvents = [];
   eventList2 = [];
+  userComment = [];
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
-
-  ngOnInit() {
-    this.getEventsByUserId();
-=======
   selectedFile: File = null;
   imageURL: string;
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
@@ -44,7 +38,8 @@ export class UserProfileComponent implements OnInit {
 
   loading: any;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService) { }
+  constructor(public dialog: MatDialog, private modalService: NgbModal, public cognitoService: CognitoService,
+    private eventService: EventsService, private commentService: CommentsService) { }
 
   cognitoUsername: string;
 
@@ -52,7 +47,8 @@ export class UserProfileComponent implements OnInit {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
     });
->>>>>>> 0c87891fcd16f721e3de36af9fb2b36155d79f7b
+    this.getEventsByUserId();
+    this.getCommetsByUserId();
   }
 
   toggleProfile() {
@@ -104,7 +100,6 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   getEventsByUserId() {
     let userId: number = parseInt(sessionStorage.getItem('id'), 10);
     this.eventService.getEventsByUserId(userId)
@@ -112,8 +107,8 @@ export class UserProfileComponent implements OnInit {
         (events) => {
           for (let event of events) {
             this.attendingEvents.push(event);
-            if (event.eventPhotoID === null) {
-              event.eventPhotoID = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
         },
@@ -128,8 +123,8 @@ export class UserProfileComponent implements OnInit {
         (events) => {
           for (let event of events) {
             this.eventList2.push(event);
-            if (event.eventPhotoID === null) {
-              event.eventPhotoID = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
         },
@@ -138,8 +133,25 @@ export class UserProfileComponent implements OnInit {
     return this.eventList2;
   }
 
-}
-=======
+  getCommetsByUserId() {
+    let userId: number = parseInt(sessionStorage.getItem('id'), 10);
+    this.commentService.getEventsByUserId(userId)
+      .subscribe(
+        (comments) => {
+          console.log(comments);
+          // for (let comment of comments) {
+          //   console.log('comments');
+          //   this.userComment.push(comment);
+          // }
+          this.userComment.push(comments);
+          console.log('after loop' + this.userComment);
+        },
+        (error) => console.log(error)
+      );
+    return this.userComment;
+  }
+
+
   upload() {
     this.loading = true;
     this.uploader.uploadAll();
@@ -156,4 +168,3 @@ export class UserProfileComponent implements OnInit {
 
   }
 }
->>>>>>> 0c87891fcd16f721e3de36af9fb2b36155d79f7b

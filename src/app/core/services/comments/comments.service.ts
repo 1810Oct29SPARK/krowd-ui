@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Comment } from '../../../shared/models/comment';
-import { HttpService } from '../../services/http/http.service'
+import { HttpService } from '../../services/http/http.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
@@ -14,14 +14,14 @@ import { Observable } from 'rxjs';
 })
 export class CommentsService {
   private comments: Comment[] = [];
-  
+
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application.json',
     'Accept': 'application/json',
     'Access-Control-Allow-Headers': 'Content-Type'
   });
 
-  constructor(private httpClient: HttpClient, comment: Comment) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   getAllComments() {
@@ -39,12 +39,23 @@ export class CommentsService {
     return this.httpClient.get<Comment[]>(HttpService.baseUrl);
   }
 
-  getCommentsByUserId(userId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${userId}`);
+  getEventsByUserId(userid: number) {
+    return this.httpClient.get<Event[]>(`http://localhost:8085/comment/getById/${userid}`)
+      .map( (comments) => {
+          let userComments = comments;
+          return userComments;
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('EventsService: @getEventsByUserId()');
+          return Observable.throw(error);
+        }
+      );
   }
 
   getCommentByEventId(commentId: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+ `${commentId}`);
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${commentId}`);
   }
 
   getFlaggedComments(flagScore: number) {

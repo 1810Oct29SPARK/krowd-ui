@@ -50,8 +50,8 @@ export class UserAdminComponent implements OnInit {
           console.log(events);
           for (let event of events) {
             this.flaggedEvents.push(event);
-            if (event.eventPhotoID === null) {
-              event.eventPhotoID = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+            if (event.picture === null) {
+              event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
         },

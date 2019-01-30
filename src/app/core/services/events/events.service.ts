@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
 import { Observable } from 'rxjs';
-import { HttpService } from '../../services/http/http.service'
+import { HttpService } from '../../services/http/http.service';
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
@@ -27,7 +27,7 @@ export class EventsService {
   }
 
   getAllEvents() {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl +'event/all')
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/all')
     .map((events) => {
       let eventData = events;
       return eventData;
@@ -43,7 +43,6 @@ export class EventsService {
   getEventsByUserId(userid: number) {
     return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userid}`)
       .map( (events) => {
-          console.log(event);
           let userEventData = events;
           return userEventData;
         },
@@ -119,38 +118,6 @@ export class EventsService {
         }
       );
   }
-
-<<<<<<< HEAD
-  // getEventsByUserId(userid: number) {
-  //   return this.httpClient.get<Event[]>(`http://localhost:8085/byUser/${userid}`)
-  //     .map(
-  //       (event: any[]) => {
-  //         console.log(event);
-  //       },
-  //     )
-  //     .catch(
-  //       (error) => {
-  //         console.log('EventsService: @getEventsByUserId()');
-  //         return Observable.throw(error);
-  //       }
-  //     );
-  // }
-=======
-  getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl + `byUser/${userid}`)
-      .map(
-        (event: any[]) => {
-          console.log(event);
-        },
-      )
-      .catch(
-        (error) => {
-          console.log('EventsService: @getEventsByUserId()');
-          return Observable.throw(error);
-        }
-      );
-  }
->>>>>>> 0c87891fcd16f721e3de36af9fb2b36155d79f7b
 
   registerForEvent(eventId: number, userId: number) {
     return this.httpClient.post(`http://localhost:8085/userEvent/addUserEvent`, eventId);
