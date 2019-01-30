@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -25,6 +25,8 @@ import { AdminService } from './services/admin/admin.service';
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { CognitoService } from './services/cognito/cognito.service';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { CognitoService } from './services/cognito/cognito.service';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    EventsComponent
+    EventsComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,11 @@ import { CognitoService } from './services/cognito/cognito.service';
   exports: [
     RouterModule
   ],
-  providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService]
+  providers: [EventsService, UsersService, CommentsService, AdminService, AmplifyService, CognitoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }]
 })
 export class CoreModule { }
