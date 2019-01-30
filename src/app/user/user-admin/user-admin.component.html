@@ -5,8 +5,8 @@
       <br>
       <!-- (3) For each event that is flagged, display it in the "Flagged Events" table -->
       <!-- *NgFor="let flagged of flagged-events"-->
-      <div id="flagged-events">
-        <table class="col-md-12" *ngFor="let flagged of flaggedEvents">
+      <div *ngFor="let flagged of flaggedEvents" id="flagged-events">
+        <table class="col-md-12">
         <tr class="eventList justify-content-between z-depth-2" (click)="open(eventFlag)">
           <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
             Then we populate the modal with the results. -->
@@ -15,7 +15,33 @@
           <td class="event-date"> <span class="align-middle"> {{flagged.date}} </span> </td>
           <td class="event-time"> <span class="align-middle"> Time </span> </td>
           <td class="event-location"> <span class="align-middle"> {{flagged.address.streetAddress}} </span> </td>
-        </tr>
+          <!-- <td>
+            <span class="buttons">
+              <button type="button" class="btn btn-outline-dark" color="warn">unflag</button>
+            </span> </td> -->
+            </tr>
+            <ng-template #eventFlag let-modal>
+              <div class="modal-header" (click)="modal.dismiss('Cross click')">
+                <h4 class="modal-title" id="modal-basic-title">{{ flagged.name}}</h4>
+                <button type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
+                <br>
+                <br>
+                <h4> Event Description </h4>
+                <p> {{flagged.description}} </p>
+                <br>
+                <h4>Date & Time </h4>
+                <p> {{flagged.date}} </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="unflagEvent(flagged);modal.dismiss('Cross click');">Dismiss</button>
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
+              </div>
+            </ng-template>
         </table>
       </div>
     </div>
@@ -26,7 +52,8 @@
   <br>
   <div id="comments">
     <!-- table created if there is anything in the response (user has made comments)-->
-    <table *ngIf="response !== null" class="table">
+    <table  class="table">
+        <!-- *ngIf="response !== null" -->
       <thead>
         <th scope="col">Event</th>
         <th scope="col">Comment</th>
@@ -35,18 +62,18 @@
       <tbody>
         <!-- creates a new row for each user comment, 
                         using the name of the event, the comment, and the event date-->
-        <tr *ngFor="let comment of commentsList" id="commentsList">
-          <a routerLink="/events/{{eventID}}">
-            <td> {{comment.event_id}} </td>
+        <tr *ngFor="let comment of flaggedComments" id="commentsList">
+          <a routerLink="/user/home}">
+            <td> {{comment.eventId.name}} </td>
           </a>
-          <td> {{comment.data}} </td>
+          <td> {{comment.comment}} </td>
           <td> {{comment.created | date }} </td>
           <td>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark">Dismiss</button>
+              <button type="button" class="btn btn-outline-dark" (click)="consoleFunc();unflagComment(comment);">Dismiss</button>
             </span>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark">Delete</button>
+              <button type="button" class="btn btn-outline-dark" (click)="consoleFunc();deleteComment(comment);consoleFunc();">Delete</button>
             </span>
           </td>
         </tr>
@@ -76,7 +103,7 @@
       <p> {{flaggedEvents.date}} </p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Dismiss</button>
+      <button type="button" class="btn btn-outline-dark" (click)="unflagEvent()">Dismiss</button>
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
     </div>
   </ng-template>

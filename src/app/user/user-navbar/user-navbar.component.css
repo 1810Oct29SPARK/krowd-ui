@@ -88,3 +88,8 @@ nav ul li a {
   color: #fff;
   display: none;
 }
+
+.space{
+  flex: auto;
+  
+}

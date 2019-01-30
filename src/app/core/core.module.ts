@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '../material.module';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CoreRoutingModule } from './core-routing.module';
 import { LandingComponent } from './landing/landing.component';
@@ -24,9 +25,13 @@ import { CommentsService } from './services/comments/comments.service';
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { CognitoService } from './services/cognito/cognito.service';
+import { User } from '../shared/models/user';
+import { Event } from '../shared/models/event';
+import { Comment } from '../shared/models/comment';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
 import { AuthGaurdService } from './services/guard/auth-gaurd.service';
+
 
 @NgModule({
   declarations: [
@@ -49,18 +54,20 @@ import { AuthGaurdService } from './services/guard/auth-gaurd.service';
     CoreRoutingModule,
     Ng2CloudinaryModule,
     FileUploadModule,
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    MatButtonModule
   ],
   exports: [
     RouterModule
   ],
 
+
   providers: [EventsService, UsersService, CommentsService, AmplifyService, AuthGaurdService, CognitoService,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }]
-
 })
 export class CoreModule { }

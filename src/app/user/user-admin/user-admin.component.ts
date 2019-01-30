@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
+import { Event } from '../../shared/models/event';
+import { HttpClient } from '@angular/common/http';
+import { Comment } from '../../shared/models/comment';
+import { HttpService } from 'src/app/core/services/http/http.service';
 
 @Component({
   selector: 'app-user-admin',
@@ -9,13 +13,17 @@ import { EventsService } from 'src/app/core/services/events/events.service';
   styleUrls: ['./user-admin.component.css']
 })
 export class UserAdminComponent implements OnInit {
-
+  toggle = false;
   response: any = null;
   closeResult: string;
   flaggedEvents = [];
+  flaggedComments = [];
   eventId: any = 1;
+  flagNewEvent: any;
+  flagNewComment: any;
+  commentToKill: any;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService) { }
+  constructor(public dialog: MatDialog, private http: HttpClient, private modalService: NgbModal, private eventService: EventsService) { }
 
   // (1) array with elements of type Event
 
@@ -41,7 +49,10 @@ export class UserAdminComponent implements OnInit {
 
   ngOnInit() {
     this.getAllFlaggedEvents();
+    this.getAllFlaggedComments();
   }
+
+consoleFunc() {console.log('fug man'); }
 
   getAllFlaggedEvents() {
     this.eventService.getAllFlaggedEvents()
@@ -60,4 +71,88 @@ export class UserAdminComponent implements OnInit {
     return this.flaggedEvents;
   }
 
+  getAllFlaggedComments() {
+    this.eventService.getFlaggedComments()
+      .subscribe(
+        (comments) => {
+          console.log(comments);
+          for (let comment of comments) {
+            this.flaggedComments.push(comment);
+          }
+        },
+        (error) => console.log(error)
+      );
+    return this.flaggedEvents;
+  }
+
+  // dismissFlaggedEvent(flagged: Event) {
+  //   flagged.flag = 0;
+  //   this.modalService.dismissAll();
+  //   console.log("pressed dismiss before");
+  //   this.eventService.updateEvent(flagged);
+  //   console.log("pressed dismiss after");
+  // }
+  // consoleFunc(flagged){console.log(flagged);}
+
+  unflagEvent(value) {
+    let index = this.flaggedEvents.indexOf(value);
+    this.flagNewEvent = value;
+    this.flagNewEvent.flag = 0;
+    console.log(value);
+    this.http.put(HttpService.baseUrl+'/event/update', {
+        'eventID' : this.flagNewEvent.id,
+        'eventName' : this.flagNewEvent.name,
+        'eventCategory' : this.flagNewEvent.categoryId.id,
+        'eventDate' : this.flagNewEvent.date,
+        'eventAddress' : this.flagNewEvent.address.streetAddress,
+        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
+        'eventCity' : this.flagNewEvent.address.city,
+        'eventState' : this.flagNewEvent.address.state,
+        'eventZip' : this.flagNewEvent.address.zip,
+        'eventDescription' : this.flagNewEvent.description,
+        'eventFlag' : this.flagNewEvent.flag,
+        'userID' : this.flagNewEvent.userId.id,
+        'eventPhotoID' : this.flagNewEvent.picture
+    }).subscribe((result) => {
+    });
+    this.flaggedEvents.splice(index,1);
+    // this.eventService.getAllFlaggedEvents();
+    // this should be changged
+  }
+  unflagComment(value) {
+    let index = this.flaggedComments.indexOf(value);
+    this.flagNewComment = value;
+    this.flagNewComment.flag = 0;
+    console.log(value);
+    this.http.post(HttpService.baseUrl+'/admin/unflagcomment', {
+      'id': this.flagNewComment.id,
+      'comment': this.flagNewComment.comment,
+      'flag': this.flagNewComment.flag,
+      'timestamp': this.flagNewComment.timestamp,
+      'userId': this.flagNewComment.userId,
+      'eventId': this.flagNewComment.eventId
+    }).subscribe((result) => {
+    });
+<<<<<<< HEAD
+    this.flaggedComments.splice(index,1);
+    //this should be changed
+=======
+    window.location.reload();
+    // this should be changed
+>>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
+
+  }
+
+  deleteComment(value) {
+    let index = this.flaggedComments.indexOf(value);
+    this.commentToKill = value;
+    this.http.post(HttpService.baseUrl+'/comment/deletecomment', {
+      'id':this.commentToKill.id
+    }).subscribe((result)=> {
+    });
+    this.flaggedComments.splice(index,1);
+  }
+
 }
+
+
