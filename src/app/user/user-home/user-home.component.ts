@@ -4,8 +4,12 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from '../../shared/models/comment';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
-import { CommentsService } from '../../core/services/comments/comments.service';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/shared/models/user';
+import { CommentsService } from 'src/app/core/services/comments/comments.service';
+import { Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
+import { CommentsService } from '../../core/services/comments/comments.service';
 import { HttpClient } from '@angular/common/http';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
@@ -32,6 +36,7 @@ export class UserHomeComponent implements OnInit {
   eventList2 = [];
   eventId: any = 10;
   comments: Comment[] = [];
+  comment: Comment;
   eventList = [];
   toggle: boolean = false;
   flagNewEvent: any;
@@ -113,6 +118,23 @@ export class UserHomeComponent implements OnInit {
         (error) => console.log(error)
       );
     return this.singleEvent;
+  }
+  onCommentCreated(form: NgForm) {
+    console.log('Hello World');
+    let comment: any = {
+      'id': 1,
+      'comment': form.value.data,
+      'flag': 0,
+      'timestamp': '2018-01-01T12:00',
+      'userId': 1,
+      'eventId': this.eventId
+    };
+    console.log(comment);
+    this.commentService.addComment(comment)
+      .subscribe(
+        (event) =>
+          this.comments.push(comment)
+      );
   }
 
   // getCommentByEventId(value) {
