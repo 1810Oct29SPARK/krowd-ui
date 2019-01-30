@@ -14,10 +14,10 @@ export class Event {
     picture: string;
     date: Date;
     address: string;
-    ratingScore: number;
+    score: number;
     flag: number;
-    hostId: User;
-    category: Category;
+    userId: User;
+    categoryId: Category;
 
     constructor(
         id: number,
@@ -26,20 +26,20 @@ export class Event {
         picture: string,
         date: Date,
         address: string,
-        ratingScore: number,
+        score: number,
         flag: number,
-        hostId: User,
-        category: Category,
+        userId: User,
+        categoryId: Category,
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.categoryId = categoryId;
         this.date = date;
         this.address = address;
-        this.ratingScore = ratingScore;
+        this.score = score;
         this.flag = flag;
-        this.hostId = hostId;
+        this.userId = userId;
         this.picture = picture;
     }
 

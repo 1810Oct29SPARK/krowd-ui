@@ -11,7 +11,7 @@ export class Comment {
     id: number;
     comment: string;
     flag: number;
-    time: any;
+    timestamp: any;
     userId: User;
     eventId: Event; 
 
@@ -19,14 +19,14 @@ export class Comment {
         id: number,
         comment: string,
         userId: User,
-        time: any,
+        timestamp: any,
         flag: number,
         eventId: Event
     ) {
         this.id = id;
         this.comment = comment;
         this.userId = userId;
-        this.time = time;
+        this.timestamp = timestamp;
         this.flag = flag;
         this.eventId = eventId;
     }

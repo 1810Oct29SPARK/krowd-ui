@@ -12,9 +12,8 @@ export class User {
     lastname: string;
     email: string;
     reputation: number;
-    flagScore: number;
-    photoUrl: string;
-    cognitoStuff: string;
+    picture: string;
+    cognito: string;
     accountStatus: number;
     roleId: Admin;
 
@@ -25,9 +24,9 @@ constructor(
     lastname: string,
     email: string,
     reputation: number,
-    flagScore: number,
     accountStatus: number,
-    photoUrl: string,
+    picture: string,
+    cognito: string,
     roleId: Admin
 ) {
     this.id = id;
@@ -36,9 +35,9 @@ constructor(
     this.lastname = lastname;
     this.email = email;
     this.reputation = reputation;
-    this.flagScore = flagScore;
+    this.cognito = cognito;
     this.accountStatus = accountStatus;
-    this.photoUrl = photoUrl;
+    this.picture = picture;
     this.roleId = roleId;
 }
 
