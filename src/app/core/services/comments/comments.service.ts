@@ -41,7 +41,6 @@ export class CommentsService {
   }
 
   getEventsByUserId(userid: number) {
-    
     return this.httpClient.get<Event[]>(HttpService.baseUrl + `comment/getById/${userid}`)
       .map((comments) => {
         let userComments = comments;
@@ -78,12 +77,6 @@ export class CommentsService {
   flagComment(commentId: number) {
     return this.httpClient.post(HttpService.baseUrl + 'comment/flagcomment', {
       'id': commentId
-    });
-  }
-
-  deleteComment(commentId: number) {
-    return this.httpClient.post(HttpService.baseUrl + 'comment/deletecomment', {
-      'id':commentId
     });
   }
 

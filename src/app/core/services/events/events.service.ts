@@ -46,8 +46,8 @@ export class EventsService {
   }
 
   getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`userEvent/eventByUser/${userid}`)
-      .map((events) => {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `userEvent/eventByUser/${userid}`) .map((events) => {
+
         let userEventData = events;
         return userEventData;
       },
@@ -61,7 +61,7 @@ export class EventsService {
   }
 
   getAllFlaggedEvents() {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+'event/byFlag')
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/byFlag')
       .map((events) => {
         let flaggedEvent = events;
         return flaggedEvent;
@@ -93,21 +93,24 @@ export class EventsService {
   addEvent(eventName: string, eventCategory: string, eventDate: string,
     eventAddress: string, eventApartment: string, eventCity: string, eventState: string, eventZip: string,
     eventDescription: string, eventFlag: number, userId: string, eventPhotoID: string) {
-    return this.httpClient.post(HttpService.baseUrl+`event/add`, { name });
+
+    console.log('in eventService');
+    return this.httpClient.post(HttpService.baseUrl + `event/add`, { name });
   }
 
 
   // *******************************************
   deleteEvent(event: Event) {
-    return this.httpClient.delete(HttpService.baseUrl+`event/delete`);
+
+    return this.httpClient.post(HttpService.baseUrl + `event/delete/`, event);
   }
 
   updateEvent(event: Event) {
-    return this.httpClient.put(HttpService.baseUrl+`update`, event);
+    return this.httpClient.put(HttpService.baseUrl + `update/`, event);
   }
 
   getEventById(eventId: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`event/byId/${eventId}`)
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `event/byId/${eventId}`)
       .map(
         (event: any[]) => {
           let signleEvent = event;
@@ -125,7 +128,7 @@ export class EventsService {
 
   getEventsByCategory(categoryID: number) {
 
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`byCategory/${categoryID}`)
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `byCategory/${categoryID}`)
       .map(
         (event: any[]) => {
           console.log(event);

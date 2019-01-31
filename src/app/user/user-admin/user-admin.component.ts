@@ -95,11 +95,10 @@ export class UserAdminComponent implements OnInit {
   // consoleFunc(flagged){console.log(flagged);}
 
   unflagEvent(value) {
-    let index = this.flaggedEvents.indexOf(value);
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 0;
     console.log(value);
-    this.http.put(HttpService.baseUrl+'/event/update', {
+    this.http.put(HttpService.baseUrl+'event/update', {
         'eventID' : this.flagNewEvent.id,
         'eventName' : this.flagNewEvent.name,
         'eventCategory' : this.flagNewEvent.categoryId.id,
@@ -115,7 +114,7 @@ export class UserAdminComponent implements OnInit {
         'eventPhotoID' : this.flagNewEvent.picture
     }).subscribe((result) => {
     });
-    this.flaggedEvents.splice(index,1);
+    window.location.reload();
     // this.eventService.getAllFlaggedEvents();
     // this should be changged
   }
@@ -124,7 +123,7 @@ export class UserAdminComponent implements OnInit {
     this.flagNewComment = value;
     this.flagNewComment.flag = 0;
     console.log(value);
-    this.http.post(HttpService.baseUrl+'/admin/unflagcomment', {
+    this.http.post(HttpService.baseUrl+'admin/unflagcomment', {
       'id': this.flagNewComment.id,
       'comment': this.flagNewComment.comment,
       'flag': this.flagNewComment.flag,
@@ -133,24 +132,14 @@ export class UserAdminComponent implements OnInit {
       'eventId': this.flagNewComment.eventId
     }).subscribe((result) => {
     });
-
     this.flaggedComments.splice(index,1);
   }
 
-  deleteComment(value) {
-    let index = this.flaggedComments.indexOf(value);
-    this.commentToKill = value;
-    this.http.post(HttpService.baseUrl+'/comment/deletecomment', {
-      'id':this.commentToKill.id
-    }).subscribe((result)=> {
-    });
-    this.flaggedComments.splice(index,1);
-  }
 
   deleteEvent(value) {
     let index = this.flaggedEvents.indexOf(value);
     this.eventToKill = value;
-    this.http.delete(HttpService.baseUrl+'/event/delete/'+this.eventToKill.id)
+    this.http.delete(HttpService.baseUrl+'event/delete/'+this.eventToKill.id)
     .subscribe((result)=>{});
     this.flaggedEvents.splice(index,1);
     console.log("Oops");
