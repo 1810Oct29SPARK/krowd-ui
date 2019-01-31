@@ -7,41 +7,42 @@
       <!-- *NgFor="let flagged of flagged-events"-->
       <div *ngFor="let flagged of flaggedEvents" id="flagged-events">
         <table class="col-md-12">
-        <tr class="eventList justify-content-between" (click)="open(eventFlag)">
-          <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
+          <tr class="eventList justify-content-between" (click)="open(eventFlag)">
+            <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
             Then we populate the modal with the results. -->
-          <td> <img src={{flagged.picture}}> </td>
-          <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> {{flagged.name}} </span> </td>
-          <td class="event-date"> <span class="align-middle"> {{flagged.date | date }} </span> </td>
-          <!-- <td class="event-time"> <span class="align-middle"> Time </span> </td> -->
-          <td class="event-location"> <span class="align-middle"> {{flagged.address.streetAddress}} </span> </td>
-          <!-- <td>
+            <td> <img src={{flagged.picture}}> </td>
+            <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> {{flagged.name}}
+              </span> </td>
+            <td class="event-date"> <span class="align-middle"> {{flagged.date | date }} </span> </td>
+            <!-- <td class="event-time"> <span class="align-middle"> Time </span> </td> -->
+            <td class="event-location"> <span class="align-middle"> {{flagged.address.streetAddress}} </span> </td>
+            <!-- <td>
             <span class="buttons">
               <button type="button" class="btn btn-outline-dark" color="warn">unflag</button>
             </span> </td> -->
-            </tr>
-            <ng-template #eventFlag let-modal>
-              <div class="modal-header" (click)="modal.dismiss('Cross click')">
-                <h4 class="modal-title" id="modal-basic-title">{{ flagged.name}}</h4>
-                <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <img src={{flagged.picture}} style="height: 200px; width:100%;">
-                <br>
-                <br>
-                <h4> Event Description </h4>
-                <p> {{flagged.description}} </p>
-                <br>
-                <h4>Date </h4>
-                <p> {{flagged.date | date}} </p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success" (click)="unflagEvent(flagged);modal.dismiss('Cross click');">Dismiss</button>
-                <button type="button" class="btn btn-outline-danger" (click)="deleteEvent(flagged);modal.close('Dismiss clicked')">Delete</button>
-              </div>
-            </ng-template>
+          </tr>
+          <ng-template #eventFlag let-modal>
+            <div class="modal-header" (click)="modal.dismiss('Cross click')">
+              <h4 class="modal-title" id="modal-basic-title">{{ flagged.name}}</h4>
+              <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img src={{flagged.picture}} style="height: 200px; width:100%;">
+              <br>
+              <br>
+              <h4> Event Description </h4>
+              <p> {{flagged.description}} </p>
+              <br>
+              <h4>Date </h4>
+              <p> {{flagged.date | date}} </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-success" (click)="unflagEvent(flagged);modal.dismiss('Cross click');">Dismiss</button>
+              <button type="button" class="btn btn-outline-danger" (click)="deleteEvent(flagged);modal.close('Dismiss clicked')">Delete</button>
+            </div>
+          </ng-template>
         </table>
       </div>
     </div>
@@ -52,8 +53,8 @@
   <br>
   <div id="comments">
     <!-- table created if there is anything in the response (user has made comments)-->
-    <table  class="table">
-        <!-- *ngIf="response !== null" -->
+    <table class="table">
+      <!-- *ngIf="response !== null" -->
       <thead>
         <th scope="col">Event</th>
         <th scope="col">Comment</th>
@@ -77,7 +78,7 @@
             </span>
           </td>
         </tr>
-        <tr id="default" [hidden]="!commentsList">
+        <tr id="default" [hidden]="!flaggedComments">
           <td></td>
           <td> No flagged comments to see.</td>
           <td></td>

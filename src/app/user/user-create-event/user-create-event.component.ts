@@ -7,7 +7,6 @@ import { EventsService } from '../../core/services/events/events.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { User } from 'src/app/shared/models/user';
 import { UsersService } from 'src/app/core/services/users/users.service';
-import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-user-create-event',
@@ -15,6 +14,17 @@ import { stringify } from '@angular/core/src/render3/util';
   styleUrls: ['./user-create-event.component.css']
 })
 export class UserCreateEventComponent implements OnInit {
+
+  eventName: any;
+  eventAddress: any;
+  eventApartment: any;
+  eventCity: any;
+  eventState: any;
+  eventZip: any;
+  eventTime: any;
+  eventCategory: any;
+  eventDescription: any;
+  eventDate: any;
 
   submitted = false;
 

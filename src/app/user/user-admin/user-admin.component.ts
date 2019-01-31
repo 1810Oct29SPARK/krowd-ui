@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/app/core/services/events/events.service';
-import { Event } from '../../shared/models/event';
 import { HttpClient } from '@angular/common/http';
-import { Comment } from '../../shared/models/comment';
 import { HttpService } from 'src/app/core/services/http/http.service';
 
 @Component({

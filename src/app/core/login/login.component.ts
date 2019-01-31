@@ -20,6 +20,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent {
 
+  username: any;
+  password: any;
+
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
