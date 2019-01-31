@@ -102,8 +102,8 @@ export class UserHomeComponent implements OnInit {
           console.log(this.userId);
         }
           );
-    });
-  }
+    };
+  
 
   showModal() {
     console.log('modal works');
