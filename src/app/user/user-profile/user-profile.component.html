@@ -1,6 +1,7 @@
 <div id="profile-info" class="container">
   <br>
   <br>
+  <div class="card" id="profileCard">
   <div id="user-section" class="row">
     <div class="col-md-3">
       <div id="profile-image">
@@ -9,27 +10,25 @@
     </div>
     <div class="col-md-1"></div>
     <div id="user-info" class="col-md-4">
-      <span id="profile-essentials">
-        <h4> {{userInfo?.firstname}} {{userInfo?.lastname}} </h4>
-        <p> Username: {{userInfo?.username}} </p>
-        <p> Reputation Score: {{userInfo?.reputation}} </p>
-      </span>
+      <div id="profile-essentials">
+        <strong><h1> {{userInfo?.firstname}} {{userInfo?.lastname}} </h1></strong>
+        <p><em>Username: {{userInfo?.username}}</em> </p>
+        <!-- <p> Reputation Score: {{userInfo?.reputation}} </p> -->
+      </div>
     </div>
     <div id="profile-buttons" class="col-md-4">
-      <button class="btn btn-outline-success" (click)="open(editProfile)"> Edit Profile Information </button>
+      <button class="btn btn-outline-success profileButton" (click)="open(editProfile)"> Edit Profile Information </button>
       <br>
       <br>
-      <button class="btn btn-outline-success" (click)="toggleEvents()"> {{event_button_text}} </button>
+      <button class="btn btn-outline-success profileButton" (click)="toggleEvents()"> {{event_button_text}} </button>
       <br>
       <br>
-      <button class="btn btn-outline-success" (click)="toggleComments()"> {{comment_button_text}} </button>
+      <button class="btn btn-outline-success profileButton" (click)="toggleComments()"> {{comment_button_text}} </button>
     </div>
   </div>
-
-  <br><br>
+</div>
 
 </div>
-<br>
 <br>
 <div class="container" *ngIf="show_events">
   <div class="row">
