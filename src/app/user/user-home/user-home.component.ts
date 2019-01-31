@@ -14,6 +14,7 @@ import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
 import { HttpService } from 'src/app/core/services/http/http.service';
 
+
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
@@ -46,6 +47,19 @@ export class UserHomeComponent implements OnInit {
   cognitoUsername: string;
   user: any;
 
+  commentList = [];
+  commentList2 = [];
+  commentListFinal = [];
+
+  getUser(username: string) {
+    console.log(username);
+    this.userService.getUserByUsername(username)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+
   ontoggle() {
     if (this.toggle === true) {
       this.toggle = false;
@@ -57,6 +71,7 @@ export class UserHomeComponent implements OnInit {
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      console.log(result);
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -77,14 +92,15 @@ export class UserHomeComponent implements OnInit {
     this.getAllEvents();
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
-      this.userService.getUserByUsername(this.cognitoUsername)
-        .subscribe (user => {
-          this.user = user;
-          console.log(this.user);
-          this.userId = parseInt(this.user.id, 10);
-          console.log(this.userId);
-        }
-          );
+      this.getUser(this.cognitoUsername)
+    console.log(this.cognitoUsername);
+    this.userService.getUserByUsername(this.cognitoUsername)
+      .subscribe(user => {
+        this.user = user;
+        console.log(this.user);
+        this.userId = parseInt(this.user.id, 10);
+        console.log(this.userId);
+      });
     });
   }
 
@@ -102,9 +118,12 @@ export class UserHomeComponent implements OnInit {
               event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
           }
+          console.log(events);
+
         },
         (error) => console.log(error)
       );
+    console.log(this.eventList2);
     return this.eventList2;
   }
 
@@ -113,7 +132,8 @@ export class UserHomeComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
-          console.log(this.singleEvent);
+          console.log(value);
+          this.getCommentsByEventId(value);
         },
         (error) => console.log(error)
       );
@@ -137,6 +157,18 @@ export class UserHomeComponent implements OnInit {
       );
   }
 
+  getCommentsByEventId(eventId: any) {
+    console.log(eventId);
+    this.commentService.getCommentsByEventId(eventId).subscribe((comments) => {
+      for (let comment of comments) {
+        if (comment.eventId.id == eventId) {
+          this.commentListFinal.push(comment);
+          console.log(comment);
+        }
+      }
+      return (this.commentListFinal);
+    })
+  }
   // getCommentByEventId(value) {
   //   console.log(value);
   //   this.commentService.getCommentByEventId(value)
@@ -165,10 +197,10 @@ export class UserHomeComponent implements OnInit {
   // }
 
 
-    registerForEvent(form: NgForm) {
-      this.eventService.registerForEvent(this.eventId, this.userId)
-        .subscribe((result) => {
-    });
+  registerForEvent(form: NgForm) {
+    this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
+      .subscribe((result) => {
+      });
     this.submitted = true;
   }
 
@@ -176,20 +208,20 @@ export class UserHomeComponent implements OnInit {
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 1;
     console.log(value);
-    this.http.put(HttpService.baseUrl + `event/update`, {
-        'eventID' : this.flagNewEvent.id,
-        'eventName' : this.flagNewEvent.name,
-        'eventCategory' : this.flagNewEvent.categoryId.id,
-        'eventDate' : this.flagNewEvent.date,
-        'eventAddress' : this.flagNewEvent.address.streetAddress,
-        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
-        'eventCity' : this.flagNewEvent.address.city,
-        'eventState' : this.flagNewEvent.address.state,
-        'eventZip' : this.flagNewEvent.address.zip,
-        'eventDescription' : this.flagNewEvent.description,
-        'eventFlag' : this.flagNewEvent.flag,
-        'userID' : this.flagNewEvent.userId.id,
-        'eventPhotoID' : this.flagNewEvent.picture
+    this.http.put('http://localhost:8085/event/update', {
+      'eventID': this.flagNewEvent.id,
+      'eventName': this.flagNewEvent.name,
+      'eventCategory': this.flagNewEvent.categoryId.id,
+      'eventDate': this.flagNewEvent.date,
+      'eventAddress': this.flagNewEvent.address.streetAddress,
+      'eventApartment': JSON.stringify(this.flagNewEvent.address.apartment),
+      'eventCity': this.flagNewEvent.address.city,
+      'eventState': this.flagNewEvent.address.state,
+      'eventZip': this.flagNewEvent.address.zip,
+      'eventDescription': this.flagNewEvent.description,
+      'eventFlag': this.flagNewEvent.flag,
+      'userID': this.flagNewEvent.userId.id,
+      'eventPhotoID': this.flagNewEvent.picture
     }).subscribe((result) => {
     });
     this.submitted = true;

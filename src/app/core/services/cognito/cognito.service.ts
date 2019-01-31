@@ -115,8 +115,8 @@ export class CognitoService {
           console.log(tokens.accessToken.jwtToken);
           localStorage.setItem('accessToken', tokens.accessToken.jwtToken);
           this.sendAccessToken(tokens.accessToken.jwtToken);
+          this.router.navigate(['/krowd']);
         });
-        this.router.navigate(['/user']);
       }
     } catch (err) {
       if (err.code === 'UserNotConfirmedException') {
