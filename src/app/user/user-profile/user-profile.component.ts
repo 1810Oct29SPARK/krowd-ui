@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
   userInfo: any = null;
   selectedFile: File = null;
   imageURL: string;
-  userId: number;
+  userId: number = parseInt(sessionStorage.getItem('id'), 10);
   firstname:string;
   lastname:string;
   result:User;
