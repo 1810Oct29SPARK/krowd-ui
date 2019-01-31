@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
+import { HttpService } from 'src/app/core/services/http/http.service';
 
 
 @Component({
