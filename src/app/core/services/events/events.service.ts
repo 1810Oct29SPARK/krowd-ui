@@ -45,7 +45,7 @@ export class EventsService {
   }
 
   getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl + `${userid}`) .map((events) => {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `userEvent/eventByUser/${userid}`) .map((events) => {
         let userEventData = events;
         return userEventData;
       },
