@@ -168,33 +168,6 @@ export class UserHomeComponent implements OnInit {
       return (this.commentListFinal);
     })
   }
-  // getCommentByEventId(value) {
-  //   console.log(value);
-  //   this.commentService.getCommentByEventId(value)
-  //     .subscribe(
-  //       (comment) => {
-  //         console.log(event);
-  //         this.comments = comment;
-  //       },
-  //       (error) => console.log(error)
-  //     );
-  //   return this.comments;
-  // }
-
-  // flagEvent(value) {
-  //   console.log(value);
-  //   this.eventService.updateEvent(value)
-  //     .subscribe(
-  //       (event) => {
-  //         console.log(event);
-  //         this.updateEvent = event;
-  //         this.updateEvent.flag = 1;
-  //         this.flagNewEvent = this.updateEvent;
-  //       },
-  //       (error) => console.log(error)
-  //     );
-  // }
-
 
   registerForEvent(form: NgForm) {
     this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
@@ -225,5 +198,12 @@ export class UserHomeComponent implements OnInit {
     });
     this.submitted = true;
   }
+
+
+flagComment(commentId) {
+  console.log("Comment Id: " )
+  console.log(commentId)
+  this.commentService.flagComment(commentId);
+}
 
 }
