@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../http/http.service';
 
@@ -25,6 +23,7 @@ export class CognitoService {
   }
 
   registerNewUser(username: string, email: string, firstname: string, lastname: string): any {
+    localStorage.setItem('accessToken', '0');
     this.httpClient.post(HttpService.baseUrl + `user/create`, {
       'username': username,
       'email': email,
