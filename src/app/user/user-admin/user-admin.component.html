@@ -7,13 +7,13 @@
       <!-- *NgFor="let flagged of flagged-events"-->
       <div *ngFor="let flagged of flaggedEvents" id="flagged-events">
         <table class="col-md-12">
-        <tr class="eventList justify-content-between z-depth-2" (click)="open(eventFlag)">
+        <tr class="eventList justify-content-between" (click)="open(eventFlag)">
           <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
             Then we populate the modal with the results. -->
           <td> <img src={{flagged.picture}}> </td>
           <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> {{flagged.name}} </span> </td>
-          <td class="event-date"> <span class="align-middle"> {{flagged.date}} </span> </td>
-          <td class="event-time"> <span class="align-middle"> Time </span> </td>
+          <td class="event-date"> <span class="align-middle"> {{flagged.date | date }} </span> </td>
+          <!-- <td class="event-time"> <span class="align-middle"> Time </span> </td> -->
           <td class="event-location"> <span class="align-middle"> {{flagged.address.streetAddress}} </span> </td>
           <!-- <td>
             <span class="buttons">
@@ -34,12 +34,12 @@
                 <h4> Event Description </h4>
                 <p> {{flagged.description}} </p>
                 <br>
-                <h4>Date & Time </h4>
-                <p> {{flagged.date}} </p>
+                <h4>Date </h4>
+                <p> {{flagged.date | date}} </p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="unflagEvent(flagged);modal.dismiss('Cross click');">Dismiss</button>
-                <button type="button" class="btn btn-outline-dark" (click)="deleteEvent(flagged);modal.close('Dismiss clicked')">Delete</button>
+                <button type="button" class="btn btn-outline-success" (click)="unflagEvent(flagged);modal.dismiss('Cross click');">Dismiss</button>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteEvent(flagged);modal.close('Dismiss clicked')">Delete</button>
               </div>
             </ng-template>
         </table>

@@ -197,7 +197,7 @@ export class UserHomeComponent implements OnInit {
 
 
 flagComment(commentId) {
-  console.log('Comment Id: ' );
+  console.log('Comment Id: ');
   console.log(commentId);
   this.commentService.flagComment(commentId);
 }
