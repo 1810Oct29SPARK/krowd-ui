@@ -6,6 +6,8 @@ import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { UsersService } from 'src/app/core/services/users/users.service';
 import { CommentsService } from 'src/app/core/services/comments/comments.service';
+import { User } from 'src/app/shared/models/user';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -32,6 +34,9 @@ export class UserProfileComponent implements OnInit {
   selectedFile: File = null;
   imageURL: string;
   userId: number;
+  firstname:string;
+  lastname:string;
+  result:User;
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
@@ -201,5 +206,29 @@ export class UserProfileComponent implements OnInit {
       console.info('onErrorItem', fileItem, response, status, headers);
     };
 
+  }
+  user:User;
+  userid = this.userService.getUserByUsername(this.cognitoUsername).subscribe((result)=>{
+    this.result = result;
+  });
+  onUserUpdated(ngForm: NgForm) {
+    console.log(this.userInfo);
+    let user: any = {      
+    'id': this.userInfo.id,
+    'username': this.userInfo.username,
+    'firstname': this.firstname,
+    'lastname': this.lastname,
+    'email': this.userInfo.email,
+    'reputation': this.userInfo.reputation,
+    'picture': this.picture,
+    'cognito': this.userInfo.cognito,
+    'accountStatus': this.userInfo.accountStatus,
+    'roleId': this.userInfo.roleId
+    };
+    console.log(user);
+    this.userService.updateUser(user).subscribe((user:User) =>{
+          this.user = user;
+        }
+      );
   }
 }

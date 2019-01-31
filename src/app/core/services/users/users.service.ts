@@ -39,12 +39,12 @@ export class UsersService {
       );
   }
 
-  // updateUser(event: Event) {
-  //   return this.httpClient.put(`http://localhost:8083`), {'id': id, 'Created': Date};
-  // }
+  updateUser(user: User) {
+    return this.httpClient.put(HttpService.baseUrl + `user/update`, user);
+ }
 
   registerUser(username: string, email: string, firstname: string, lastname: string) {
-    return this.httpClient.post('http://localhost:8085/user/create', {
+    return this.httpClient.post(HttpService.baseUrl + `user/create`, {
       'username': username,
       'email': email,
       'firstname': firstname,
