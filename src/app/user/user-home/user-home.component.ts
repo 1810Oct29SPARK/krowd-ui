@@ -80,16 +80,13 @@ export class UserHomeComponent implements OnInit {
         .subscribe (user => {
           sessionStorage.setItem('id', user.id);
           this.user = user;
-          console.log(this.user);
           this.userId = parseInt(this.user.id, 10);
-          console.log(this.userId);
         }
           );
     });
   }
 
   showModal() {
-    console.log('modal works');
   }
 
   getAllEvents() {
@@ -113,14 +110,12 @@ export class UserHomeComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
-          console.log(this.singleEvent);
         },
         (error) => console.log(error)
       );
     return this.singleEvent;
   }
   onCommentCreated(form: NgForm) {
-    console.log('Hello World');
     let comment: any = {
       'id': 1,
       'comment': form.value.data,
@@ -129,7 +124,6 @@ export class UserHomeComponent implements OnInit {
       'userId': 1,
       'eventId': this.eventId
     };
-    console.log(comment);
     this.commentService.addComment(comment)
       .subscribe(
         (event) =>
@@ -175,7 +169,6 @@ export class UserHomeComponent implements OnInit {
   flagEvent(value) {
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 1;
-    console.log(value);
     this.http.put('http://localhost:8085/event/update', {
         'eventID' : this.flagNewEvent.id,
         'eventName' : this.flagNewEvent.name,
