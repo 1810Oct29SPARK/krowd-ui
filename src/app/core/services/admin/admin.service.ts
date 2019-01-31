@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../services/http/http.service';
 import { User } from 'src/app/shared/models/user';
 import { Event } from 'src/app/shared/models/event';
 import { Comment } from 'src/app/shared/models/comment';
@@ -22,7 +23,7 @@ export class AdminService {
 // ********************************************************
 
   getUsersByAccountStatus(accountStatus: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${accountStatus}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl+`${accountStatus}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -37,7 +38,7 @@ export class AdminService {
   }
 
   getUsersByFlagScore(flagScore: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl+`${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -52,7 +53,7 @@ export class AdminService {
   }
 
   getCommentsByFlagScore(flagScore: number) {
-    return this.httpClient.get<User[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<User[]>(HttpService.baseUrl+`${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);
@@ -67,7 +68,7 @@ export class AdminService {
   }
 
   getEventsByFlagScore(flagScore: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/event/byFlag`)
+    return this.httpClient.get<Event[]>(HttpService.baseUrl+`event/byFlag`)
       .map(
         (event: any[]) => {
           console.log(event);

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'user',
+    path: 'krowd',
     loadChildren: '../user/user.module#UserModule',
     canActivate: [AuthGaurdService]
   },

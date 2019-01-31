@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row align-items-center">
     <div class="jumbotron text-center">
-      <h1> Hello, {{user.firstname}} {{user.lastname}}!</h1>
+      <!-- <h1> Hello, {{user.firstname}} {{user.lastname}}!</h1> -->
       <p> Welcome to your Homepage! </p>
     </div>
   </div>
@@ -63,9 +63,13 @@
       </div>
     </mat-tab>
     <mat-tab label="View Comments">
+      <div id="commentsDiv">
       <h4>Comments About The Event</h4>
-      <h6>User name</h6>
-      <p>User comment here.</p>
+      <ul>
+         <li *ngFor="let comment of commentListFinal"> {{comment.comment}} </li>
+      </ul> 
+      <p [hidden]="commentListFinal.length > 0">No comments yet.</p>
+      </div>
       <div class="modal-footer">
         <button [hidden]="toggle" (click)="ontoggle()" class="comment-button-center btn btn-outline-success">
           Post a Comment</button>
@@ -80,3 +84,5 @@
     </mat-tab>
   </mat-tab-group>
 </ng-template>
+
+<button type="button" (click)="getCommentsByEventId()"> Click Me </button>
