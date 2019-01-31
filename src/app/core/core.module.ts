@@ -30,6 +30,7 @@ import { Event } from '../shared/models/event';
 import { Comment } from '../shared/models/comment';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { TokenInterceptorService } from './services/cognito/token-interceptor.service';
+import { AuthGaurdService } from './services/guard/auth-gaurd.service';
 
 
 @NgModule({
@@ -59,7 +60,10 @@ import { TokenInterceptorService } from './services/cognito/token-interceptor.se
   exports: [
     RouterModule
   ],
-  providers: [EventsService, UsersService, CommentsService, AmplifyService, CognitoService,
+
+
+  providers: [EventsService, UsersService, CommentsService, AmplifyService, AuthGaurdService, CognitoService,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
