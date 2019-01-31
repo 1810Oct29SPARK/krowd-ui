@@ -33,6 +33,7 @@ import { UsersService } from '../core/services/users/users.service';
     FileUploadModule,
     MatTabsModule
   ],
-  providers: [UsersService]
+  providers: [UsersService],
+  bootstrap: [UserComponent]
 })
 export class UserModule { }
