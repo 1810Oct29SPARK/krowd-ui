@@ -70,14 +70,14 @@
           <td> {{comment.created | date }} </td>
           <td>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark" (click)="unflagComment(comment)">Dismiss</button>
+              <button type="button" class="btn btn-outline-success" (click)="unflagComment(comment)">Dismiss</button>
             </span>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark" (click)="deleteComment(comment)">Delete</button>
+              <button type="button" class="btn btn-outline-danger" (click)="deleteComment(comment)">Delete</button>
             </span>
           </td>
         </tr>
-        <tr id="default" [hidden]="commentsList">
+        <tr id="default" [hidden]="!commentsList">
           <td></td>
           <td> No flagged comments to see.</td>
           <td></td>
