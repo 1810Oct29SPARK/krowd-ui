@@ -50,14 +50,14 @@ export class UserHomeComponent implements OnInit {
   commentList2 = [];
   commentListFinal = [];
 
-  getUser(username:string) {
+  getUser(username: string) {
     console.log(username);
     this.userService.getUserByUsername(username)
       .subscribe((data) => {
         console.log(data);
       });
   }
- 
+
 
   ontoggle() {
     if (this.toggle === true) {
@@ -92,18 +92,16 @@ export class UserHomeComponent implements OnInit {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
       this.getUser(this.cognitoUsername)
-    })
-    
-      this.userService.getUserByUsername(this.cognitoUsername)
-        .subscribe (user => {
-          this.user = user;
-          console.log(this.user);
-          this.userId = parseInt(this.user.id, 10);
-          console.log(this.userId);
-        }
-          );
-    };
-  
+    console.log(this.cognitoUsername);
+    this.userService.getUserByUsername(this.cognitoUsername)
+      .subscribe(user => {
+        this.user = user;
+        console.log(this.user);
+        this.userId = parseInt(this.user.id, 10);
+        console.log(this.userId);
+      });
+    });
+  }
 
   showModal() {
     console.log('modal works');
@@ -120,11 +118,11 @@ export class UserHomeComponent implements OnInit {
             }
           }
           console.log(events);
-         
+
         },
         (error) => console.log(error)
       );
-      console.log(this.eventList2);
+    console.log(this.eventList2);
     return this.eventList2;
   }
 
@@ -163,11 +161,11 @@ export class UserHomeComponent implements OnInit {
     this.commentService.getCommentsByEventId(eventId).subscribe((comments) => {
       for (let comment of comments) {
         if (comment.eventId.id == eventId) {
-        this.commentListFinal.push(comment);
-        console.log(comment);
+          this.commentListFinal.push(comment);
+          console.log(comment);
         }
       }
-      return(this.commentListFinal);
+      return (this.commentListFinal);
     })
   }
   // getCommentByEventId(value) {
@@ -198,10 +196,10 @@ export class UserHomeComponent implements OnInit {
   // }
 
 
-    registerForEvent(form: NgForm) {
-      this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
-        .subscribe((result) => {
-    });
+  registerForEvent(form: NgForm) {
+    this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
+      .subscribe((result) => {
+      });
     this.submitted = true;
   }
 
@@ -210,19 +208,19 @@ export class UserHomeComponent implements OnInit {
     this.flagNewEvent.flag = 1;
     console.log(value);
     this.http.put('http://localhost:8085/event/update', {
-        'eventID' : this.flagNewEvent.id,
-        'eventName' : this.flagNewEvent.name,
-        'eventCategory' : this.flagNewEvent.categoryId.id,
-        'eventDate' : this.flagNewEvent.date,
-        'eventAddress' : this.flagNewEvent.address.streetAddress,
-        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
-        'eventCity' : this.flagNewEvent.address.city,
-        'eventState' : this.flagNewEvent.address.state,
-        'eventZip' : this.flagNewEvent.address.zip,
-        'eventDescription' : this.flagNewEvent.description,
-        'eventFlag' : this.flagNewEvent.flag,
-        'userID' : this.flagNewEvent.userId.id,
-        'eventPhotoID' : this.flagNewEvent.picture
+      'eventID': this.flagNewEvent.id,
+      'eventName': this.flagNewEvent.name,
+      'eventCategory': this.flagNewEvent.categoryId.id,
+      'eventDate': this.flagNewEvent.date,
+      'eventAddress': this.flagNewEvent.address.streetAddress,
+      'eventApartment': JSON.stringify(this.flagNewEvent.address.apartment),
+      'eventCity': this.flagNewEvent.address.city,
+      'eventState': this.flagNewEvent.address.state,
+      'eventZip': this.flagNewEvent.address.zip,
+      'eventDescription': this.flagNewEvent.description,
+      'eventFlag': this.flagNewEvent.flag,
+      'userID': this.flagNewEvent.userId.id,
+      'eventPhotoID': this.flagNewEvent.picture
     }).subscribe((result) => {
     });
     this.submitted = true;
