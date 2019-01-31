@@ -9,9 +9,10 @@ import { UserAdminComponent } from './user-admin/user-admin.component';
 
 const routes: Routes = [
   {
-    path: '', component: UserComponent, children: [
-      {
-        path: '',
+    path: '', component: UserComponent,
+    // children: [
+    //   {
+    //     path: '',
         // canActivateChild: [],
         children: [
           { path: 'home', component: UserHomeComponent },
@@ -25,8 +26,8 @@ const routes: Routes = [
           { path: '', redirectTo: 'home', pathMatch: 'full' }
         ]
       }
-    ]
-  }
+    // ]
+  // }
 ];
 
 @NgModule({
