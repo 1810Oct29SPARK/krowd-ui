@@ -1,13 +1,13 @@
 <div class="container">
-  <div class="row align-items-center">
+  <br>
+  <div *ngIf="user" class="row align-items-center">
     <div class="jumbotron text-center">
-      <!-- <h1> Hello, {{user.firstname}} {{user.lastname}}!</h1> -->
+      <h1> Hello, {{user.firstname}} {{user.lastname}}!</h1>
       <p> Welcome to your Homepage! </p>
     </div>
   </div>
   <!-- Div for 5 current events -->
   <div class="col-md-12 justify-content-between">
-    <h4> Current Events </h4>
     <br>
     <div id="current-events">
       <div class="card-group">
@@ -65,9 +65,13 @@
     <mat-tab label="View Comments">
       <div id="commentsDiv">
       <h4>Comments About The Event</h4>
-      <ul>
+      <div *ngFor="let comment of commentListFinal">
+        <p> {{comment.comment}} </p>
+        <button (click)="flagComment(comment.id)">Flag</button>
+      </div>
+      <!-- <ul>
          <li *ngFor="let comment of commentListFinal"> {{comment.comment}} </li>
-      </ul> 
+      </ul>  -->
       <p [hidden]="commentListFinal.length > 0">No comments yet.</p>
       </div>
       <div class="modal-footer">
@@ -85,4 +89,3 @@
   </mat-tab-group>
 </ng-template>
 
-<button type="button" (click)="getCommentsByEventId()"> Click Me </button>

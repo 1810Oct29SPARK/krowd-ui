@@ -75,12 +75,20 @@ export class CommentsService {
   }
 
   flagComment(commentId: number) {
+    console.log("commentId in comment service:" + commentId)
     return this.httpClient.post(HttpService.baseUrl + 'comment/flagcomment', {
       'id': commentId
-    });
+    })
+    .subscribe((result) => console.log(result));
   }
 
+  deleteComment(commentId: number) {
+    return this.httpClient.post(HttpService.baseUrl + 'comment/deletecomment', {
+      'id':commentId
+    });
+  }
   getCommentsByEventId(eventId: number) {
     return this.httpClient.get<Comment[]>(HttpService.baseUrl + 'comment/getByEvent/' + eventId);
   }
+
 }
