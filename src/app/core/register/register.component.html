@@ -1,5 +1,7 @@
 <h2 mat-dialog-title>Please Enter Your Information</h2>
 <form name="form" (ngSubmit)="cognitoSignUp(f)" #f="ngForm">
+  <div class="row">
+  <div class="col-6">
   <label class="mt-1">Username</label>
   <input class="form-control" placeholder="Username" id="username" name="username" aria-label="Username" data-toggle="tooltip"
     data-placement="bottom" title="Username is case sensitive" required ngModel [(ngModel)]="username" #uname="ngModel">
@@ -21,6 +23,8 @@
   <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
     Lastname is required
   </div>
+</div>
+<div class="col-6">
   <div>
     <label class="mt-1">Email</label>
     <input class="form-control" placeholder="Email" ngModel name="email" required aria-label="Email" data-toggle="tooltip"
@@ -47,5 +51,7 @@
   <div [hidden]="cpname.valid || cpname.pristine" class="alert alert-danger">
     Please make both fields match
   </div>
+</div>
+</div>
   <button type="submit" class="btn btn-success mt-3" [disabled]="!f.form.valid">Create User</button>
 </form>
