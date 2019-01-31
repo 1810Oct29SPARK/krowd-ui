@@ -22,6 +22,7 @@ export class UserAdminComponent implements OnInit {
   flagNewEvent: any;
   flagNewComment: any;
   commentToKill: any;
+  eventToKill: any;
 
   constructor(public dialog: MatDialog, private http: HttpClient, private modalService: NgbModal, private eventService: EventsService) { }
 
@@ -144,6 +145,15 @@ export class UserAdminComponent implements OnInit {
     }).subscribe((result)=> {
     });
     this.flaggedComments.splice(index,1);
+  }
+
+  deleteEvent(value) {
+    let index = this.flaggedEvents.indexOf(value);
+    this.eventToKill = value;
+    this.http.delete(HttpService.baseUrl+'/event/delete/'+this.eventToKill.id)
+    .subscribe((result)=>{});
+    this.flaggedEvents.splice(index,1);
+    console.log("Oops");
   }
 
 }
