@@ -61,11 +61,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   populateProfile(username: string) {
-    console.log(username);
     this.userService.getUserByUsername(username)
       .subscribe((data) => {
         this.userInfo = data;
-        console.log(this.userInfo);
       });
       return  this.userInfo;
   }
@@ -121,14 +119,11 @@ export class UserProfileComponent implements OnInit {
 
   getEventsByUserId() {
     // let userId: number = parseInt(sessionStorage.getItem('id'), 10);
-    console.log('in getEventByUserId: ' + this.userId);
     this.eventService.getEventsByUserId(this.userId)
       .subscribe(
         (events) => {
           for (let event of events) {
             this.attendingEvents.push(event);
-            console.log('Attending Events:');
-            console.log(this.attendingEvents);
             if (event.picture === null) {
               event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
@@ -144,7 +139,6 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
-          console.log(this.singleEvent);
         },
         (error) => console.log(error)
       );
@@ -172,10 +166,8 @@ export class UserProfileComponent implements OnInit {
     this.commentService.getCommentByUserId(userId)
       .subscribe(
         (comments) => {
-          console.log(comments);
           for (let comment of comments) {
             this.userComment.push(comment);
-            console.log(this.userComment);
           }
           // this.userComment.push(comments);
           // console.log('after loop' + this.userComment);

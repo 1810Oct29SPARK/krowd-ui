@@ -90,16 +90,16 @@ export class UserHomeComponent implements OnInit {
     this.getAllEvents();
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
-      this.getUser(this.cognitoUsername);
+      console.log('In ngOnInit: ' + this.cognitoUsername);
+      // this.getUser(this.cognitoUsername);
+      this.userService.getUserByUsername(this.cognitoUsername)
+        .subscribe(user => {
+          console.log('User object in getUserByUsername: ' + user.id);
+          sessionStorage.setItem('id', user.id);
+          this.userId = parseInt(user.id, 10);
+        }
+        );
     });
-
-    this.userService.getUserByUsername(this.cognitoUsername)
-      .subscribe(user => {
-        sessionStorage.setItem('id', user.id);
-        this.user = user;
-        this.userId = parseInt(this.user.id, 10);
-      }
-      );
   }
 
   showModal() {

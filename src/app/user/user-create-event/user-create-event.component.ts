@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Event } from '../../shared/models/event';
 import { EventsService } from '../../core/services/events/events.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+import { User } from 'src/app/shared/models/user';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 @Component({
   selector: 'app-user-create-event',
@@ -16,18 +18,7 @@ export class UserCreateEventComponent implements OnInit {
   submitted = false;
 
   cognitoUsername: string;
-
-  eventName: any = null;
-  eventAddress: any = null;
-  eventCity: any = null;
-  eventState: any = null;
-  eventZip: any = null;
-  eventCategory: any = null;
-  eventDescription: any = null;
-  eventDate: any = null;
-  eventTime: any = null;
-  eventApartment: any = null;
-  userId: any = null;
+  event: Event;
 
   // code for image upload
   eventPhotoID: File = null;
@@ -40,30 +31,44 @@ export class UserCreateEventComponent implements OnInit {
 
   loading: any;
 
-  constructor(private http: HttpClient, private eventservice: EventsService, public cognitoService: CognitoService) { }
+  user: User;
+
+  constructor(
+    private http: HttpClient, private eventservice: EventsService, public cognitoService: CognitoService,
+    private userService: UsersService
+  ) { }
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
+
+      this.userService.getUserByUsername(this.cognitoUsername)
+        .subscribe((response) => this.user = response);
     });
   }
 
   createEvent(form: NgForm) {
-  this.http.post('http://localhost:8085/event/add', {
-  'eventName': this.eventName,
-  'eventCategory': this.assignCategory(this.eventCategory),
-  'eventDate': JSON.stringify(this.eventDate),
-  'eventAddress': this.eventAddress,
-  'eventApartment': this.eventApartment,
-  'eventCity': this.eventCity,
-  'eventState': this.eventState,
-  'eventZip': this.eventZip,
-  'eventDescription': this.eventDescription,
-  'eventFlag': JSON.stringify(0),
-  'userID': 1,
-  'eventPhotoID': ''
-}).subscribe((result) => {
-});
+
+    this.event = {
+      'id': null,
+      'name': form.value.eventName,
+      'description': form.value.eventDescription,
+      'picture': this.picture,
+      'date': JSON.stringify(form.value.eventDate),
+      'address': {
+        'id': null,
+        'streetAddress': form.value.eventAddress, 'apartment': form.value.apartment, 'city': form.value.city,
+        'state': form.value.state,
+        'zip': form.value.zip,
+      },
+      'score': 0,
+      'flag': 0,
+      'userId': this.user,
+      'categoryId': { 'id': this.assignCategory(form.value.eventCategory), 'name': form.value.eventCategory }
+    };
+    console.log(this.event);
+    this.eventservice.addEvent(this.event).subscribe((result) => {
+    });
     this.submitted = true;
   }
 

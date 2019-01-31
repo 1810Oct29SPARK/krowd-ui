@@ -98,20 +98,20 @@ export class UserAdminComponent implements OnInit {
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 0;
     console.log(value);
-    this.http.put(HttpService.baseUrl+'event/update', {
-        'eventID' : this.flagNewEvent.id,
-        'eventName' : this.flagNewEvent.name,
-        'eventCategory' : this.flagNewEvent.categoryId.id,
-        'eventDate' : this.flagNewEvent.date,
-        'eventAddress' : this.flagNewEvent.address.streetAddress,
-        'eventApartment' : JSON.stringify(this.flagNewEvent.address.apartment),
-        'eventCity' : this.flagNewEvent.address.city,
-        'eventState' : this.flagNewEvent.address.state,
-        'eventZip' : this.flagNewEvent.address.zip,
-        'eventDescription' : this.flagNewEvent.description,
-        'eventFlag' : this.flagNewEvent.flag,
-        'userID' : this.flagNewEvent.userId.id,
-        'eventPhotoID' : this.flagNewEvent.picture
+    this.http.put(HttpService.baseUrl + 'event/update', {
+      'eventID': this.flagNewEvent.id,
+      'eventName': this.flagNewEvent.name,
+      'eventCategory': this.flagNewEvent.categoryId.id,
+      'eventDate': this.flagNewEvent.date,
+      'eventAddress': this.flagNewEvent.address.streetAddress,
+      'eventApartment': JSON.stringify(this.flagNewEvent.address.apartment),
+      'eventCity': this.flagNewEvent.address.city,
+      'eventState': this.flagNewEvent.address.state,
+      'eventZip': this.flagNewEvent.address.zip,
+      'eventDescription': this.flagNewEvent.description,
+      'eventFlag': this.flagNewEvent.flag,
+      'userID': this.flagNewEvent.userId.id,
+      'eventPhotoID': this.flagNewEvent.picture
     }).subscribe((result) => {
     });
     window.location.reload();
@@ -123,7 +123,7 @@ export class UserAdminComponent implements OnInit {
     this.flagNewComment = value;
     this.flagNewComment.flag = 0;
     console.log(value);
-    this.http.post(HttpService.baseUrl+'admin/unflagcomment', {
+    this.http.post(HttpService.baseUrl + 'admin/unflagcomment', {
       'id': this.flagNewComment.id,
       'comment': this.flagNewComment.comment,
       'flag': this.flagNewComment.flag,
@@ -132,17 +132,17 @@ export class UserAdminComponent implements OnInit {
       'eventId': this.flagNewComment.eventId
     }).subscribe((result) => {
     });
-    this.flaggedComments.splice(index,1);
+    this.flaggedComments.splice(index, 1);
   }
 
 
   deleteEvent(value) {
     let index = this.flaggedEvents.indexOf(value);
     this.eventToKill = value;
-    this.http.delete(HttpService.baseUrl+'event/delete/'+this.eventToKill.id)
-    .subscribe((result)=>{});
-    this.flaggedEvents.splice(index,1);
-    console.log("Oops");
+    this.http.delete(HttpService.baseUrl + 'event/delete/' + this.eventToKill.id)
+      .subscribe((result) => { });
+    this.flaggedEvents.splice(index, 1);
+    console.log('Oops');
   }
 
 }
