@@ -104,7 +104,7 @@ export class UserCreateEventComponent implements OnInit {
       case 'Outdoors': {
         return 4;
       }
-      case 'Sprots': {
+      case 'Sports': {
         return 5;
       }
       case 'Volunteering': {
