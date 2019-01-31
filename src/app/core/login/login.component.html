@@ -1,10 +1,17 @@
 <h2 mat-dialog-title>Please Enter Credentials</h2>
 <form (ngSubmit)="cognitoSignIn(f)" #f="ngForm">
   <label class="mt-1">Username</label>
-  <input class="form-control" placeholder="Username" ngModel name="username" required aria-label="Password"
-  data-toggle="tooltip" data-placement="bottom" title="Username is case sensitive">
+  <input class="form-control" placeholder="Username" ngModel name="username" required aria-label="Password" data-toggle="tooltip"
+    data-placement="bottom" title="Username is case sensitive" [(ngModel)]="username" #uname="ngModel">
+  <div [hidden]="uname.valid || uname.pristine" class="alert alert-danger">
+    Username is required
+  </div>
   <label class="mt-1">Password</label>
   <input type="password" class="form-control" placeholder="Password" ngModel name="password" required aria-label="Password"
-  data-toggle="tooltip" data-placement="bottom" title="Requires: 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 special character)">
-  <button type="submit" class="btn btn-success mt-3">Login</button>
+    data-toggle="tooltip" data-placement="bottom" title="Requires: 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 symbol)"
+    [(ngModel)]="password" #pname="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
+  <div [hidden]="pname.valid || pname.pristine" class="alert alert-danger">
+    Password is required and must contain 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 symbol)
+  </div>
+  <button type="submit" class="btn btn-success mt-3" [disabled]="!f.form.valid">Login</button>
 </form>
