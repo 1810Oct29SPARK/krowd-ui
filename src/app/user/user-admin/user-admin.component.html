@@ -10,7 +10,7 @@
         <tr class="eventList justify-content-between z-depth-2" (click)="open(eventFlag)">
           <!-- When we click the event, we have to execute a function that sends a request to search for event by event id. 
             Then we populate the modal with the results. -->
-          <td> <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png"> </td>
+          <td> <img src={{flagged.picture}}> </td>
           <td class="event-title"> <span class="align-middle" style="vertical-align: center;"> {{flagged.name}} </span> </td>
           <td class="event-date"> <span class="align-middle"> {{flagged.date}} </span> </td>
           <td class="event-time"> <span class="align-middle"> Time </span> </td>
@@ -28,7 +28,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <img src="http://archive.idebate.org/sites/preview/files/default_event_image.png" style="height: 200px; width:100%;">
+                <img src={{flagged.picture}} style="height: 200px; width:100%;">
                 <br>
                 <br>
                 <h4> Event Description </h4>
@@ -39,7 +39,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="unflagEvent(flagged);modal.dismiss('Cross click');">Dismiss</button>
-                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Dismiss clicked')">Delete</button>
+                <button type="button" class="btn btn-outline-dark" (click)="deleteEvent(flagged);modal.close('Dismiss clicked')">Delete</button>
               </div>
             </ng-template>
         </table>
@@ -70,10 +70,10 @@
           <td> {{comment.created | date }} </td>
           <td>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark" (click)="consoleFunc();unflagComment(comment);">Dismiss</button>
+              <button type="button" class="btn btn-outline-dark" (click)="unflagComment(comment)">Dismiss</button>
             </span>
             <span class="buttons">
-              <button type="button" class="btn btn-outline-dark">Delete</button>
+              <button type="button" class="btn btn-outline-dark" (click)="deleteComment(comment)">Delete</button>
             </span>
           </td>
         </tr>
