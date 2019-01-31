@@ -4,15 +4,12 @@ import { Event } from 'src/app/shared/models/event';
 
 import { HttpService } from '../../services/http/http.service';
 import { Comment } from 'src/app/shared/models/comment';
-import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
-import { User } from 'src/app/shared/models/user';
-import { Category } from 'src/app/shared/models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -87,7 +84,7 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('AdminService: @getAllComments()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -158,7 +155,7 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('UserEventService: @getUsersAttendingEvent()');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
@@ -172,7 +169,7 @@ export class EventsService {
       .catch(
         (error) => {
           console.log('UserEventServiceError: @getEventScore');
-          return Observable.throw(error);
+          return throwError(error);
         }
       );
   }
