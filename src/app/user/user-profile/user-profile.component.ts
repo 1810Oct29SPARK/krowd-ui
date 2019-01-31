@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/core/services/users/users.service';
 import { CommentsService } from 'src/app/core/services/comments/comments.service';
 import { User } from 'src/app/shared/models/user';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -52,7 +53,8 @@ export class UserProfileComponent implements OnInit {
     public cognitoService: CognitoService,
     public userService: UsersService,
     public eventService: EventsService,
-    public commentService: CommentsService
+    public commentService: CommentsService,
+    public router: Router
   ) { }
 
   cognitoUsername: string;
@@ -220,6 +222,8 @@ export class UserProfileComponent implements OnInit {
     console.log(user);
     this.userService.updateUser(user).subscribe((userObject: User) => {
       this.user = userObject;
+      this.modalService.dismissAll();
+      this.router.navigate(['/krowd/home']);
     }
     );
   }

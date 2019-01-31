@@ -95,6 +95,7 @@ export class UserAdminComponent implements OnInit {
   // consoleFunc(flagged){console.log(flagged);}
 
   unflagEvent(value) {
+    let index = this.flaggedEvents.indexOf(value);
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 0;
     console.log(value);
@@ -114,7 +115,7 @@ export class UserAdminComponent implements OnInit {
       'eventPhotoID': this.flagNewEvent.picture
     }).subscribe((result) => {
     });
-    window.location.reload();
+    this.flaggedEvents.splice(index, 1);
     // this.eventService.getAllFlaggedEvents();
     // this should be changged
   }
@@ -142,6 +143,15 @@ export class UserAdminComponent implements OnInit {
     this.http.delete(HttpService.baseUrl + 'event/delete/' + this.eventToKill.id)
       .subscribe((result) => { });
     this.flaggedEvents.splice(index, 1);
+    console.log('Oops');
+  }
+
+  deleteComment(value) {
+    let index = this.flaggedComments.indexOf(value);
+    this.commentToKill = value;
+    this.http.delete(HttpService.baseUrl + 'event/delete/' + this.commentToKill.id)
+      .subscribe((result) => { });
+    this.flaggedComments.splice(index, 1);
     console.log('Oops');
   }
 
