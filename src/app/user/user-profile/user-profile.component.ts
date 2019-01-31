@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit {
   userInfo: any = null;
   selectedFile: File = null;
   imageURL: string;
-  userId: number;
+  userId: number = parseInt(sessionStorage.getItem('id'), 10);
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
@@ -64,7 +64,6 @@ export class UserProfileComponent implements OnInit {
     console.log(username);
     this.userService.getUserByUsername(username)
       .subscribe((data) => {
-        sessionStorage.setItem('id', data.id);
         this.userInfo = data;
         console.log(this.userInfo);
       });
@@ -121,9 +120,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   getEventsByUserId() {
-    console.log('running getEvents function');
-    let userId: number = parseInt(sessionStorage.getItem('id'), 10);
-    this.eventService.getEventsByUserId(userId)
+    // let userId: number = parseInt(sessionStorage.getItem('id'), 10);
+    console.log('in getEventByUserId: ' + this.userId);
+    this.eventService.getEventsByUserId(this.userId)
       .subscribe(
         (events) => {
           for (let event of events) {

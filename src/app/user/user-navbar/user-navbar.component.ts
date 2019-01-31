@@ -38,6 +38,7 @@ export class UserNavbarComponent implements OnInit {
 
   onLogout() {
     this.cognitoService.amplifySignOut();
+    sessionStorage.clear();
     this.router.navigate(['/']);
   }
 

@@ -78,6 +78,7 @@ export class UserHomeComponent implements OnInit {
       this.cognitoUsername = authUser.username;
       this.userService.getUserByUsername(this.cognitoUsername)
         .subscribe (user => {
+          sessionStorage.setItem('id', user.id);
           this.user = user;
           console.log(this.user);
           this.userId = parseInt(this.user.id, 10);
