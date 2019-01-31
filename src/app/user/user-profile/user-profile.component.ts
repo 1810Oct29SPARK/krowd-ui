@@ -34,10 +34,11 @@ export class UserProfileComponent implements OnInit {
   selectedFile: File = null;
   imageURL: string;
   userId: number = parseInt(sessionStorage.getItem('id'), 10);
-  firstname:string;
-  lastname:string;
-  result:User;
+  firstname: string;
+  lastname: string;
+  result: User;
   picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
+  user: User;
 
   uploader: CloudinaryUploader = new CloudinaryUploader(
     new CloudinaryOptions({ cloudName: 'dhazivqjc', uploadPreset: 'zalhcbr6' })
@@ -55,6 +56,9 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   cognitoUsername: string;
+  userid = this.userService.getUserByUsername(this.cognitoUsername).subscribe((result) => {
+    this.result = result;
+  });
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
@@ -66,14 +70,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   populateProfile(username: string) {
-    console.log(username);
     this.userService.getUserByUsername(username)
       .subscribe((data) => {
-        sessionStorage.setItem('id', data.id);
         this.userInfo = data;
-        console.log(this.userInfo);
       });
-      return  this.userInfo;
+    return this.userInfo;
   }
 
   toggleProfile() {
@@ -126,15 +127,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   getEventsByUserId() {
-    console.log('running getEvents function');
-    let userId: number = parseInt(sessionStorage.getItem('id'), 10);
-    this.eventService.getEventsByUserId(userId)
+    // let userId: number = parseInt(sessionStorage.getItem('id'), 10);
+    this.eventService.getEventsByUserId(this.userId)
       .subscribe(
         (events) => {
           for (let event of events) {
             this.attendingEvents.push(event);
-            console.log('Attending Events:');
-            console.log(this.attendingEvents);
             if (event.picture === null) {
               event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
@@ -150,7 +148,6 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (event) => {
           this.singleEvent = event;
-          console.log(this.singleEvent);
         },
         (error) => console.log(error)
       );
@@ -178,10 +175,8 @@ export class UserProfileComponent implements OnInit {
     this.commentService.getCommentByUserId(userId)
       .subscribe(
         (comments) => {
-          console.log(comments);
           for (let comment of comments) {
             this.userComment.push(comment);
-            console.log(this.userComment);
           }
           // this.userComment.push(comments);
           // console.log('after loop' + this.userComment);
@@ -207,28 +202,25 @@ export class UserProfileComponent implements OnInit {
     };
 
   }
-  user:User;
-  userid = this.userService.getUserByUsername(this.cognitoUsername).subscribe((result)=>{
-    this.result = result;
-  });
+
   onUserUpdated(ngForm: NgForm) {
     console.log(this.userInfo);
-    let user: any = {      
-    'id': this.userInfo.id,
-    'username': this.userInfo.username,
-    'firstname': this.firstname,
-    'lastname': this.lastname,
-    'email': this.userInfo.email,
-    'reputation': this.userInfo.reputation,
-    'picture': this.picture,
-    'cognito': this.userInfo.cognito,
-    'accountStatus': this.userInfo.accountStatus,
-    'roleId': this.userInfo.roleId
+    let user: any = {
+      'id': this.userInfo.id,
+      'username': this.userInfo.username,
+      'firstname': this.firstname,
+      'lastname': this.lastname,
+      'email': this.userInfo.email,
+      'reputation': this.userInfo.reputation,
+      'picture': this.picture,
+      'cognito': this.userInfo.cognito,
+      'accountStatus': this.userInfo.accountStatus,
+      'roleId': this.userInfo.roleId
     };
     console.log(user);
-    this.userService.updateUser(user).subscribe((user:User) =>{
-          this.user = user;
-        }
-      );
+    this.userService.updateUser(user).subscribe((userObject: User) => {
+      this.user = userObject;
+    }
+    );
   }
 }

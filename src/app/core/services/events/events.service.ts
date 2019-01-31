@@ -11,6 +11,8 @@ import 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
+import { User } from 'src/app/shared/models/user';
+import { Category } from 'src/app/shared/models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,7 @@ export class EventsService {
   }
 
   getAllEvents() {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+'event/all')
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/all')
       .map((events) => {
         let eventData = events;
         return eventData;
@@ -46,12 +48,12 @@ export class EventsService {
   }
 
   getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl + `userEvent/eventByUser/${userid}`) .map((events) => {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `userEvent/eventByUser/${userid}`).map((events) => {
 
-        let userEventData = events;
-        return userEventData;
-      },
-      )
+      let userEventData = events;
+      return userEventData;
+    },
+    )
       .catch(
         (error) => {
           console.log('EventsService: @getEventsByUserId()');
@@ -75,7 +77,7 @@ export class EventsService {
   }
 
   getFlaggedComments() {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+`comment/getByFlag/1`)
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `comment/getByFlag/1`)
       .map(
         (comments) => {
           let flaggedComment = comments;
@@ -90,12 +92,8 @@ export class EventsService {
       );
   }
 
-  addEvent(eventName: string, eventCategory: string, eventDate: string,
-    eventAddress: string, eventApartment: string, eventCity: string, eventState: string, eventZip: string,
-    eventDescription: string, eventFlag: number, userId: string, eventPhotoID: string) {
-
-    console.log('in eventService');
-    return this.httpClient.post(HttpService.baseUrl + `event/add`, { name });
+  addEvent(event: any) {
+    return this.httpClient.post(HttpService.baseUrl + `event/add`, event);
   }
 
 
@@ -151,35 +149,35 @@ export class EventsService {
 
 
   getEventsUserAttending(userId: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`userEvent/eventByUser/${userId}`)
-        .map(
-            (event: any[]) => {
-                console.log(event);
-            },
-        )
-        .catch(
-            (error) => {
-                console.log('UserEventService: @getUsersAttendingEvent()');
-                return Observable.throw(error);
-            }
-        );
-}
-getEventScore(eventId: number) {
-  return this.httpClient.get(HttpService.baseUrl+`userEvent/scoreEvent/${eventId}`)
-  .map(
-      (event: any) => {
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `userEvent/eventByUser/${userId}`)
+      .map(
+        (event: any[]) => {
           console.log(event);
-      },
-  )
-  .catch(
-      (error) => {
+        },
+      )
+      .catch(
+        (error) => {
+          console.log('UserEventService: @getUsersAttendingEvent()');
+          return Observable.throw(error);
+        }
+      );
+  }
+  getEventScore(eventId: number) {
+    return this.httpClient.get(HttpService.baseUrl + `userEvent/scoreEvent/${eventId}`)
+      .map(
+        (event: any) => {
+          console.log(event);
+        },
+      )
+      .catch(
+        (error) => {
           console.log('UserEventServiceError: @getEventScore');
           return Observable.throw(error);
-      }
-  );
-}
+        }
+      );
+  }
 
-rateEvent(ratingScore: number) {
-  return this.httpClient.put(HttpService.baseUrl+`userEvent/rate`, {ratingScore});
-}
+  rateEvent(ratingScore: number) {
+    return this.httpClient.put(HttpService.baseUrl + `userEvent/rate`, { ratingScore });
+  }
 }

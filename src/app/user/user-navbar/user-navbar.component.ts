@@ -26,9 +26,7 @@ export class UserNavbarComponent implements OnInit {
       this.userService.getUserByUsername(this.cognitoUsername)
         .subscribe (user => {
           this.user = user;
-          console.log(this.user);
           this.userRole = this.user.roleId.name;
-          console.log(this.userRole);
         }
           );
     });
@@ -38,6 +36,7 @@ export class UserNavbarComponent implements OnInit {
 
   onLogout() {
     this.cognitoService.amplifySignOut();
+    sessionStorage.clear();
     this.router.navigate(['/']);
   }
 

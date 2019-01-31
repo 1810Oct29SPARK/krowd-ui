@@ -59,7 +59,6 @@ export class UserHomeComponent implements OnInit {
       });
   }
 
-
   ontoggle() {
     if (this.toggle === true) {
       this.toggle = false;
@@ -92,7 +91,7 @@ export class UserHomeComponent implements OnInit {
     this.getAllEvents();
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
-      this.getUser(this.cognitoUsername)
+      this.getUser(this.cognitoUsername);
     console.log(this.cognitoUsername);
     this.userService.getUserByUsername(this.cognitoUsername)
       .subscribe(user => {
@@ -105,7 +104,6 @@ export class UserHomeComponent implements OnInit {
   }
 
   showModal() {
-    console.log('modal works');
   }
 
   getAllEvents() {
@@ -140,7 +138,6 @@ export class UserHomeComponent implements OnInit {
     return this.singleEvent;
   }
   onCommentCreated(form: NgForm) {
-    console.log('Hello World');
     let comment: any = {
       'id': 1,
       'comment': form.value.data,
@@ -149,7 +146,6 @@ export class UserHomeComponent implements OnInit {
       'userId': 1,
       'eventId': this.eventId
     };
-    console.log(comment);
     this.commentService.addComment(comment)
       .subscribe(
         (event) =>
@@ -161,13 +157,13 @@ export class UserHomeComponent implements OnInit {
     console.log(eventId);
     this.commentService.getCommentsByEventId(eventId).subscribe((comments) => {
       for (let comment of comments) {
-        if (comment.eventId.id == eventId) {
+        if (comment.eventId.id === eventId) {
           this.commentListFinal.push(comment);
           console.log(comment);
         }
       }
       return (this.commentListFinal);
-    })
+    });
   }
 
   registerForEvent(form: NgForm) {
@@ -180,7 +176,6 @@ export class UserHomeComponent implements OnInit {
   flagEvent(value) {
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 1;
-    console.log(value);
     this.http.put('http://localhost:8085/event/update', {
       'eventID': this.flagNewEvent.id,
       'eventName': this.flagNewEvent.name,
@@ -202,8 +197,8 @@ export class UserHomeComponent implements OnInit {
 
 
 flagComment(commentId) {
-  console.log("Comment Id: ")
-  console.log(commentId)
+  console.log('Comment Id: ');
+  console.log(commentId);
   this.commentService.flagComment(commentId);
 }
 

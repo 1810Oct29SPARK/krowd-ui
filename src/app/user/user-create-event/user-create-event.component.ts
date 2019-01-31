@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { Event } from '../../shared/models/event';
 import { EventsService } from '../../core/services/events/events.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+import { User } from 'src/app/shared/models/user';
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-user-create-event',
@@ -16,18 +19,7 @@ export class UserCreateEventComponent implements OnInit {
   submitted = false;
 
   cognitoUsername: string;
-
-  eventName: any = null;
-  eventAddress: any = null;
-  eventCity: any = null;
-  eventState: any = null;
-  eventZip: any = null;
-  eventCategory: any = null;
-  eventDescription: any = null;
-  eventDate: any = null;
-  eventTime: any = null;
-  eventApartment: any = null;
-  userId: any = null;
+  createdEvent: Event[] = [];
 
   // code for image upload
   eventPhotoID: File = null;
@@ -40,36 +32,57 @@ export class UserCreateEventComponent implements OnInit {
 
   loading: any;
 
-  constructor(private http: HttpClient, private eventservice: EventsService, public cognitoService: CognitoService) { }
+  user: User;
+
+  constructor(
+    private http: HttpClient, private eventservice: EventsService, public cognitoService: CognitoService,
+    private userService: UsersService
+  ) { }
 
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
+
+      this.userService.getUserByUsername(this.cognitoUsername)
+        .subscribe((response) => this.user = response);
     });
   }
 
   createEvent(form: NgForm) {
-  this.http.post('http://localhost:8085/event/add', {
-  'eventName': this.eventName,
-  'eventCategory': this.assignCategory(this.eventCategory),
-  'eventDate': JSON.stringify(this.eventDate),
-  'eventAddress': this.eventAddress,
-  'eventApartment': this.eventApartment,
-  'eventCity': this.eventCity,
-  'eventState': this.eventState,
-  'eventZip': this.eventZip,
-  'eventDescription': this.eventDescription,
-  'eventFlag': JSON.stringify(0),
-  'userID': 1,
-  'eventPhotoID': ''
-}).subscribe((result) => {
-});
+    if (form.value.eventDate.month < 10) {
+      form.value.eventDate.month = '0' + form.value.eventDate.month;
+    } else if (form.value.eventDate.day < 10) {
+      form.value.eventDate.day = '0' + form.value.eventDate.day;
+    }
+
+    console.log(form.value.eventTime);
+    let event: any = {
+      'name': form.value.eventName,
+      'description': form.value.eventDescription,
+      'picture': this.imageURL,
+      'date': form.value.eventDate.year + '-' + form.value.eventDate.month + '-' + form.value.eventDate.day + 'T00:00',
+      'address': form.value.eventAddress,
+      'apartment': form.value.eventApartment,
+      'city': form.value.eventCity,
+      'state': form.value.eventState,
+      'zip': form.value.eventZip,
+      'score': 0,
+      'flag': 0,
+      'userId': this.user.id,
+      'categoryId': this.assignCategory(form.value.eventCategory)
+    };
+    console.log(event);
+    this.eventservice.addEvent(event)
+      .subscribe((result) => {
+      });
     this.submitted = true;
   }
 
   assignCategory(category) {
+    console.log(category);
     switch (category) {
       case 'Art': {
+        console.log('you are in Art case');
         return 1;
       }
       case 'Food & Drink': {
@@ -88,6 +101,7 @@ export class UserCreateEventComponent implements OnInit {
         return 6;
       }
       case 'Other': {
+        console.log('you are in other case');
         return 7;
       }
     }
@@ -98,7 +112,6 @@ export class UserCreateEventComponent implements OnInit {
     this.uploader.uploadAll();
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
       let res: any = JSON.parse(response);
-      console.log(res);
       this.imageURL = res.url;
       console.log(this.imageURL);
       this.picture = this.imageURL;

@@ -4,6 +4,7 @@
 
 import { Category } from './category';
 import { User } from './user';
+import { Address } from './address';
 
 
 export class Event {
@@ -11,8 +12,8 @@ export class Event {
     name: string;
     description: string;
     picture: string;
-    date: Date;
-    address: string;
+    date: string;
+    address: Address;
     score: number;
     flag: number;
     userId: User;
@@ -23,8 +24,8 @@ export class Event {
         name: string,
         description: string,
         picture: string,
-        date: Date,
-        address: string,
+        date: string,
+        address: Address,
         score: number,
         flag: number,
         userId: User,
