@@ -1,26 +1,51 @@
 <h2 mat-dialog-title>Please Enter Your Information</h2>
-<form (ngSubmit)="cognitoSignUp(f)" #f="ngForm">
+<form name="form" (ngSubmit)="cognitoSignUp(f)" #f="ngForm">
   <label class="mt-1">Username</label>
-  <input class="form-control" placeholder="Username" id="username" name="username" aria-label="Username"
-    data-toggle="tooltip" data-placement="bottom" title="Username is case sensitive" required ngModel>
-
+  <input class="form-control" placeholder="Username" id="username" name="username" aria-label="Username" data-toggle="tooltip"
+    data-placement="bottom" title="Username is case sensitive" required ngModel [(ngModel)]="username" #uname="ngModel">
+  <div [hidden]="uname.valid || uname.pristine" class="alert alert-danger">
+    Username is required
+  </div>
   <div>
     <label class="mt-1">Firstname</label>
-    <input class="form-control" placeholder="First Name" ngModel name="firstname" required>
+    <input class="form-control" placeholder="First Name" ngModel name="firstname" required [(ngModel)]="firstname"
+      #fname="ngModel">
+  </div>
+  <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+    Firstname is required
   </div>
   <div>
     <label class="mt-1">Lastname</label>
-    <input class="form-control" placeholder="Last Name" ngModel name="lastname" required>
+    <input class="form-control" placeholder="Last Name" ngModel name="lastname" required [(ngModel)]="lastname" #name="ngModel">
+  </div>
+  <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+    Lastname is required
   </div>
   <div>
     <label class="mt-1">Email</label>
-    <input class="form-control" placeholder="Email" ngModel name="email" required required aria-label="Email"
-      data-toggle="tooltip" data-placement="bottom" title="ex: example@email.com">
+    <input class="form-control" placeholder="Email" ngModel name="email" required aria-label="Email" data-toggle="tooltip"
+      data-placement="bottom" title="ex: example@email.com" [(ngModel)]="email" #ename="ngModel">
+  </div>
+  <div [hidden]="ename.valid || ename.pristine" class="alert alert-danger">
+    Email is required
   </div>
   <div>
     <label class="mt-1">Password</label>
     <input type="password" class="form-control" placeholder="Password" ngModel name="password" required aria-label="Password"
-      data-toggle="tooltip" data-placement="bottom" title="Requires: 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 special character)">
+      data-toggle="tooltip" data-placement="bottom" title="Requires: 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 special character)"
+      [(ngModel)]="password" #pname="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
   </div>
-  <button type="submit" class="btn btn-success mt-3">Create User</button>
+  <div [hidden]="pname.valid || pname.pristine" class="alert alert-danger">
+    Password is required and must contain 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 symbol)
+  </div>
+  <div>
+    <label class="mt-1">Confirm Password</label>
+    <input type="password" class="form-control" placeholder="Confirm Password" ngModel name="confirmPassword" required
+      aria-label="Password" data-toggle="tooltip" data-placement="bottom" title="Confirm Password" [(ngModel)]="confirmPassword"
+      #cpname="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
+  </div>
+  <div [hidden]="cpname.valid || cpname.pristine" class="alert alert-danger">
+    Please make both fields match
+  </div>
+  <button type="submit" class="btn btn-success mt-3" [disabled]="!f.form.valid">Create User</button>
 </form>
