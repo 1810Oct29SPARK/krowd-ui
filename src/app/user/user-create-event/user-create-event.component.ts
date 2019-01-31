@@ -59,8 +59,8 @@ export class UserCreateEventComponent implements OnInit {
     let event: any = {
       'name': form.value.eventName,
       'description': form.value.eventDescription,
-      'picture': this.picture,
-      'date': form.value.eventDate.year + '-' + form.value.eventDate.month + '-' + form.value.eventDate.day + 'T' + form.value.eventTime,
+      'picture': this.imageURL,
+      'date': form.value.eventDate.year + '-' + form.value.eventDate.month + '-' + form.value.eventDate.day + 'T00:00',
       'address': form.value.eventAddress,
       'apartment': form.value.eventApartment,
       'city': form.value.eventCity,
@@ -112,7 +112,6 @@ export class UserCreateEventComponent implements OnInit {
     this.uploader.uploadAll();
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
       let res: any = JSON.parse(response);
-      console.log(res);
       this.imageURL = res.url;
       console.log(this.imageURL);
       this.picture = this.imageURL;
