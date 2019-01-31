@@ -16,13 +16,13 @@
       </span>
     </div>
     <div id="profile-buttons" class="col-md-4">
-      <button (click)="open(editProfile)"> Edit Profile Information </button>
+      <button class="btn btn-outline-success" (click)="open(editProfile)"> Edit Profile Information </button>
       <br>
       <br>
-      <button (click)="toggleEvents()"> {{event_button_text}} </button>
+      <button class="btn btn-outline-success" (click)="toggleEvents()"> {{event_button_text}} </button>
       <br>
       <br>
-      <button (click)="toggleComments()"> {{comment_button_text}} </button>
+      <button class="btn btn-outline-success" (click)="toggleComments()"> {{comment_button_text}} </button>
     </div>
   </div>
 
@@ -46,9 +46,9 @@
         <div class="card" (click)="open(singleEventUser)">
           <div (click)="getEventById(event.id)">
             <div class="card-img-top card-img-top-250">
-              <img class="img-fluid" src="{{event.eventId.picture}}" alt="Carousel 1">
+              <img class="img-fluid" src="{{event.picture}}" alt="Carousel 1">
               <div class="card-body">
-                <h6 class="small text-wide p-b-2">{{event.eventId.name}}</h6>
+                <h6 class="small text-wide p-b-2">{{event.name}}</h6>
                 <h6 class="small text-wide p-b-2">Created by: {{event.userId.firstname}} {{event.userId.lastname}}</h6>
                 <h2>
                   {{event.name}}

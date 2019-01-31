@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class HttpService {
 
   constructor() { }
-
   public static baseUrl = 'http://localhost:8085/';
+
+
 
 }
