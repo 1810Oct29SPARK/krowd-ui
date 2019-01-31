@@ -7,6 +7,7 @@ export class HttpService {
 
   constructor() { }
 
+
   // 'http://ec2-3-91-103-185.compute-1.amazonaws.com:8080/krowd-boot/'
 
   public static baseUrl = 'http://localhost:8085/';

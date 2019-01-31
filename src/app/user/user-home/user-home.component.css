@@ -71,3 +71,7 @@ tbody {
 #current-events td {
   width: 20%;
 }
+
+#commentsDiv {
+  padding: 5px;
+}
