@@ -1,17 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Event } from 'src/app/shared/models/event';
-<<<<<<< HEAD
-import { Comment } from 'src/app/shared/models/comment'
-import { Observable } from 'rxjs';
-import { throwError } from 'rxjs';
-import { HttpService } from 'src/app/core/services/http/http.service';
-=======
 import { HttpService } from '../../services/http/http.service';
 import { Comment } from 'src/app/shared/models/comment';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
 
 import 'rxjs';
 import 'rxjs/add/operator/map';
@@ -38,11 +31,7 @@ export class EventsService {
   }
 
   getAllEvents() {
-<<<<<<< HEAD
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+'/event/all')
-=======
     return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/all')
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
       .map((events) => {
         let eventData = events;
         return eventData;
@@ -56,12 +45,7 @@ export class EventsService {
   }
 
   getEventsByUserId(userid: number) {
-<<<<<<< HEAD
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`/userEvent/eventByUser/${userid}`)
-      .map((events) => {
-=======
     return this.httpClient.get<Event[]>(HttpService.baseUrl + `${userid}`) .map((events) => {
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
         let userEventData = events;
         return userEventData;
       },
@@ -75,11 +59,7 @@ export class EventsService {
   }
 
   getAllFlaggedEvents() {
-<<<<<<< HEAD
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+'/event/byFlag')
-=======
     return this.httpClient.get<Event[]>(HttpService.baseUrl + 'event/byFlag')
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
       .map((events) => {
         let flaggedEvent = events;
         return flaggedEvent;
@@ -93,7 +73,7 @@ export class EventsService {
   }
 
   getFlaggedComments() {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+`/comment/getByFlag/1`)
+    return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByFlag/1`)
       .map(
         (comments) => {
           let flaggedComment = comments;
@@ -112,27 +92,12 @@ export class EventsService {
     eventAddress: string, eventApartment: string, eventCity: string, eventState: string, eventZip: string,
     eventDescription: string, eventFlag: number, userId: string, eventPhotoID: string) {
     console.log('in eventService');
-<<<<<<< HEAD
-    return this.httpClient.post(HttpService.baseUrl+`/event/add`, { name });
-=======
     return this.httpClient.post(HttpService.baseUrl + `event/add`, { name });
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
   }
 
 
   // *******************************************
   deleteEvent(event: Event) {
-<<<<<<< HEAD
-    return this.httpClient.delete(HttpService.baseUrl+`/event/delete`);
-  }
-
-  updateEvent(event: Event) {
-    return this.httpClient.put(HttpService.baseUrl+`/update`, event);
-  }
-
-  getEventById(eventId: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`/event/byId/${eventId}`)
-=======
     return this.httpClient.post(HttpService.baseUrl + `event/delete/`, event);
   }
 
@@ -142,7 +107,6 @@ export class EventsService {
 
   getEventById(eventId: number) {
     return this.httpClient.get<Event[]>(HttpService.baseUrl + `event/byId/${eventId}`)
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
       .map(
         (event: any[]) => {
           let signleEvent = event;
@@ -160,11 +124,7 @@ export class EventsService {
 
   getEventsByCategory(categoryID: number) {
 
-<<<<<<< HEAD
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`/byCategory/${categoryID}`)
-=======
     return this.httpClient.get<Event[]>(HttpService.baseUrl + `byCategory/${categoryID}`)
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
       .map(
         (event: any[]) => {
           console.log(event);
@@ -183,14 +143,10 @@ export class EventsService {
   // }
 
   registerForEvent(eventId: number, userId: number) {
-<<<<<<< HEAD
-    return this.httpClient.post(HttpService.baseUrl+`/userEvent/addUserEvent`, eventId);
-=======
     return this.httpClient.post(HttpService.baseUrl + 'userEvent/addUserEvent', {
       'userId': userId,
       'eventId': eventId,
     });
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
   }
 
   // getFlaggedEvents(flagScore: number) {
@@ -211,7 +167,7 @@ export class EventsService {
 
 
   getEventsUserAttending(userId: number) {
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`/userEvent/eventByUser/${userId}`)
+    return this.httpClient.get<Event[]>(`http://localhost:8085/userEvent/eventByUser/${userId}`)
         .map(
             (event: any[]) => {
                 console.log(event);
@@ -225,7 +181,7 @@ export class EventsService {
         );
 }
 getEventScore(eventId: number) {
-  return this.httpClient.get(HttpService.baseUrl+`/userEvent/scoreEvent/${eventId}`)
+  return this.httpClient.get(`http://localhost:8085/userEvent/scoreEvent/${eventId}`)
   .map(
       (event: any) => {
           console.log(event);
@@ -240,6 +196,6 @@ getEventScore(eventId: number) {
 }
 
 rateEvent(ratingScore: number) {
-  return this.httpClient.put(HttpService.baseUrl+`/userEvent/rate`, {ratingScore});
+  return this.httpClient.put(`http://localhost:8085:/userEvent/rate`, {ratingScore});
 }
 }
