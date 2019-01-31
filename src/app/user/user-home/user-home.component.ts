@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
 import { HttpService } from 'src/app/core/services/http/http.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class UserHomeComponent implements OnInit {
     private commentService: CommentsService,
     private http: HttpClient,
     private cognitoService: CognitoService,
-    private userService: UsersService) { }
+    private userService: UsersService,
+    public router: Router) { }
 
   events: Event[] = [];
   singleEvent: any = null;
@@ -77,6 +79,7 @@ export class UserHomeComponent implements OnInit {
   }
 
   private getDismissReason(reason: any): string {
+    this.commentListFinal = [];
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -98,6 +101,7 @@ export class UserHomeComponent implements OnInit {
         this.user = user;
         console.log(this.user);
         this.userId = parseInt(this.user.id, 10);
+        sessionStorage.setItem('id', this.userId);
         console.log(this.userId);
       });
     });
@@ -169,6 +173,8 @@ export class UserHomeComponent implements OnInit {
   registerForEvent(form: NgForm) {
     this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
       .subscribe((result) => {
+        this.modalService.dismissAll();
+        this.router.navigate(['/krowd/profile']);
       });
     this.submitted = true;
   }

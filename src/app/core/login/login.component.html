@@ -11,7 +11,7 @@
     data-toggle="tooltip" data-placement="bottom" title="Requires: 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 symbol)"
     [(ngModel)]="password" #pname="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
   <div [hidden]="pname.valid || pname.pristine" class="alert alert-danger">
-    Password is required and must contain 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 symbol)
+    Password is required.
   </div>
   <button type="submit" class="btn btn-success mt-3" [disabled]="!f.form.valid">Login</button>
 </form>
