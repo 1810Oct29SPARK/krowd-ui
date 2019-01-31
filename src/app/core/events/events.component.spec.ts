@@ -23,14 +23,5 @@ describe('EventsComponent', () => {
   xit('should allow event host to update event', () => {
     expect(component).toBeTruthy();
   });
-  xit('should allow event host to cancel event', () => {
-
-  });
-  xit('should allow event host to upload an event image', () => {
-
-  });
-  xit('should allow user to register for an event', () => {
-
-  });
 
 });
