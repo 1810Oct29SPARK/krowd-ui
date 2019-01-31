@@ -102,7 +102,44 @@
 <br>
 <br>
 <br>
-<br>
+<br><ng-template #editProfile let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Profile Information</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #userForm="ngForm" (ngSubmit)="onUserUpdated(userForm)" >
+      <label for="firstInput"> First Name </label>
+      <input id="firstInput" class="form-control" type="text" name="firstname" [(ngModel)]="firstname">
+      <br>
+      <label for="lastInput"> Last Name </label>
+      <input id="lastInput" class="form-control" type="text" name="lastname" [(ngModel)]="lastname">
+      <br>
+      <div class="form-group">
+      </div>
+      <br>
+      <img id="newImage" src={{picture}}>
+      <br>
+      <h6> Change Profile Image </h6>
+      <div class="form-row picture-upload">
+        <div class="form-group col-4">
+          <input type="file" ng2FileSelect [uploader]="uploader" [(ngModel)]="picture" accept="image/*;capture=camera" name="picture"
+            ngModel>
+          <br>
+          <br>
+          <button [disabled]="loading" (click)="upload()">Upload</button>
+        </div>
+        <div class="form-group col-4">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" click="modal.close('Submit clicked')"> Submit Changes </button>
+      </div>
+    </form>
+  </div>  
+</ng-template>
 <ng-template #singleEventUser let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{singleEvent?.name}}</h4>
@@ -129,6 +166,8 @@
         <button type="button" class="btn btn-outline-warning" (click)="registerForEvent()">
           Register Now!</button>
       </div>
+      
     </mat-tab>
   </mat-tab-group>
+  
 </ng-template>
