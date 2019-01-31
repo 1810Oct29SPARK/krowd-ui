@@ -82,7 +82,13 @@ export class CommentsService {
     .subscribe((result) => console.log(result));
   }
 
+  deleteComment(commentId: number) {
+    return this.httpClient.post(HttpService.baseUrl + 'comment/deletecomment', {
+      'id':commentId
+    });
+  }
   getCommentsByEventId(eventId: number) {
     return this.httpClient.get<Comment[]>(HttpService.baseUrl + 'comment/getByEvent/' + eventId);
   }
+
 }
