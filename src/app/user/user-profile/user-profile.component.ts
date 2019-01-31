@@ -121,12 +121,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   getEventsByUserId() {
+    console.log('running getEvents function');
     let userId: number = parseInt(sessionStorage.getItem('id'), 10);
     this.eventService.getEventsByUserId(userId)
       .subscribe(
         (events) => {
           for (let event of events) {
             this.attendingEvents.push(event);
+            console.log('Attending Events:');
+            console.log(this.attendingEvents);
             if (event.picture === null) {
               event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }

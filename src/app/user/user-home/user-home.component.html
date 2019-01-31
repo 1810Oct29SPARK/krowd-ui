@@ -58,7 +58,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-success" (click)="flagEvent(singleEvent)">
           Flag This Event</button>
-        <button type="button" class="btn btn-outline-warning" (click)="registerForEvent()">
+        <button type="button" class="btn btn-outline-warning" (click)="registerForEvent(singleEvent?.id)">
           Register Now!</button>
       </div>
     </mat-tab>
