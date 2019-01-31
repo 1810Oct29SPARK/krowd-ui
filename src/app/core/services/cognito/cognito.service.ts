@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +10,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CognitoService {
 
-  constructor(public httpClient: HttpClient) { }
+  constructor(
+    public httpClient: HttpClient,
+    public router: Router
+  ) { }
 
   getCodeFromUserInput(): any {
     return null;
@@ -26,8 +30,8 @@ export class CognitoService {
       'firstname': firstname,
       'lastname': lastname,
       'picture': 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjn3bTR55XgAhVOq' +
-      'lkKHdbTDUQQjRx6BAgBEAU&url=https%3A%2F%2Fafribary.com%2Fauthors%2Fanonymous-user&psig=AOvVaw2t8NFmGK' +
-      '1yDh5n6eWlI9QS&ust=1548948139047611',
+        'lkKHdbTDUQQjRx6BAgBEAU&url=https%3A%2F%2Fafribary.com%2Fauthors%2Fanonymous-user&psig=AOvVaw2t8NFmGK' +
+        '1yDh5n6eWlI9QS&ust=1548948139047611',
       'reputation': 0,
       'roleId': 2
     }).subscribe(data => {
@@ -61,9 +65,9 @@ export class CognitoService {
   async cognitoSignUp(username: string, email: string, password: string, firstname: string, lastname: string): Promise<void> {
     const user: any = await Auth.signUp({ username, password, attributes: { email } })
       .catch(err => console.log(err));
-      if (user != null) {
-        this.registerNewUser(username, email, firstname, lastname);
-      }
+    if (user != null) {
+      this.registerNewUser(username, email, firstname, lastname);
+    }
     console.log(user);
   }
 
@@ -110,6 +114,7 @@ export class CognitoService {
           console.log(tokens.accessToken.jwtToken);
           localStorage.setItem('accessToken', tokens.accessToken.jwtToken);
           this.sendAccessToken(tokens.accessToken.jwtToken);
+          this.router.navigate(['/krowd']);
         });
       }
     } catch (err) {
@@ -127,6 +132,6 @@ export class CognitoService {
   amplifySignOut() {
     Auth.signOut()
       .catch(err => console.log(err));
-      localStorage.clear();
+    localStorage.clear();
   }
 }

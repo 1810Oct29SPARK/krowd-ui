@@ -27,7 +27,8 @@ export class UserProfileComponent implements OnInit {
   attendingEvents = [];
   eventList2 = [];
   userComment = [];
-
+  singleEvent: any = null;
+  userInfo: any = null;
   selectedFile: File = null;
   imageURL: string;
   userId: number;
@@ -53,17 +54,21 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.cognitoService.getCurrentAuthUser().then(authUser => {
       this.cognitoUsername = authUser.username;
-      console.log(this.cognitoUsername);
       this.populateProfile(this.cognitoUsername);
     });
+    this.getEventsByUserId();
+    this.getCommetsByUserId();
   }
 
   populateProfile(username: string) {
     console.log(username);
     this.userService.getUserByUsername(username)
       .subscribe((data) => {
-        console.log(data);
+        sessionStorage.setItem('id', data.id);
+        this.userInfo = data;
+        console.log(this.userInfo);
       });
+      return  this.userInfo;
   }
 
   toggleProfile() {
@@ -97,7 +102,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  open(content) {
+  open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -116,12 +121,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   getEventsByUserId() {
+    console.log('running getEvents function');
     let userId: number = parseInt(sessionStorage.getItem('id'), 10);
     this.eventService.getEventsByUserId(userId)
       .subscribe(
         (events) => {
           for (let event of events) {
             this.attendingEvents.push(event);
+            console.log('Attending Events:');
+            console.log(this.attendingEvents);
             if (event.picture === null) {
               event.picture = 'http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png';
             }
@@ -130,6 +138,18 @@ export class UserProfileComponent implements OnInit {
         (error) => console.log(error)
       );
     return this.attendingEvents;
+  }
+
+  getEventById(value) {
+    this.eventService.getEventById(value)
+      .subscribe(
+        (event) => {
+          this.singleEvent = event;
+          console.log(this.singleEvent);
+        },
+        (error) => console.log(error)
+      );
+    return this.singleEvent;
   }
 
   getAllEvents() {
@@ -155,8 +175,8 @@ export class UserProfileComponent implements OnInit {
         (comments) => {
           console.log(comments);
           for (let comment of comments) {
-            console.log('comments');
             this.userComment.push(comment);
+            console.log(this.userComment);
           }
           // this.userComment.push(comments);
           // console.log('after loop' + this.userComment);

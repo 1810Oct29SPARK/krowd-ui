@@ -4,11 +4,15 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from '../../shared/models/comment';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { Event } from 'src/app/shared/models/event';
-import { CommentsService } from '../../core/services/comments/comments.service';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/shared/models/user';
+import { CommentsService } from 'src/app/core/services/comments/comments.service';
+import { Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { UsersService } from 'src/app/core/services/users/users.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
+import { UsersService } from 'src/app/core/services/users/users.service';
+
 
 @Component({
   selector: 'app-user-home',
@@ -19,21 +23,29 @@ export class UserHomeComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(public dialog: MatDialog, private modalService: NgbModal, private eventService: EventsService,
-    private commentService: CommentsService, private http: HttpClient, public userService: UsersService, public cognitoService: CognitoService) { }
+  constructor(public dialog: MatDialog,
+    private modalService: NgbModal,
+    private eventService: EventsService,
+    private commentService: CommentsService,
+    private http: HttpClient,
+    private cognitoService: CognitoService,
+    private userService: UsersService) { }
 
   events: Event[] = [];
   singleEvent: any = null;
   eventList2 = [];
   eventId: any = 10;
   comments: Comment[] = [];
+  comment: Comment;
   eventList = [];
   toggle: boolean = false;
   flagNewEvent: any;
   updateEvent: any;
-  userId: any = 2;
+  userId: any;
   submitted = false;
   cognitoUsername: string;
+  user: any;
+
   commentList = [];
   commentList2 = [];
   commentListFinal = [];
@@ -45,6 +57,8 @@ export class UserHomeComponent implements OnInit {
         console.log(data);
       });
   }
+ 
+
   ontoggle() {
     if (this.toggle === true) {
       this.toggle = false;
@@ -80,6 +94,15 @@ export class UserHomeComponent implements OnInit {
       this.getUser(this.cognitoUsername)
     })
     
+      this.userService.getUserByUsername(this.cognitoUsername)
+        .subscribe (user => {
+          this.user = user;
+          console.log(this.user);
+          this.userId = parseInt(this.user.id, 10);
+          console.log(this.userId);
+        }
+          );
+    });
   }
 
   showModal() {
@@ -116,6 +139,23 @@ export class UserHomeComponent implements OnInit {
         (error) => console.log(error)
       );
     return this.singleEvent;
+  }
+  onCommentCreated(form: NgForm) {
+    console.log('Hello World');
+    let comment: any = {
+      'id': 1,
+      'comment': form.value.data,
+      'flag': 0,
+      'timestamp': '2018-01-01T12:00',
+      'userId': 1,
+      'eventId': this.eventId
+    };
+    console.log(comment);
+    this.commentService.addComment(comment)
+      .subscribe(
+        (event) =>
+          this.comments.push(comment)
+      );
   }
 
   getCommentsByEventId(eventId: any) {
@@ -157,11 +197,10 @@ export class UserHomeComponent implements OnInit {
   //     );
   // }
 
-  registerForEvent(form: NgForm) {
-    this.http.post('http://localhost:8085/userEvent/addUserEvent', {
-      'userId': this.userId,
-      'eventId': this.eventId,
-    }).subscribe((result) => {
+
+    registerForEvent(form: NgForm) {
+      this.eventService.registerForEvent(this.eventId, parseInt(sessionStorage.getItem('id'), 10))
+        .subscribe((result) => {
     });
     this.submitted = true;
   }

@@ -1,15 +1,26 @@
 <h2 mat-dialog-title>Please Enter Your Information</h2>
 <form (ngSubmit)="cognitoSignUp(f)" #f="ngForm">
-  <input class="form-control" placeholder="Username" ngModel name="username" required>
-  <input class="form-control" placeholder="First Name" ngModel name="firstname" required>
-  <input class="form-control" placeholder="Last Name" ngModel name="lastname" required>
-  <input class="form-control" placeholder="Email" ngModel name="email" required>
-  <input class="form-control" placeholder="Firstname" ngModel name="firstname" required>
-  <input class="form-control" placeholder="Lastname" ngModel name="lastname" required>
-  <input type="password" class="form-control" placeholder="Password" ngModel name="password" required>
-  <button type="submit" mdbBtn color="red" class="waves-light" mdbWavesEffect>Create User</button>
-</form>
+  <label class="mt-1">Username</label>
+  <input class="form-control" placeholder="Username" id="username" name="username" aria-label="Username"
+    data-toggle="tooltip" data-placement="bottom" title="Username is case sensitive" required ngModel>
 
-<button (click)="makeRequest()"> 
-Click Me
-</button>
+  <div>
+    <label class="mt-1">Firstname</label>
+    <input class="form-control" placeholder="First Name" ngModel name="firstname" required>
+  </div>
+  <div>
+    <label class="mt-1">Lastname</label>
+    <input class="form-control" placeholder="Last Name" ngModel name="lastname" required>
+  </div>
+  <div>
+    <label class="mt-1">Email</label>
+    <input class="form-control" placeholder="Email" ngModel name="email" required required aria-label="Email"
+      data-toggle="tooltip" data-placement="bottom" title="ex: example@email.com">
+  </div>
+  <div>
+    <label class="mt-1">Password</label>
+    <input type="password" class="form-control" placeholder="Password" ngModel name="password" required aria-label="Password"
+      data-toggle="tooltip" data-placement="bottom" title="Requires: 8 characters (atleast: 1 uppercase, 1 lowercase, 1 number, 1 special character)">
+  </div>
+  <button type="submit" class="btn btn-success mt-3">Create User</button>
+</form>

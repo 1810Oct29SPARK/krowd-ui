@@ -23,13 +23,14 @@ export class CommentsService {
 
   constructor(private httpClient: HttpClient) { }
 
+  comment: Comment;
 
   getAllComments() {
     return this.httpClient.get<Event[]>(HttpService.baseUrl + 'comment/getallcomments');
   }
 
-  addComment(comment: Comment) {
-    return this.httpClient.post(HttpService.baseUrl, comment);
+  addComment(comment: any) {
+    return this.httpClient.post(HttpService.baseUrl + 'comment/createcomment', comment);
   }
   // updateEvent(event: Event) {
   //   return this.httpClient.put(`http://localhost:8080`), {'id': id, 'Created': Date};
@@ -40,7 +41,7 @@ export class CommentsService {
   }
 
   getEventsByUserId(userid: number) {
-    return this.httpClient.get<Event[]>(`http://localhost:8085/comment/getById/${userid}`)
+    return this.httpClient.get<Event[]>(HttpService.baseUrl + `comment/getById/${userid}`)
       .map((comments) => {
         let userComments = comments;
         return userComments;
@@ -55,11 +56,11 @@ export class CommentsService {
   }
 
   getCommentByUserId(userId: number) {
-    return this.httpClient.get<Comment[]>(`http://localhost:8085/comment/getByUser/${userId}`);
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `comment/getByUser/${userId}`);
   }
 
   getFlaggedComments(flagScore: number) {
-    return this.httpClient.get<Comment[]>(`http://localhost:8085/${flagScore}`)
+    return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${flagScore}`)
       .map(
         (event: any[]) => {
           console.log(event);

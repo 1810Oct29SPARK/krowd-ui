@@ -1,7 +1,7 @@
 header {
   position: relative;
   overflow: hidden;
-  height: 700px;
+  height: 850px;
 }
 
 .header__bg {
@@ -42,7 +42,7 @@ header h3 {
 #card{
   width: 500px;
   position: relative;
-  margin-left: 550px;
+  margin-left: 40%;
   margin-top: 60px;
 
 }
