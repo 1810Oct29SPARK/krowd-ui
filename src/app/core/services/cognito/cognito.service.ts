@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class CognitoService {
   }
 
   registerNewUser(username: string, email: string, firstname: string, lastname: string): any {
-    this.httpClient.post('http://ec2-3-91-103-185.compute-1.amazonaws.com:8080/krowd-boot/user/create', {
+    this.httpClient.post(HttpService.baseUrl + `user/create`, {
       'username': username,
       'email': email,
       'firstname': firstname,

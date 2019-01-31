@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
+import { HttpService } from 'src/app/core/services/http/http.service';
 
 @Component({
   selector: 'app-user-home',
@@ -175,7 +176,7 @@ export class UserHomeComponent implements OnInit {
     this.flagNewEvent = value;
     this.flagNewEvent.flag = 1;
     console.log(value);
-    this.http.put('http://localhost:8085/event/update', {
+    this.http.put(HttpService.baseUrl + `event/update`, {
         'eventID' : this.flagNewEvent.id,
         'eventName' : this.flagNewEvent.name,
         'eventCategory' : this.flagNewEvent.categoryId.id,
