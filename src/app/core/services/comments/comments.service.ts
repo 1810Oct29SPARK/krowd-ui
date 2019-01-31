@@ -41,11 +41,8 @@ export class CommentsService {
   }
 
   getEventsByUserId(userid: number) {
-<<<<<<< HEAD
-    return this.httpClient.get<Event[]>(HttpService.baseUrl+`/comment/getById/${userid}`)
-=======
+    
     return this.httpClient.get<Event[]>(HttpService.baseUrl + `comment/getById/${userid}`)
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
       .map((comments) => {
         let userComments = comments;
         return userComments;
@@ -60,19 +57,11 @@ export class CommentsService {
   }
 
   getCommentByUserId(userId: number) {
-<<<<<<< HEAD
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+`/comment/getByUser/${userId}`);
-  }
-
-  getFlaggedComments(flagScore: number) {
-    return this.httpClient.get<Comment[]>(HttpService.baseUrl+`/${flagScore}`)
-=======
     return this.httpClient.get<Comment[]>(HttpService.baseUrl + `comment/getByUser/${userId}`);
   }
 
   getFlaggedComments(flagScore: number) {
     return this.httpClient.get<Comment[]>(HttpService.baseUrl + `${flagScore}`)
->>>>>>> 5eeccc02be9e6f51704a1fcece9f13671321acc9
       .map(
         (event: any[]) => {
           console.log(event);
