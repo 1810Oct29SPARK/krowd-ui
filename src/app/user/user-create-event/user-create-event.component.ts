@@ -51,7 +51,7 @@ export class UserCreateEventComponent implements OnInit {
   createEvent(form: NgForm) {
     if (form.value.eventDate.month < 10) {
       form.value.eventDate.month = '0' + form.value.eventDate.month;
-    } else if (form.value.eventDate.day < 10) {
+    } if (form.value.eventDate.day < 10) {
       form.value.eventDate.day = '0' + form.value.eventDate.day;
     }
 
@@ -94,7 +94,7 @@ export class UserCreateEventComponent implements OnInit {
       case 'Outdoors': {
         return 4;
       }
-      case 'Sprots': {
+      case 'Sports': {
         return 5;
       }
       case 'Volunteering': {

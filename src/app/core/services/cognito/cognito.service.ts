@@ -64,6 +64,7 @@ export class CognitoService {
   }
 
   async cognitoSignUp(username: string, email: string, password: string, firstname: string, lastname: string): Promise<void> {
+    localStorage.setItem('accessToken', '0');
     const user: any = await Auth.signUp({ username, password, attributes: { email } })
       .catch(err => console.log(err));
     if (user != null) {
