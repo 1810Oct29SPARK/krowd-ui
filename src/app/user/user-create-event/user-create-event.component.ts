@@ -7,6 +7,7 @@ import { EventsService } from '../../core/services/events/events.service';
 import { CognitoService } from 'src/app/core/services/cognito/cognito.service';
 import { User } from 'src/app/shared/models/user';
 import { UsersService } from 'src/app/core/services/users/users.service';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-user-create-event',
@@ -18,7 +19,7 @@ export class UserCreateEventComponent implements OnInit {
   submitted = false;
 
   cognitoUsername: string;
-  event: Event;
+  createdEvent: Event[] = [];
 
   // code for image upload
   eventPhotoID: File = null;
@@ -48,33 +49,40 @@ export class UserCreateEventComponent implements OnInit {
   }
 
   createEvent(form: NgForm) {
+    if (form.value.eventDate.month < 10) {
+      form.value.eventDate.month = '0' + form.value.eventDate.month;
+    } else if (form.value.eventDate.day < 10) {
+      form.value.eventDate.day = '0' + form.value.eventDate.day;
+    }
 
-    this.event = {
-      'id': null,
+    console.log(form.value.eventTime);
+    let event: any = {
       'name': form.value.eventName,
       'description': form.value.eventDescription,
       'picture': this.picture,
-      'date': JSON.stringify(form.value.eventDate),
-      'address': {
-        'id': null,
-        'streetAddress': form.value.eventAddress, 'apartment': form.value.apartment, 'city': form.value.city,
-        'state': form.value.state,
-        'zip': form.value.zip,
-      },
+      'date': form.value.eventDate.year + '-' + form.value.eventDate.month + '-' + form.value.eventDate.day + 'T' + form.value.eventTime,
+      'address': form.value.eventAddress,
+      'apartment': form.value.eventApartment,
+      'city': form.value.eventCity,
+      'state': form.value.eventState,
+      'zip': form.value.eventZip,
       'score': 0,
       'flag': 0,
-      'userId': this.user,
-      'categoryId': { 'id': this.assignCategory(form.value.eventCategory), 'name': form.value.eventCategory }
+      'userId': this.user.id,
+      'categoryId': this.assignCategory(form.value.eventCategory)
     };
-    console.log(this.event);
-    this.eventservice.addEvent(this.event).subscribe((result) => {
-    });
+    console.log(event);
+    this.eventservice.addEvent(event)
+      .subscribe((result) => {
+      });
     this.submitted = true;
   }
 
   assignCategory(category) {
+    console.log(category);
     switch (category) {
       case 'Art': {
+        console.log('you are in Art case');
         return 1;
       }
       case 'Food & Drink': {
@@ -93,6 +101,7 @@ export class UserCreateEventComponent implements OnInit {
         return 6;
       }
       case 'Other': {
+        console.log('you are in other case');
         return 7;
       }
     }

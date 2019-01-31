@@ -93,9 +93,7 @@ export class EventsService {
   }
 
   addEvent(event: any) {
-
-    console.log('in eventService');
-    return this.httpClient.post(HttpService.baseUrl + `event/add`, { name });
+    return this.httpClient.post(HttpService.baseUrl + `event/add`, event);
   }
 
 
